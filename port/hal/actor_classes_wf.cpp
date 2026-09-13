@@ -484,6 +484,8 @@ int _ZN13PoleBillboard13InitResourcesEv(char *self);  /* .c, C linkage */
 int _ZN13PoleBillboard8BehaviorEv(char *self);         /* .cpp extern "C" */
 int *_ZN13PoleBillboardD1Ev(int *self);                /* .c, C linkage */
 int *_ZN13PoleBillboardD0Ev(int *self);                /* .c, slot 17, DTOR-PAIRS seat (0x02111360) */
+void func_ov015_02111408(char *self, char *other);     /* .c, slot 23 (lane ADJSEAT) */
+void func_ov015_021113fc(char *self, char *other);     /* .c, slot 24 (lane ADJSEAT) */
 void *_ZTV13PoleBillboard[32];
 }
 /* PORT_HOST_ABI: two names of ONE ROM table, read off the ROM rather than
@@ -511,6 +513,31 @@ static int __fastcall kp_d1(void *s, void *)
 { return (int)(size_t)_ZN13PoleBillboardD1Ev((int *)s); }
 static int __fastcall kp_d0(void *s, void *)
 { return (int)(size_t)_ZN13PoleBillboardD0Ev((int *)s); }
+/* SLOTS 23 AND 24, the ROM's own tail-jump veneers (lane ADJSEAT). Read out of
+   extracted/overlays/overlay_0015.bin, both are the three-word shape
+
+       0x021113fc  E59FC000 ldr ip,[pc] ; E12FFF1C bx ip ; .word 0x02111414
+       0x02111408  E59FC000 ldr ip,[pc] ; E12FFF1C bx ip ; .word 0x02111414
+
+   so r0 and r1 ride each frame untouched into func_ov015_02111414, which reads
+   c+0x397 at its first instruction and other+0x5c at its Vec3_HorzAngle call.
+   The recovered src spells each veneer (void) and names neither argument, which
+   is faithful to the ROM, and is why the declarations above give them the real
+   signature instead: the two pushed words sit at [esp+4] and [esp+8] of the
+   veneer's frame and the jmp hands that same frame to 02111414. If MSVC ever
+   emits a real prologue here, 02111414 reads a saved register and a return
+   address instead. Nothing in the tree asks for the jmp, so both frames are
+   declared Class C rows in port/tools/tailjump_guard.py and the build fails if
+   either becomes a call -- the RF1 heap-teardown and CUR2 curling precedent.
+
+   The three-parameter shape is wf_trap23's and is not optional: the dispatch
+   sites (unmatched/Actor_OnAttacked2Dispatch.cpp and
+   unmatched/Actor_OnKickedDispatch.cpp) are thiscall and push one argument the
+   callee must pop, so these must emit ret 4 exactly as the traps did. */
+static int __fastcall kp_atk2(void *s, void *, void *other)
+{ func_ov015_02111408((char *)s, (char *)other); return 0; }
+static int __fastcall kp_kicked(void *s, void *, void *other)
+{ func_ov015_021113fc((char *)s, (char *)other); return 0; }
 extern "C" void hal_fill_knock_down_plank_vtable(void)
 {
     void **vt = _ZTV13PoleBillboard;
@@ -530,10 +557,15 @@ extern "C" void hal_fill_knock_down_plank_vtable(void)
     /* 32 slots. _ZTV13PoleBillboard overrides four of the tail with its own
        ov015 bodies, all matched in src and none in a slice: 23 OnAttacked2
        (0x02111408), 24 OnKicked (0x021113fc), 27 OnHitByMegaChar (0x021113c0)
-       and 31 Kill, which is Platform's (0x020ee55c). Slot 27 is seated now
-       (gate 62, kp_mega -> func_ov015_021113c0); 23/24 stay trapped. */
-    vt[23] = (void *)wf_trap23;
-    vt[24] = (void *)wf_trap24;
+       and 31 Kill, which is Platform's (0x020ee55c). Slot 27 is seated at gate
+       62 (kp_mega -> func_ov015_021113c0), and 23/24 are seated here by lane
+       ADJSEAT: config relocs from:0x0211447c -> 0x02111408 and from:0x02114480
+       -> 0x021113fc, which are this table's base + 4*23 and base + 4*24
+       (base-8 at 0x02114418 is a plain unrelocated zero, base-4 at 0x0211441c
+       relocates to the typeinfo at 0x021143dc). All four of the tail overrides
+       now run the ROM's own bodies. */
+    vt[23] = (void *)kp_atk2;
+    vt[24] = (void *)kp_kicked;
     vt[27] = (void *)kp_mega;
     vt[31] = (void *)wf_kill;
 }

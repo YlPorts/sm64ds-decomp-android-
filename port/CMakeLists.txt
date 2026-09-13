@@ -9408,6 +9408,31 @@ foreach(adjseat_vt src/func_ov015_021111d0.c src/func_ov015_02112c20.c)
     endif()
 endforeach()
 
+# LANE ADJSEAT, second rung: _ZTV13PoleBillboard's slots 23 and 24 and the body
+# both of their ROM veneers jump to. See the head of slice_adjseat.txt for the
+# ROM edge, the Itanium slot derivation and the tail-jump dependency. The three
+# TUs ride the gate-59 targets rather than three new source-list entries,
+# because they are ov015 Whomp's Fortress platform bodies filled by the same
+# hal/actor_classes_wf.cpp the rest of gate 59 is filled by.
+port_read_lines("${CMAKE_CURRENT_SOURCE_DIR}/slice_adjseat.txt" SLICE_ADJSEAT_LINES)
+set(SLICE_ADJSEAT_SOURCES "")
+foreach(line IN LISTS SLICE_ADJSEAT_LINES)
+    string(STRIP "${line}" line)
+    if(line MATCHES "^#" OR line STREQUAL "")
+        continue()
+    endif()
+    list(APPEND SLICE_ADJSEAT_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/../${line}")
+endforeach()
+list(LENGTH SLICE_ADJSEAT_SOURCES adjseat_n)
+if(NOT adjseat_n EQUAL 3)
+    message(FATAL_ERROR "slice_adjseat.txt carries ${adjseat_n} active lines, "
+            "not the three this lane measured: the two _ZTV13PoleBillboard "
+            "veneers and func_ov015_02111414, the body both jump to. Dropping "
+            "the body leaves an unresolved external; dropping a veneer leaves "
+            "its vtable slot on the trap")
+endif()
+list(APPEND SLICE59_SOURCES ${SLICE_ADJSEAT_SOURCES})
+
 # Gates 70-74: Whomp's Fortress' level-7 enemies and platforms (ov084, ov091).
 # Both overlays are already mounted (gate 32); these slices are the matched
 # lifecycle closures of the five classes, one file each. The HAL seam is
