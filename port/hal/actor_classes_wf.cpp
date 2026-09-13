@@ -121,6 +121,31 @@ static void wf_trap_report(void *self, int slot)
                     slot, id, port_actor_class_name(id));
       port_actor_slot_decline(_m); }
 }
+/* LANE ADJSEAT (run link100 wave 7), env-gated and silent by default: the
+   evidence that the words this lane seated are the words the running game
+   enters, and that the receiver reaching them is the object. One getenv per
+   process; nothing is emitted unless SM64DS_ADJSEAT_TRACE is set to something
+   other than 0. The id read is wf_trap_report's own, the actor id at +0xc. */
+static int adjseat_trace_on(void)
+{
+    static int on = -1;
+    if (on < 0) {
+        const char *e = std::getenv("SM64DS_ADJSEAT_TRACE");
+        on = (e && *e && *e != '0') ? 1 : 0;
+    }
+    return on;
+}
+static void adjseat_trace(const char *what, void *self)
+{
+    if (!adjseat_trace_on())
+        return;
+    unsigned id = self ? *(unsigned short *)((char *)self + 0xc) : 0u;
+    std::fprintf(stderr, "ADJSEAT: %s entered, this=%p id=%u %s\n",
+                 what, self, id,
+                 self ? port_actor_class_name(id) : "(null)");
+    std::fflush(stderr);
+}
+
 #define WF_TRAP(n) \
     static int __fastcall wf_trap##n(void *s, void *) \
     { wf_trap_report(s, n); return 0; }
@@ -442,7 +467,10 @@ static int __fastcall pb_render(void *s, void *)
 static int __fastcall pb_d1(void *s, void *)
 { return (int)(size_t)func_ov015_021111a0((int *)s); }
 static int __fastcall pb_d0(void *s, void *)
-{ return (int)(size_t)func_ov015_021111d0((int *)s); }
+{
+    adjseat_trace("data_ov015_02114360[17] daObjBkBillboard_c D0 (func_ov015_021111d0)", s);
+    return (int)(size_t)func_ov015_021111d0((int *)s);
+}
 extern "C" void hal_fill_pole_billboard_vtable(void)
 {
     void **vt = data_ov015_02114360;
@@ -535,9 +563,17 @@ static int __fastcall kp_d0(void *s, void *)
    unmatched/Actor_OnKickedDispatch.cpp) are thiscall and push one argument the
    callee must pop, so these must emit ret 4 exactly as the traps did. */
 static int __fastcall kp_atk2(void *s, void *, void *other)
-{ func_ov015_02111408((char *)s, (char *)other); return 0; }
+{
+    adjseat_trace("_ZTV13PoleBillboard[23] OnAttacked2 (func_ov015_02111408)", s);
+    func_ov015_02111408((char *)s, (char *)other);
+    return 0;
+}
 static int __fastcall kp_kicked(void *s, void *, void *other)
-{ func_ov015_021113fc((char *)s, (char *)other); return 0; }
+{
+    adjseat_trace("_ZTV13PoleBillboard[24] OnKicked (func_ov015_021113fc)", s);
+    func_ov015_021113fc((char *)s, (char *)other);
+    return 0;
+}
 extern "C" void hal_fill_knock_down_plank_vtable(void)
 {
     void **vt = _ZTV13PoleBillboard;
@@ -631,7 +667,10 @@ static int __fastcall rp_render(void *s, void *)
 static int __fastcall rp_d1(void *s, void *)
 { return (int)(size_t)func_ov015_02112bd0((int *)s); }
 static int __fastcall rp_d0(void *s, void *)
-{ return (int)(size_t)func_ov015_02112c20((int *)s); }
+{
+    adjseat_trace("data_ov015_021147e8[17] daObjBk_Ukisima_c D0 (func_ov015_02112c20)", s);
+    return (int)(size_t)func_ov015_02112c20((int *)s);
+}
 extern "C" void hal_fill_rotating_platform_wf_vtable(void)
 {
     void **vt = data_ov015_021147e8;
