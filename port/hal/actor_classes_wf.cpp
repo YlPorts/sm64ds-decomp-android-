@@ -135,6 +135,58 @@ static int adjseat_trace_on(void)
     }
     return on;
 }
+/* LANE ADJSEAT, the other half of the evidence and gated by its own variable:
+   SM64DS_ADJSEAT_PROBE=<n> fires once per seated slot, on the nth behaviour
+   tick of the first live object of that class. It reads the word the LIVE
+   object dispatches at the seated slot straight out of the object's own vptr,
+   says whether it is this file's thunk, and for the two slots that are safe to
+   enter it ENTERS the word through that same vptr, so the trace above prints
+   the receiver the ROM's body actually got.
+
+   SLOT 17 IS READ AND NOT ENTERED, and that is a measurement rather than
+   caution. Nothing on a mounted level dispatches a deleting destructor:
+   AfterCleanupResources dispatches slot 16 and frees the object itself, which
+   is what this file already says one class up and what lane SEAT2 recorded
+   when it traced the same shape. Entering 17 here would free an actor the
+   level manager still holds, which would prove nothing about the ROM and
+   would break the run. So for those two rows the evidence is the vptr
+   readback: the word the live object would dispatch IS the seated thunk.
+
+   SLOTS 23 AND 24 ARE ENTERED. func_ov015_02111414 reads self+0x397, +0x396,
+   +0x394, +0x8e and +0x5c and the other actor's +0x5c and +0x60 -- all inside
+   two live Actors, no allocation, no free -- so the probe hands it the plank
+   as both arguments and the run carries on. */
+static int adjseat_probe_at(void)
+{
+    static int at = -2;
+    if (at == -2) {
+        const char *e = std::getenv("SM64DS_ADJSEAT_PROBE");
+        at = (e && *e) ? std::atoi(e) : -1;
+    }
+    return at;
+}
+typedef int(__fastcall *AdjSeatSlotFn)(void *, void *, void *);
+static void adjseat_probe(const char *cls, void *s, int slot, const void *want,
+                          int *ticks, int enter)
+{
+    int at = adjseat_probe_at();
+    if (at < 0 || !s)
+        return;
+    if (++*ticks != at)
+        return;
+    void **vt = *(void ***)s;
+    void *live = vt ? vt[slot] : 0;
+    unsigned id = *(unsigned short *)((char *)s + 0xc);
+    std::fprintf(stderr,
+                 "ADJSEAT-PROBE: %s tick %d, this=%p id=%u %s, vptr=%p, "
+                 "slot %d word=%p, seated thunk=%p -- %s\n",
+                 cls, at, s, id, port_actor_class_name(id), (void *)vt,
+                 slot, live, want, live == want ? "SAME WORD" : "DIFFERENT");
+    std::fflush(stderr);
+    if (enter && live == want)
+        ((AdjSeatSlotFn)live)(s, 0, s);
+}
+
 static void adjseat_trace(const char *what, void *self)
 {
     if (!adjseat_trace_on())
@@ -175,12 +227,19 @@ static int __fastcall wf_bclean(void *s, void *)
 { return ((Actor *)s)->Actor::BeforeCleanupResources(); }
 static void __fastcall wf_aclean(void *s, void *, unsigned a)
 { ((ActorBase *)s)->ActorBase::AfterCleanupResources(a); }
+static void adjseat_probe_actor(void *s);
 static int __fastcall wf_bbeh(void *s, void *)
-{ return _ZN5Actor14BeforeBehaviorEv(s); }
+{
+    adjseat_probe_actor(s);
+    return _ZN5Actor14BeforeBehaviorEv(s);
+}
 static void __fastcall wf_abeh(void *s, void *, unsigned a)
 { ((ActorBase *)s)->ActorBase::AfterBehavior(a); }
 static int __fastcall wf_bren(void *s, void *)
-{ return _ZN5Actor12BeforeRenderEv(s); }
+{
+    adjseat_probe_actor(s);
+    return _ZN5Actor12BeforeRenderEv(s);
+}
 static void __fastcall wf_aren(void *s, void *, unsigned a)
 { ((ActorBase *)s)->ActorBase::AfterRender(a); }
 static int __fastcall wf_pdes(void *s, void *)
@@ -457,8 +516,14 @@ static int __fastcall pb_clean(void *s, void *)
 { return func_ov015_02111254((char *)s); }
 /* slot 6 is ActorBase::Behavior, a base no-op the .cpp defines as a real
    method. */
+static int __fastcall pb_d0(void *s, void *);
 static int __fastcall pb_behavior(void *s, void *)
-{ return ((ActorBase *)s)->ActorBase::Behavior(); }
+{
+    static int t;
+    adjseat_probe("data_ov015_02114360[17] daObjBkBillboard_c D0", s, 17,
+                  (const void *)pb_d0, &t, 0);
+    return ((ActorBase *)s)->ActorBase::Behavior();
+}
 static int __fastcall pb_render(void *s, void *)
 {
     port_actor_render_probe("POLE_BILLBOARD", (char *)s + 0xd4);
@@ -530,8 +595,17 @@ static int __fastcall kp_init(void *s, void *)
 { return _ZN13PoleBillboard13InitResourcesEv((char *)s); }
 static int __fastcall kp_clean(void *s, void *)
 { return ((PoleBillboard *)s)->PoleBillboard::CleanupResources(); }
+static int __fastcall kp_atk2(void *s, void *, void *other);
+static int __fastcall kp_kicked(void *s, void *, void *other);
 static int __fastcall kp_behavior(void *s, void *)
-{ return _ZN13PoleBillboard8BehaviorEv((char *)s); }
+{
+    static int t23, t24;
+    adjseat_probe("_ZTV13PoleBillboard[23] OnAttacked2", s, 23,
+                  (const void *)kp_atk2, &t23, 1);
+    adjseat_probe("_ZTV13PoleBillboard[24] OnKicked", s, 24,
+                  (const void *)kp_kicked, &t24, 1);
+    return _ZN13PoleBillboard8BehaviorEv((char *)s);
+}
 static int __fastcall kp_render(void *s, void *)
 {
     port_actor_render_probe("KNOCK_DOWN_PLANK", (char *)s + 0xd4);
@@ -657,8 +731,14 @@ static int __fastcall rp_init(void *s, void *)
 { return func_ov015_02112c98((char *)s); }
 static int __fastcall rp_clean(void *s, void *)
 { return func_ov015_02112c84((char *)s); }
+static int __fastcall rp_d0(void *s, void *);
 static int __fastcall rp_behavior(void *s, void *)
-{ return func_ov002_020b6718((char *)s); }
+{
+    static int t;
+    adjseat_probe("data_ov015_021147e8[17] daObjBk_Ukisima_c D0", s, 17,
+                  (const void *)rp_d0, &t, 0);
+    return func_ov002_020b6718((char *)s);
+}
 static int __fastcall rp_render(void *s, void *)
 {
     port_actor_render_probe("ROTATING_PLATFORM_WF", (char *)s + 0xd4);
@@ -695,6 +775,30 @@ extern "C" void hal_fill_rotating_platform_wf_vtable(void)
     vt[17] = (void *)rp_d0;
     /* 32 slots; slot 31 is Platform::Kill. dsd's bound reads 15 words here. */
     vt[31] = (void *)wf_kill;
+}
+
+/* The shared half of the ADJSEAT probe, keyed by the actor id at +0xc so
+   one call site covers all three seated classes. It sits here because
+   every thunk it names -- pb_d0, rp_d0, kp_atk2, kp_kicked -- is defined
+   above this line. Inert unless SM64DS_ADJSEAT_PROBE is set. */
+static void adjseat_probe_actor(void *s)
+{
+    if (adjseat_probe_at() < 0 || !s)
+        return;
+    unsigned id = *(unsigned short *)((char *)s + 0xc);
+    static int t42, t50, t44a, t44b;
+    if (id == 42)
+        adjseat_probe("data_ov015_02114360[17] daObjBkBillboard_c D0 "
+                      "(shared hook)", s, 17, (const void *)pb_d0, &t42, 0);
+    else if (id == 50)
+        adjseat_probe("data_ov015_021147e8[17] daObjBk_Ukisima_c D0 "
+                      "(shared hook)", s, 17, (const void *)rp_d0, &t50, 0);
+    else if (id == 44) {
+        adjseat_probe("_ZTV13PoleBillboard[23] OnAttacked2 (shared hook)",
+                      s, 23, (const void *)kp_atk2, &t44a, 1);
+        adjseat_probe("_ZTV13PoleBillboard[24] OnKicked (shared hook)",
+                      s, 24, (const void *)kp_kicked, &t44b, 1);
+    }
 }
 
 // ============================================================================
