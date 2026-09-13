@@ -555,6 +555,7 @@ int func_ov015_02112c84(char *self);   /* slot 3  CleanupResources */
 int func_ov002_020b6718(char *self);   /* slot 6  Behavior (ov002 base) */
 int func_ov002_020b66f0(char *self);   /* slot 9  Render (ov002 base) */
 int *func_ov015_02112bd0(int *self);   /* slot 16 D1 */
+int *func_ov015_02112c20(int *self);   /* slot 17 D0 (lane ADJSEAT) */
 DSSTATE_BEGIN
 void *data_ov015_021147e8[32];
 DSSTATE_END
@@ -597,6 +598,8 @@ static int __fastcall rp_render(void *s, void *)
 }
 static int __fastcall rp_d1(void *s, void *)
 { return (int)(size_t)func_ov015_02112bd0((int *)s); }
+static int __fastcall rp_d0(void *s, void *)
+{ return (int)(size_t)func_ov015_02112c20((int *)s); }
 extern "C" void hal_fill_rotating_platform_wf_vtable(void)
 {
     void **vt = data_ov015_021147e8;
@@ -606,6 +609,19 @@ extern "C" void hal_fill_rotating_platform_wf_vtable(void)
     vt[6] = (void *)rp_behavior;
     vt[9] = (void *)rp_render;
     vt[16] = (void *)rp_d1;
+    /* Slot 17, the ROM's own deleting destructor. ov015 relocs.txt has
+       from:0x0211482c kind:load to:0x02112c20 module:overlay(15), and
+       0x0211482c is this table's base + 4*17 (base-8 at 0x021147e0 is a
+       plain unrelocated zero; base-4 at 0x021147e4 relocates to the
+       typeinfo at 0x02114798). The body takes its receiver as a real first
+       parameter (mov r4,r0 at 0x02112c28). It stores THREE vptrs into the
+       same word as the base destructors inline -- the ROM's literal pool at
+       0x02112c74/78/7c reads 0x021147e8, 0x021091d4 and 0x0210ae38 -- and
+       the src spells them VT0/VT1/VT2, bound per source in
+       port/CMakeLists.txt to data_ov015_021147e8, data_ov002_021091d4 and
+       _ZTV8Platform. Without those renames all three stores would write the
+       address of a dummy host array. */
+    vt[17] = (void *)rp_d0;
     /* 32 slots; slot 31 is Platform::Kill. dsd's bound reads 15 words here. */
     vt[31] = (void *)wf_kill;
 }
