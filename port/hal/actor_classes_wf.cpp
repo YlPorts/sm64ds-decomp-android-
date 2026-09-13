@@ -411,6 +411,7 @@ int func_ov015_021112a0(char *self);   /* slot 0  InitResources (.cpp extern C) 
 int func_ov015_02111254(char *self);   /* slot 3  CleanupResources */
 int func_ov015_02111278(char *self);   /* slot 9  Render */
 int *func_ov015_021111a0(int *self);   /* slot 16 D1 */
+int *func_ov015_021111d0(int *self);   /* slot 17 D0 (lane ADJSEAT) */
 DSSTATE_BEGIN
 void *data_ov015_02114360[31];
 DSSTATE_END
@@ -440,6 +441,8 @@ static int __fastcall pb_render(void *s, void *)
 }
 static int __fastcall pb_d1(void *s, void *)
 { return (int)(size_t)func_ov015_021111a0((int *)s); }
+static int __fastcall pb_d0(void *s, void *)
+{ return (int)(size_t)func_ov015_021111d0((int *)s); }
 extern "C" void hal_fill_pole_billboard_vtable(void)
 {
     void **vt = data_ov015_02114360;
@@ -449,6 +452,18 @@ extern "C" void hal_fill_pole_billboard_vtable(void)
     vt[6] = (void *)pb_behavior;
     vt[9] = (void *)pb_render;
     vt[16] = (void *)pb_d1;
+    /* Slot 17, the ROM's own deleting destructor, the kp_d0/rb_d0 shape one
+       class up. ov015 relocs.txt has from:0x021143a4 kind:load
+       to:0x021111d0 module:overlay(15), and 0x021143a4 is this table's
+       base + 4*17 (base-8 at 0x02114358 is a plain unrelocated zero, the
+       Itanium offset-to-top; base-4 at 0x0211435c relocates to the
+       typeinfo at 0x02114318). func_ov015_021111d0 takes its receiver as a
+       real first parameter (mov r4,r0 at 0x021111d4), so the thunk is a
+       plain forward with no ride-through. Its own vptr store is the
+       shared-header VT0 placeholder, bound per source to this table in
+       port/CMakeLists.txt -- without that rename it would write the
+       address of hal/actor_vtables.cpp's dummy VT0[20] into the object. */
+    vt[17] = (void *)pb_d0;
     /* THIRTY-ONE and correct: id 42 POLE_BILLBOARD installs the billboard base
        table, which is a plain Actor and not a Platform, so it has no slot 31.
        The only one of the seven that does not grow. */
