@@ -8566,6 +8566,27 @@ foreach(line IN LISTS SLICE_SND8_LINES)
     list(APPEND SLICE_SND8_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/../${line}")
 endforeach()
 
+# ---------------------------------------------------------------------------
+# Run link100 wave 7, lane SND3, rung R5: the ARM9 sound thread.
+#
+# Same three targets and the same reason as the three blocks above:
+# hal/sdat/consumer.cpp calls func_020506fc from sd_sound_init_host, and that
+# file is on all three sound targets, so a target with the sound stack and
+# without this slice would not link. The storage the two TUs need is the
+# 0x534-byte thread run plus two singletons in hal/snd_globals.cpp, which
+# already rides SOUND_HOST_SOURCES; everything they CALL is already in all
+# three links (slice_gate223 for the creation, slice_wm2 and slice_wm3 for the
+# message queue, ntr/runtime.cpp for the cache primitive).
+port_read_lines("${CMAKE_CURRENT_SOURCE_DIR}/slice_snd3.txt" SLICE_SND3_LINES)
+set(SLICE_SND3_SOURCES "")
+foreach(line IN LISTS SLICE_SND3_LINES)
+    string(STRIP "${line}" line)
+    if(line MATCHES "^#" OR line STREQUAL "")
+        continue()
+    endif()
+    list(APPEND SLICE_SND3_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/../${line}")
+endforeach()
+
 # THREE PER-SOURCE RENAMES, the shape lane R2ABC used for func_02060890 and
 # lane BOOTR1 for main. Each names an edge that is not ROM code yet, in one
 # place, without making a host body under a ROM name -- which would be a new
@@ -17899,6 +17920,12 @@ endforeach()
 # reason (hal/sdat/consumer.cpp calls it).
 foreach(_tsnd2 smoke_player walk_window walk_window_hires)
     target_sources(${_tsnd2} PRIVATE ${SLICE_SND2_SOURCES})
+endforeach()
+
+# Run link100 wave 7, lane SND3, rung R5: the ARM9 sound thread, same three
+# targets and the same reason (hal/sdat/consumer.cpp calls func_020506fc).
+foreach(_tsnd3 smoke_player walk_window walk_window_hires)
+    target_sources(${_tsnd3} PRIVATE ${SLICE_SND3_SOURCES})
 endforeach()
 
 # THE CONFIGURE-DEPENDS SELF-CHECK (run link100, lane CMAKEDEPS).  Every list
