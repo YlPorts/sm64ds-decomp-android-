@@ -9,5 +9,5 @@ JHOME=${JAVA_HOME:-$(dirname "$(dirname "$(readlink -f "$(command -v javac)")")"
   -I"$ROOT/port" -I"$ROOT/android/full-engine" "$HERE/native/bridge.cpp" \
   "$ROOT/android/full-engine/pad_android.cpp" -o "$OUT/libsm64ds_controls.so"
 javac -d "$OUT/classes" "$HERE/java/org/ylports/sm64ds/controls/TouchControls.java" \
-  "$HERE/java/org/ylports/sm64ds/controls/NativeBridge.java" "$HERE/tests/ControlsTest.java"
+  "$HERE/java/org/ylports/sm64ds/controls/NativeBridge.java" "$HERE/java/org/ylports/sm64ds/controls/DsLayout.java" "$HERE/tests/ControlsTest.java"
 java -Djava.library.path="$OUT" -cp "$OUT/classes" org.ylports.sm64ds.controls.ControlsTest

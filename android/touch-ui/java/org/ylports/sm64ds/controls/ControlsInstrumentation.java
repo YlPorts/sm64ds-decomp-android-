@@ -61,7 +61,12 @@ public final class ControlsInstrumentation extends Instrumentation {
             final Bitmap[] capture=new Bitmap[1];
             runOnMainSync(()->{
                 android.view.View decor=a.getWindow().getDecorView();
-                check(decor.getWidth()>decor.getHeight(),"landscape Android layout");
+                check(decor.getHeight()>decor.getWidth(),"portrait Android layout");
+                DsLayout layout=a.panels;
+                check(layout!=null && layout.bottom>layout.top+layout.height,"stacked separated panels");
+                check(Math.abs(layout.width/layout.height-4f/3f)<.001f,"native ratio, not stretched");
+                for(TouchControls.Control control:a.overlay.controls.controls)
+                    check(control.y-control.ry>=layout.bottom+layout.height,"controls below both panels");
                 capture[0]=Bitmap.createBitmap(decor.getWidth(),decor.getHeight(),Bitmap.Config.ARGB_8888);
                 decor.draw(new android.graphics.Canvas(capture[0]));
             });

@@ -51,6 +51,24 @@ public final class ControlsTest {
                 check(b.x-b.rx>=-.01f&&b.x+b.rx<=size[0]+.01f&&b.y-b.ry>=-.01f&&b.y+b.ry<=size[1]+.01f,"inside safe viewport");}
             press(c,1,0);c.event(1,2,-1000,2000);int[] p=NativeBridge.poll();check(Math.hypot(p[1],p[2])<=32768,"radial clamped stick");c.cancel();
         }
+        c.compact(true);c.defaults();
+        for(int[] size:new int[][]{{360,640},{411,891},{1080,2400},{800,1280}}){
+            float density=size[0]/400f;DsLayout layout=DsLayout.fit(size[0],size[1],density);
+            check(Math.abs(layout.width/layout.height-4f/3f)<.001f,"DS aspect preserved");
+            check(layout.bottom>layout.top+layout.height,"DS screens stacked");
+            c.viewport(8*density,layout.dockY,size[0]-16*density,layout.dockHeight-4*density,density);
+            c.stylusRect(layout.x,layout.bottom,layout.width,layout.height);
+            for(float scale:new float[]{.8f,1f,1.4f}){
+                c.scale(scale);
+                for(TouchControls.Control b:c.controls){
+                    check(b.y-b.ry>=layout.bottom+layout.height,"buttons do not cover screens");
+                    check(b.x-b.rx>=0&&b.x+b.rx<=size[0]&&b.y+b.ry<=size[1],"portrait bounds");
+                    for(TouchControls.Control o:c.controls)if(o.id>b.id)
+                        check(Math.abs(o.x-b.x)>=o.rx+b.rx || Math.abs(o.y-b.y)>=o.ry+b.ry ||
+                            !b.pill&&!o.pill&&Math.hypot(o.x-b.x,o.y-b.y)>=o.rx+b.rx,"portrait separation");
+                }
+            }
+        }
         for(int i=0;i<1000;i++){
             press(c,1,1);release(c,1,1);check(NativeBridge.poll()[0]==0x1000,"repeat short press "+i);check(NativeBridge.poll()[0]==0,"repeat release "+i);
         }

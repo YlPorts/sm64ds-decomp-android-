@@ -46,7 +46,7 @@ public final class TouchControls {
     private final float[] positions=new float[18];
     private float left,top,width=1,height=1,dp=1,scale=1;
     private float sx,sy,sw,sh;
-    private boolean editing,focused=true,configured;
+    private boolean editing,focused=true,configured,compact;
     public int buttons;
     public float stickX,stickY;
     public boolean rejectedMove;
@@ -55,9 +55,10 @@ public final class TouchControls {
     public static float clamp(float value,float lo,float hi) {
         return Float.isNaN(value)||Float.isInfinite(value)?lo:Math.max(lo,Math.min(hi,value));
     }
+    public void compact(boolean value){cancel();compact=value;layout();}
     public void viewport(float x,float y,float w,float h,float density) {
         cancel();left=x;top=y;width=Math.max(1,w);height=Math.max(1,h);
-        dp=Math.max(.1f,Math.min(clamp(density,.1f,10),Math.min(width/620f,height/330f)));
+        dp=Math.max(.1f,Math.min(clamp(density,.1f,10),Math.min(width/(compact?400f:620f),height/(compact?240f:330f))));
         configured=true;layout();
     }
     public void stylusRect(float x,float y,float w,float h){cancel();sx=x;sy=y;sw=Math.max(0,w);sh=Math.max(0,h);}
@@ -66,6 +67,7 @@ public final class TouchControls {
     public float scale(){return scale;}
     private void layout() {
         if(!configured)return;
+        if(compact){layoutCompact();return;}
         float u=Math.min(dp*scale,Math.min(width/620f,height/275f));
         float fit=u/dp;
         float[][] defaults={{90,height/dp-91},{width/dp-124,height/dp-57},
@@ -83,6 +85,21 @@ public final class TouchControls {
             if(i==0){x=90*u;y=height-91*u;}
             c.x=positions[2*i]>=0?left+positions[2*i]*width:left+x;
             c.y=positions[2*i+1]>=0?top+positions[2*i+1]*height:top+y;
+            bound(c);
+        }
+    }
+    private void layoutCompact(){
+        float u=Math.min(dp*scale,Math.min(width/400f,height/240f));
+        float[][] centers={{78,150},{300,193},{349,145},{251,145},{300,97},
+            {42,32},{358,32},{193,213},{189,98}};
+        for(Control c:controls){
+            c.rx=(c.stick?54:c.pill?30:c.id==1?28:c.id==8?23:25)*u;
+            c.ry=c.pill?(c.id==7?18:20)*u:c.rx;
+            float x=centers[c.id][0]*u, y=height-(240-centers[c.id][1])*u;
+            if(c.id>=1&&c.id<=4 || c.id==6)x=width-(400-centers[c.id][0])*u;
+            if(c.id==7||c.id==8)x=width*.5f+(centers[c.id][0]-200)*u;
+            c.x=positions[2*c.id]>=0?left+positions[2*c.id]*width:left+x;
+            c.y=positions[2*c.id+1]>=0?top+positions[2*c.id+1]*height:top+y;
             bound(c);
         }
     }

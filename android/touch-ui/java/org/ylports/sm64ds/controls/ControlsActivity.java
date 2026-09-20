@@ -30,11 +30,12 @@ public final class ControlsActivity extends Activity implements InputManager.Inp
     private FrameLayout stage;
     private Button settings;
     private boolean resumed;
+    DsLayout panels;
     @Override public void onCreate(Bundle state){
         super.onCreate(state);NativeBridge.init();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getWindow().getDecorView().setSystemUiVisibility(5894);
-        prefs=getSharedPreferences("controls-v1",MODE_PRIVATE);
+        prefs=getSharedPreferences("controls-v2-portrait",MODE_PRIVATE);
         input=(InputManager)getSystemService(INPUT_SERVICE);
         LinearLayout root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(0xff111820);
         root.setOnApplyWindowInsetsListener((v,insets)->{
@@ -46,7 +47,7 @@ public final class ControlsActivity extends Activity implements InputManager.Inp
             v.setPadding(l,t,r,b);return insets;
         });
         LinearLayout toolbar=new LinearLayout(this);toolbar.setGravity(android.view.Gravity.CENTER_VERTICAL);toolbar.setPadding(dp(20),0,dp(12),0);
-        TextView title=new TextView(this);title.setText("SM64DS  /  CONTROLES · PRUEBA");title.setTextColor(0xffdce7f1);title.setTextSize(14);
+        TextView title=new TextView(this);title.setText("SM64DS · Controles");title.setTextColor(0xffdce7f1);title.setTextSize(14);
         toolbar.addView(title,new LinearLayout.LayoutParams(0,dp(52),1));title.setGravity(android.view.Gravity.CENTER_VERTICAL);
         settings=new Button(this);settings.setText("Ajustar");settings.setAllCaps(false);settings.setContentDescription("Ajustar tamaño, transparencia y posición de los controles");
         settings.setOnClickListener(v->{if(overlay.controls.editing()){overlay.controls.editing(false);save();settings.setText("Ajustar");overlay.invalidate();}else showSettings();});
@@ -59,10 +60,12 @@ public final class ControlsActivity extends Activity implements InputManager.Inp
         });
         stage.addView(new Monitor(this),new FrameLayout.LayoutParams(-1,-1));stage.addView(overlay,new FrameLayout.LayoutParams(-1,-1));
         stage.addOnLayoutChangeListener((v,l,t,r,b,ol,ot,or,ob)->{
-            if(r-l==or-ol && b-t==ob-ot)return;float d=getResources().getDisplayMetrics().density;
-            overlay.controls.viewport(dp(8),0,r-l-dp(16),b-t-dp(8),d);
-            float w=Math.min(dp(180),(r-l)*.24f),h=w*.75f;
-            overlay.controls.stylusRect((r-l-w)/2,(b-t-h)/2,w,h);
+            if(r-l==or-ol && b-t==ob-ot)return;
+            float density=getResources().getDisplayMetrics().density;
+            panels=DsLayout.fit(r-l,b-t,density);
+            overlay.controls.compact(true);
+            overlay.controls.viewport(dp(8),panels.dockY,r-l-dp(16),panels.dockHeight-dp(4),density);
+            overlay.controls.stylusRect(panels.x,panels.bottom,panels.width,panels.height);
             overlay.invalidate();
         });
         root.addView(stage,new LinearLayout.LayoutParams(-1,0,1));setContentView(root);
@@ -118,15 +121,17 @@ public final class ControlsActivity extends Activity implements InputManager.Inp
         @Override protected void onDraw(Canvas c){
             float d=getResources().getDisplayMetrics().density;int[] s=NativeBridge.poll();
             markerX=Math.max(-1,Math.min(1,markerX+s[1]/32767f*.025f));markerY=Math.max(-1,Math.min(1,markerY-s[2]/32767f*.025f));
-            p.setColor(0xff18232e);c.drawRoundRect(dp(14),dp(8),getWidth()-dp(14),getHeight()-dp(12),dp(22),dp(22),p);
+            DsLayout layout=panels;if(layout==null)return;
+            p.setColor(0xff18232e);c.drawRect(layout.x,layout.top,layout.x+layout.width,layout.top+layout.height,p);
             p.setColor(0xff849aaf);p.setTextAlign(Paint.Align.CENTER);p.setTextSize(12*d);
-            c.drawText("PRUEBA NATIVA · SIN JUEGO",getWidth()/2f,dp(34),p);
-            p.setTextSize(10*d);c.drawText("El escenario todavía no está conectado",getWidth()/2f,dp(51),p);
-            p.setColor(0xffcee9f8);c.drawCircle(getWidth()/2f+markerX*getWidth()*.20f,dp(86)+markerY*dp(19),dp(6),p);
-            float[] r=overlay.controls.stylusRect();p.setColor(0xff223340);c.drawRoundRect(r[0],r[1],r[0]+r[2],r[1]+r[3],dp(12),dp(12),p);
+            c.drawText("PANTALLA SUPERIOR",getWidth()/2f,layout.top+layout.height*.35f,p);
+            p.setTextSize(10*d);c.drawText("Prueba de controles · sin juego",getWidth()/2f,layout.top+layout.height*.48f,p);
+            p.setColor(0xffcee9f8);c.drawCircle(getWidth()/2f+markerX*layout.width*.35f,
+                layout.top+layout.height*.68f+markerY*layout.height*.12f,dp(5),p);
+            float[] r=overlay.controls.stylusRect();p.setColor(0xff223340);c.drawRect(r[0],r[1],r[0]+r[2],r[1]+r[3],p);
             p.setColor(0xffa5bccd);p.setTextSize(11*d);c.drawText("PANTALLA TÁCTIL",r[0]+r[2]/2,r[1]+r[3]/2,p);
             if(s[4]!=0){p.setColor(0xffb9edff);c.drawCircle(s[5],s[6],dp(9),p);}
-            p.setColor(0xff8fa5b8);p.setTextSize(10*d);c.drawText(String.format(java.util.Locale.ROOT,"PAD %04X   ·   ZR %d",s[0],s[3]),getWidth()/2f,getHeight()-dp(73),p);
+            p.setColor(0xff8fa5b8);p.setTextSize(10*d);c.drawText(String.format(java.util.Locale.ROOT,"PAD %04X   ·   ZR %d",s[0],s[3]),getWidth()/2f,layout.top+layout.height-dp(12),p);
             if(resumed)postInvalidateOnAnimation();
         }
     }

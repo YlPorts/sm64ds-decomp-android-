@@ -77,7 +77,7 @@ jobs:
           done
           [[ "$(adb shell getprop sys.boot_completed | tr -d '\r')" == 1 ]]
           adb shell settings put system accelerometer_rotation 0
-          adb shell settings put system user_rotation 1
+          adb shell settings put system user_rotation 0
           adb shell wm dismiss-keyguard
           adb shell input keyevent 82
           adb install -t build/controls-apk/SM64DS-Controles-Prueba.apk
