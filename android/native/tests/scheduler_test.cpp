@@ -11,9 +11,7 @@
 
 extern "C" {
 int data_020a612c[4] = {};
-int data_020a6134[5] = {};
 int data_020a6128 = 0;
-int data_020a6148[16] = {};
 alignas(4) unsigned char data_0209d4fc[4] = {};
 alignas(4) unsigned char data_0209d4f0[4] = {};
 int data_0209d500 = 0;
@@ -69,6 +67,10 @@ extern "C" void func_02019144() {
     ++display_commits;
 }
 extern "C" void func_02019100() { ++irq_tails; }
+
+#ifdef SM64DS_TEST_LIFETIMES
+#include "scheduler_lifetime_cases.inc"
+#endif
 
 int main() {
     require(sizeof(void *) == 4, "original 32-bit layout");
@@ -135,6 +137,10 @@ int main() {
     data_0209d4f0[0] = 0; vblank_handler = nullptr;
     pass("2000 frame waits through the real VBlank handler; correct IRQ-return order");
 
+#ifdef SM64DS_TEST_LIFETIMES
+    run_lifetime_cases();
+#endif
+
     RomThread invalid{};
     invalid.id = 16;
     auto rejected = g_stat.rejected;
@@ -163,6 +169,6 @@ int main() {
     }
     require(sm64ds::platform::fiber_to_thread(), "test root cleanup");
     pass("probe-owned suspended stacks released");
-    std::printf("RESULT: %u/%u scheduler cases passed; 8 original C translation units; NOT GAMEPLAY\n", cases, cases);
+    std::printf("RESULT: %u/%u scheduler cases passed; original scheduler and lifecycle translation units; NOT GAMEPLAY\n", cases, cases);
     return 0;
 }
