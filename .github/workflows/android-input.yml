@@ -1,0 +1,56 @@
+name: Android input and touch (not gameplay)
+on:
+  workflow_dispatch:
+  push:
+    branches: [android/native-bootstrap]
+    paths: ['android/full-engine/**', '.github/workflows/android-input.yml']
+permissions:
+  contents: read
+jobs:
+  input:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [arm, thumb, android]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install ARM execution tools
+        if: matrix.target != 'android'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends g++-arm-linux-gnueabihf qemu-user
+      - uses: android-actions/setup-android@v3
+        if: matrix.target == 'android'
+        with:
+          packages: platform-tools
+          log-accepted-android-sdk-licenses: false
+      - name: Install pinned NDK
+        if: matrix.target == 'android'
+        run: sdkmanager 'ndk;28.2.13676358'
+      - name: Check reviewed source adaptations
+        run: python3 -m unittest discover -s android/full-engine -p 'test_*.py' -v
+      - name: Build or execute native input and original touch path
+        shell: bash
+        env:
+          TARGET: ${{ matrix.target }}
+        run: |
+          set -o pipefail
+          if [[ "$TARGET" == android ]]; then
+            LLVM="$ANDROID_HOME/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/bin"
+            python3 android/full-engine/check_android_input.py --cxx "$LLVM/armv7a-linux-androideabi23-clang++" --android --output build/input-tests | tee input-tests.log
+          else
+            python3 android/full-engine/check_android_input.py --cxx arm-linux-gnueabihf-g++ --flags="-m$TARGET" --runner="qemu-arm -L /usr/arm-linux-gnueabihf" --output build/input-tests | tee input-tests.log
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: input-touch-${{ matrix.target }}-NOT-GAMEPLAY
+          path: |
+            input-tests.log
+            build/input-tests
+          retention-days: 14
+          if-no-files-found: error

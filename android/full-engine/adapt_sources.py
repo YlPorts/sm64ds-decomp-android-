@@ -35,10 +35,11 @@ def transform(text: str, rule: dict) -> str:
 
 def load_manifest() -> dict:
     result = json.loads(Path(__file__).with_name('source_portability.json').read_text())
-    extra = json.loads(Path(__file__).with_name('platform_portability.json').read_text())['sources']
-    if result['sources'].keys() & extra.keys():
-        raise ValueError('Duplicate native platform source rule')
-    result['sources'].update(extra)
+    for filename in ('platform_portability.json', 'input_portability.json'):
+        extra = json.loads(Path(__file__).with_name(filename).read_text())['sources']
+        if result['sources'].keys() & extra.keys():
+            raise ValueError('Duplicate native platform source rule')
+        result['sources'].update(extra)
     return result
 
 

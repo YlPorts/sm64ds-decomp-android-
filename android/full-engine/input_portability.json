@@ -1,0 +1,74 @@
+{
+  "scope": "Native Android input boundary, preserving upstream touch and renderer. No Activity or gameplay.",
+  "sources": {
+    "port/hal/pad_backend.cpp": {
+      "sha256": "0a05c0c0a5ac1027ad318dd90ee5194d87221fb7db2337a901c16c8989143f3a",
+      "replacement": "android/full-engine/pad_android.cpp"
+    },
+    "port/hal/sub_screen.cpp": {
+      "sha256": "996fef96c874c90c889bccaf4320500277f56c2840260d52eb1361cb5e8aa9c5",
+      "edits": [
+        {
+          "old": "#include <windows.h>",
+          "new": "#include \"sm64ds_android_input.h\"",
+          "count": 1,
+          "reason": "Native Android event boundary; original renderer and touch stores retained."
+        },
+        {
+          "old": "HWND g_hwnd;",
+          "new": "void *g_hwnd; // only a non-null host-surface marker; never a Windows handle",
+          "count": 1,
+          "reason": "Native Android event boundary; original renderer and touch stores retained."
+        },
+        {
+          "old": "BOOL(WINAPI *GetCursorPos_)(POINT *);\nBOOL(WINAPI *ScreenToClient_)(HWND, POINT *);\nSHORT(WINAPI *GetAsyncKeyState_)(int);\nHWND(WINAPI *GetForegroundWindow_)(void);\n\n",
+          "new": "// Input snapshots come from Android events, never session-global polling.\n\n",
+          "count": 1,
+          "reason": "Native Android event boundary; original renderer and touch stores retained."
+        },
+        {
+          "old": "    g_hwnd = (HWND)hwnd;",
+          "new": "    g_hwnd = hwnd;",
+          "count": 1,
+          "reason": "Native Android event boundary; original renderer and touch stores retained."
+        },
+        {
+          "old": "    if (HMODULE u = LoadLibraryA(\"user32.dll\")) {\n        GetCursorPos_ = (decltype(GetCursorPos_))GetProcAddress(u, \"GetCursorPos\");\n        ScreenToClient_ = (decltype(ScreenToClient_))GetProcAddress(u, \"ScreenToClient\");\n        GetAsyncKeyState_ =\n            (decltype(GetAsyncKeyState_))GetProcAddress(u, \"GetAsyncKeyState\");\n        GetForegroundWindow_ =\n            (decltype(GetForegroundWindow_))GetProcAddress(u, \"GetForegroundWindow\");\n    }\n\n",
+          "new": "    port_pad_init(); // The Activity/native host must publish focus and input events.\n\n",
+          "count": 1,
+          "reason": "Native Android event boundary; original renderer and touch stores retained."
+        },
+        {
+          "old": "    if (g_nofocusgate) return 1;\n    if (!g_hwnd || !GetForegroundWindow_) return 1;\n    return GetForegroundWindow_() == g_hwnd ? 1 : 0;",
+          "new": "    if (g_nofocusgate) return 1;\n    if (!g_hwnd) return 1; // headless test code still gates interactive reads\n    return sm64ds::input::focused() ? 1 : 0;",
+          "count": 1,
+          "reason": "Native Android event boundary; original renderer and touch stores retained."
+        },
+        {
+          "old": "    const int btn = !g_headless && g_on && GetAsyncKeyState_ &&\n                    (GetAsyncKeyState_(VK_LBUTTON) & 0x8000) ? 1 : 0;\n    if (!btn) drag_own = 0;\n    if (btn && GetCursorPos_ && ScreenToClient_) {\n        POINT p;\n        if (GetCursorPos_(&p) && ScreenToClient_(g_hwnd, &p)) {",
+          "new": "    const auto p = sm64ds::input::pointer_snapshot();\n    int btn = !g_headless && g_on && p.focused && p.down;\n    static std::uint32_t gesture_seen;\n    if (p.gesture != gesture_seen) {\n        gesture_seen = p.gesture;\n        drag_own = 0;\n        // A replacement gesture must never inherit an old off-panel drag.\n        // Expose one release before its fresh press when both arrived between\n        // polls, instead of collapsing two gestures into a single long hold.\n        if (data_020a0de8[0]) btn = 0;\n    }\n    if (!btn) drag_own = 0;\n    if (btn) {\n        { // A single coherent snapshot already contains client/surface coordinates.",
+          "count": 1,
+          "reason": "Native Android event boundary; original renderer and touch stores retained."
+        },
+        {
+          "old": "        } else if (drag_own) {\n            /* THE QUERY FAILED, NOT THE DRAG. ScreenToClient does not fail for\n               a live window, but an owned drag must not end on something that\n               is not the player's hand. Ending on anything else is the exact\n               defect this latch exists to close. Hold the record where it is:\n               `down` stays set, and feeding the published point back through\n               the two stores below leaves the last one standing. */\n            down = 1;\n            sx = data_020a0de8[2];\n            sy = data_020a0de8[3];\n        }\n    }\n",
+          "new": "        }\n    }\n",
+          "count": 1,
+          "reason": "Native Android event boundary; original renderer and touch stores retained."
+        },
+        {
+          "old": "    if (GetAsyncKeyState_ && !g_headless && !hal_sub_screen_stacked()) {",
+          "new": "    if (!g_headless && !hal_sub_screen_stacked()) {",
+          "count": 1,
+          "reason": "Native Android event boundary; original renderer and touch stores retained."
+        },
+        {
+          "old": "            const int tab = (GetAsyncKeyState_(VK_TAB) & 0x8000) != 0;",
+          "new": "            const int tab = sm64ds::input::legacy_key_held(9);",
+          "count": 1,
+          "reason": "Native Android event boundary; original renderer and touch stores retained."
+        }
+      ]
+    }
+  }
+}
