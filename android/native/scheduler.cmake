@@ -20,16 +20,17 @@ if(SM64DS_TEST_UPSTREAM_SCHEDULER)
     target_include_directories(sm64ds_scheduler_support PRIVATE
         "${REPO_ROOT}/port/ntr/include" "${REPO_ROOT}/port/hal")
     target_compile_definitions(sm64ds_scheduler_support PRIVATE SM64DS_NATIVE_FIBERS=1)
+    target_compile_options(sm64ds_scheduler_support PRIVATE -fno-strict-aliasing)
     target_link_libraries(sm64ds_scheduler_support PUBLIC sm64ds_fibers)
     # Test includes the same generated scheduler to inspect invariants without
     # adding test-only entry points to the production module.
-    set_source_files_properties(tests/scheduler_test.cpp PROPERTIES OBJECT_DEPENDS "${SCHED_ADAPTER}")
+    set_source_files_properties(tests/scheduler_worker_test.cpp PROPERTIES OBJECT_DEPENDS "${SCHED_ADAPTER}")
     set(SCHED_ROM_SOURCES
         src/OS_SleepThread.c src/OS_WakeupThread.c src/func_02057f54.c
         src/func_0205801c.c src/func_02057e34.c src/func_0201a4d0.c
         src/func_0201a4bc.c src/_ZN3IRQ13VBlankHandlerEv.c)
     list(TRANSFORM SCHED_ROM_SOURCES PREPEND "${REPO_ROOT}/")
-    add_executable(sm64ds_scheduler_tests tests/scheduler_test.cpp "${SCHED_RT}" ${SCHED_ROM_SOURCES})
+    add_executable(sm64ds_scheduler_tests tests/scheduler_worker_test.cpp "${SCHED_RT}" ${SCHED_ROM_SOURCES})
     target_include_directories(sm64ds_scheduler_tests PRIVATE "${CMAKE_CURRENT_BINARY_DIR}"
         "${REPO_ROOT}/include" "${REPO_ROOT}/port" "${REPO_ROOT}/port/hal"
         "${REPO_ROOT}/port/ntr/include")
