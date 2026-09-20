@@ -37,6 +37,9 @@ add_library(sm64ds_ntr_platform STATIC ${NTR_SOURCES} ${NTR_ADAPTED} "${PORTABLE
 target_include_directories(sm64ds_ntr_platform PUBLIC "${REPO_ROOT}/port/ntr/include"
     PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include" "${REPO_ROOT}/port/ntr" "${REPO_ROOT}/port" "${REPO_ROOT}/port/hal" "${REPO_ROOT}/include")
 target_compile_definitions(sm64ds_ntr_platform PRIVATE SM64DS_PLATFORM_PC=1 SM64DS_NATIVE_FIBERS=1)
+# Upstream gx.h uses global size_t without including its defining header.
+# Supply only the standard declaration; never weaken compiler diagnostics.
+target_compile_options(sm64ds_ntr_platform PUBLIC "SHELL:-include stddef.h")
 target_compile_options(sm64ds_ntr_platform PRIVATE -fno-strict-aliasing -ffunction-sections -fdata-sections)
 target_link_libraries(sm64ds_ntr_platform PUBLIC sm64ds_fibers Threads::Threads)
 add_executable(sm64ds_platform_probe tests/platform_probe.cpp)
