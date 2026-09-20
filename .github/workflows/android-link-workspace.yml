@@ -39,12 +39,12 @@ jobs:
       - name: Package compiler, inputs and objects without credentials or ROM
         run: |
           NDK="$ANDROID_HOME/ndk/28.2.13676358"
-          LLVM="$NDK/toolchains/llvm/prebuilt/linux-x86_64"
           mkdir -p export
+          tar -czf export/engine-link-workspace.tar.gz build/full-graph build/full-report build/full-compile.log build/full-compile.exit
           python3 - "$NDK" <<'PY'
           import pathlib,sys,tarfile
           ndk=pathlib.Path(sys.argv[1]); llvm=ndk/'toolchains/llvm/prebuilt/linux-x86_64'
-          paths=[ndk/'source.properties',ndk/'build/cmake',llvm/'lib/clang',llvm/'lib64',llvm/'sysroot/usr/include',llvm/'sysroot/usr/lib/arm-linux-androideabi']
+          paths=[ndk/'source.properties',ndk/'build/cmake',ndk/'meta',ndk/'NOTICE',llvm/'lib',llvm/'sysroot/usr/include',llvm/'sysroot/usr/lib/arm-linux-androideabi']
           for name in ['clang','clang++','ld.lld','lld','llvm-ar','llvm-nm','llvm-readelf','llvm-objdump','llvm-objcopy','llvm-strip','llvm-ranlib']:
               p=llvm/'bin'/name
               if p.exists():
@@ -54,15 +54,18 @@ jobs:
           with tarfile.open('export/ndk-armv7-workspace.tar.gz','w:gz',compresslevel=3) as tar:
               seen=set()
               for p in paths:
+                  if not p.exists():
+                      if p.name in ('NOTICE','meta'):continue
+                      raise FileNotFoundError(p)
                   name=p.relative_to(ndk).as_posix()
                   if name not in seen:
                       tar.add(p,arcname=name);seen.add(name)
           PY
-          tar -czf export/engine-link-workspace.tar.gz build/full-graph build/full-report build/full-compile.log build/full-compile.exit
           git rev-parse HEAD > export/REVISION.txt
           sha256sum export/*.tar.gz > export/SHA256SUMS.txt
           ls -lh export
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: native-link-offline-workspace
           path: export
