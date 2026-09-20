@@ -57,6 +57,11 @@ jobs:
           assert not re.search(r'\bUND\s+AAudio', text), 'AAudio must resolve only through checked dlsym'
           print('PASS: API-26 function types verified; API-23 ELF has no required AAudio library/symbol')
           PYCHECK
+      - name: Compile native host memory and fault boundary tests for Android
+        shell: bash
+        run: |
+          LLVM="$ANDROID_HOME/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/bin"
+          python3 android/full-engine/check_host_boundaries.py --cxx "$LLVM/armv7a-linux-androideabi23-clang++" --output build/host-tests-android
       - name: Resolve complete upstream game target, no ROM required
         shell: bash
         run: |
@@ -75,6 +80,12 @@ jobs:
           python3 android/full-engine/compile_inventory.py \
             --build build/full-graph --ndk "$ANDROID_HOME/ndk/28.2.13676358" \
             --target walk_window --output build/full-report --jobs 4 | tee full-engine.log
+      - name: Audit actual compiled objects and remaining engine link errors
+        if: ${{ always() && !cancelled() }}
+        shell: bash
+        run: |
+          test -f build/full-report/report.json
+          python3 android/full-engine/link_inventory.py --build build/full-graph --report build/full-report --ndk "$ANDROID_HOME/ndk/28.2.13676358"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -88,6 +99,10 @@ jobs:
             build/full-report/adapted
             build/full-report/call-abi
             build/full-report/source-ports
+            build/host-tests-android
+            build/full-report/link-audit/*.json
+            build/full-report/link-audit/*.log
+            build/full-report/link-audit/*.txt
             build/source-tests-android
             build/platform-tests-android
             build/call-abi-android
@@ -127,6 +142,11 @@ jobs:
         run: |
           set -o pipefail
           python3 android/full-engine/check_platform_backends.py --cxx arm-linux-gnueabihf-g++ --flags="-m${{ matrix.mode }}" --runner="qemu-arm -L /usr/arm-linux-gnueabihf" --output build/platform-tests | tee platform-tests.log
+      - name: Execute original snapshot and explicit actor-decline paths
+        shell: bash
+        run: |
+          set -o pipefail
+          python3 android/full-engine/check_host_boundaries.py --cxx arm-linux-gnueabihf-g++ --flags="-m${{ matrix.mode }}" --runner="qemu-arm -L /usr/arm-linux-gnueabihf" --output build/host-tests | tee host-tests.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -136,6 +156,8 @@ jobs:
             source-tests.log
             platform-tests.log
             build/platform-tests
+            build/host-tests
+            host-tests.log
             build/source-tests
             build/call-abi
           retention-days: 14

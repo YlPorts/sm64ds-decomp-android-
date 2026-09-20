@@ -1,0 +1,20 @@
+{
+  "sources": {
+    "port/hal/scene_boot.cpp": {
+      "sha256": "f4e05a130849853a99ca0c7f75a300f5b03661f7f785ab4f3f4aceb0da78db95",
+      "native_boundary": "scene"
+    },
+    "port/hal/oam_lists.cpp": {
+      "sha256": "5de0146bf762f3c766d9241cc80057027552cb69b7a17755c0fb78037d712829",
+      "native_boundary": "oam"
+    },
+    "port/hal/rollback.cpp": {
+      "sha256": "00ef84ad352d0e52a1be365ac1c0a6303287a75bf9776e706926ca427b8f761c",
+      "native_boundary": "rollback"
+    },
+    "port/unmatched/func_02043fdc_hostcopy.cpp": {
+      "sha256": "820d39e34f4f0ca288624585a5aaac6975cde0fb2bcf188cf01303019e4d9973",
+      "native_boundary": "actor"
+    }
+  }
+}

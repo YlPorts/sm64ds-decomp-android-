@@ -35,7 +35,7 @@ def transform(text: str, rule: dict) -> str:
 
 def load_manifest() -> dict:
     result = json.loads(Path(__file__).with_name('source_portability.json').read_text())
-    for filename in ('platform_portability.json', 'input_portability.json', 'asset_portability.json'):
+    for filename in ('platform_portability.json', 'input_portability.json', 'asset_portability.json', 'host_portability.json'):
         extra = json.loads(Path(__file__).with_name(filename).read_text())['sources']
         if result['sources'].keys() & extra.keys():
             raise ValueError('Duplicate native platform source rule')
@@ -92,7 +92,10 @@ def prepare(units: list[dict], output: Path) -> list[dict]:
                 validate((root / 'port/tools/hostgen.py').read_bytes(), manifest['hostgen_sha256'], 'hostgen.py')
                 validate(original.read_bytes(), manifest['generated_sha256'][rel], str(original))
             text = Path(unit['source']).read_text()
-            if 'replacement' in rule:
+            if 'native_boundary' in rule:
+                from adapt_host_boundaries import transform as transform_boundary
+                converted = transform_boundary(text, rule['native_boundary'])
+            elif 'replacement' in rule:
                 replacement = (root / rule['replacement']).resolve()
                 if not replacement.is_relative_to(Path(__file__).resolve().parent) or replacement.suffix != '.cpp':
                     raise ValueError('Replacement must be a native .cpp inside android/full-engine')
