@@ -17,6 +17,15 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - name: Export tracked source without credentials
+        run: |
+          mkdir -p export
+          git archive --format=tar.gz HEAD > export/source.tar.gz
+          git rev-parse HEAD > export/REVISION.txt
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
       - uses: android-actions/setup-android@v3
         with:
           packages: platform-tools
@@ -26,15 +35,14 @@ jobs:
           sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
           sudo apt-get update -qq
           sudo apt-get install -y -qq qemu-user-static g++-arm-linux-gnueabihf
-      - name: Export source and development tools only
+          python3 -m pip download --dest export/wheels ndspy capstone pyelftools
+      - name: Export development tools only
         run: |
-          mkdir -p export
-          git archive --format=tar.gz HEAD > export/source.tar.gz
           tar -czf export/android-sdk-minimal.tar.gz -C "$ANDROID_HOME" platforms/android-35 build-tools/35.0.0
           tar -czf export/linux-arm-tools.tar.gz /usr/bin/qemu-arm-static /usr/bin/arm-linux-gnueabihf-* /usr/lib/gcc-cross/arm-linux-gnueabihf /usr/arm-linux-gnueabihf
-          git rev-parse HEAD > export/REVISION.txt
           sha256sum export/*.tar.gz > export/SHA256SUMS.txt
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: android-local-development-inputs
           path: export
