@@ -1,0 +1,63 @@
+name: Android native bootstrap (not playable)
+'on':
+  push:
+    branches: [android/native-bootstrap]
+    paths: [android/native/**, .github/workflows/android-native.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: android-native-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  native-host-tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Audit remaining Windows and ABI dependencies
+        run: python3 android/native/tools/audit_port.py . --output build/android-audit.json
+      - name: Build the fiber backend and actual upstream frame-loop probe
+        run: |
+          python3 -m unittest discover -s android/native/tests -p 'test_*.py' -v
+          cmake -S android/native -B build/native-host -G Ninja -DCMAKE_BUILD_TYPE=Release -DSM64DS_TEST_UPSTREAM_RUNTIME=ON
+          cmake --build build/native-host --parallel 2
+          ctest --test-dir build/native-host --output-on-failure
+      - name: Upload audit and test log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-host-report
+          path: |
+            build/android-audit.json
+            build/native-host/Testing/Temporary/LastTest.log
+          if-no-files-found: error
+  android-ndk:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        abi: [armeabi-v7a, arm64-v8a]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: android-actions/setup-android@v3
+      - name: Install pinned Android NDK
+        run: sdkmanager 'ndk;28.2.13676358'
+      - name: Cross-compile native support and frame-loop tests (not the game)
+        run: |
+          cmake -S android/native -B build/android-${{ matrix.abi }} -G Ninja \
+            -DCMAKE_TOOLCHAIN_FILE="$ANDROID_HOME/ndk/28.2.13676358/build/cmake/android.toolchain.cmake" \
+            -DANDROID_ABI=${{ matrix.abi }} -DANDROID_PLATFORM=android-23 \
+            -DANDROID_STL=c++_static -DCMAKE_BUILD_TYPE=Release \
+            -DSM64DS_TEST_UPSTREAM_RUNTIME=ON
+          cmake --build build/android-${{ matrix.abi }} --parallel 2
+      - name: Upload platform library and on-device test executables
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-platform-${{ matrix.abi }}-NOT-A-GAME
+          path: |
+            build/android-${{ matrix.abi }}/libsm64ds_fibers.a
+            build/android-${{ matrix.abi }}/sm64ds_fiber_tests
+            build/android-${{ matrix.abi }}/sm64ds_runtime_tests
+          if-no-files-found: error
