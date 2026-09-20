@@ -56,7 +56,16 @@ public final class ControlsInstrumentation extends Instrumentation {
                 c.focus(true);NativeBridge.focus(true);v.release();v.invalidate();
             });
             waitForIdleSync();SystemClock.sleep(120);
-            Bitmap image=getUiAutomation().takeScreenshot();check(image!=null,"actual Android screenshot");
+            // Render the actual laid-out Android decor View. A device-screen
+            // screenshot may instead capture first-boot/keyguard overlays.
+            final Bitmap[] capture=new Bitmap[1];
+            runOnMainSync(()->{
+                android.view.View decor=a.getWindow().getDecorView();
+                check(decor.getWidth()>decor.getHeight(),"landscape Android layout");
+                capture[0]=Bitmap.createBitmap(decor.getWidth(),decor.getHeight(),Bitmap.Config.ARGB_8888);
+                decor.draw(new android.graphics.Canvas(capture[0]));
+            });
+            Bitmap image=capture[0];check(image!=null,"actual Android View rendered");
             try(FileOutputStream out=new FileOutputStream(new File(getTargetContext().getFilesDir(),"controls.png"))){check(image.compress(Bitmap.CompressFormat.PNG,100,out),"screenshot saved");}image.recycle();
             result.putString("stream","PASS "+checks+" framework/JNI input checks. Controls diagnostic only; no game or physical device.\n");finish(Activity.RESULT_OK,result);
         }catch(Throwable t){result.putString("stream","FAIL "+t+"\n"+android.util.Log.getStackTraceString(t));finish(Activity.RESULT_CANCELED,result);}

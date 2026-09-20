@@ -90,7 +90,7 @@ public final class ControlsActivity extends Activity implements InputManager.Inp
         slider(box,"Opacidad",15,85,Math.round(overlay.opacity()*100),n->overlay.opacity(n/100f));
         slider(box,"Tamaño",80,140,Math.round(overlay.controls.scale()*100),n->overlay.controls.scale(n/100f));
         CheckBox vibrate=new CheckBox(this);vibrate.setText("Vibración suave");vibrate.setChecked(overlay.haptics());vibrate.setOnCheckedChangeListener((v,c)->overlay.haptics(c));box.addView(vibrate);
-        TextView help=new TextView(this);help.setText("A: saltar · B: atacar · X: correr · ZR: agachar\nL/R: cámara · Y: centrar\nMover no activa acciones del juego.");help.setPadding(0,dp(8),0,dp(8));box.addView(help);
+        TextView help=new TextView(this);help.setText("A: saltar · B: atacar · X: correr · ZR: agachar\nL/R: cámara · Y: auxiliar\nMover no activa acciones del juego.");help.setPadding(0,dp(8),0,dp(8));box.addView(help);
         android.widget.ScrollView scroll=new android.widget.ScrollView(this);scroll.addView(box);
         AlertDialog dialog=new AlertDialog.Builder(this).setTitle("Controles táctiles").setView(scroll)
             .setPositiveButton("Listo",(d,w)->save())
@@ -107,7 +107,7 @@ public final class ControlsActivity extends Activity implements InputManager.Inp
         return super.dispatchKeyEvent(event);
     }
     @Override public boolean onGenericMotionEvent(MotionEvent e){
-        if(resumed&&(e.getSource()&InputDevice.SOURCE_JOYSTICK)==InputDevice.SOURCE_JOYSTICK){
+        if(resumed&&overlay!=null&&!overlay.controls.editing()&&(e.getSource()&InputDevice.SOURCE_JOYSTICK)==InputDevice.SOURCE_JOYSTICK){
             NativeBridge.axes(e.getDeviceId(),new float[]{e.getAxisValue(0),e.getAxisValue(1),e.getAxisValue(11),e.getAxisValue(14),e.getAxisValue(17),e.getAxisValue(18),e.getAxisValue(15),e.getAxisValue(16)});return true;
         }return super.onGenericMotionEvent(e);
     }

@@ -78,6 +78,7 @@ jobs:
           [[ "$(adb shell getprop sys.boot_completed | tr -d '\r')" == 1 ]]
           adb shell settings put system accelerometer_rotation 0
           adb shell settings put system user_rotation 1
+          adb shell wm dismiss-keyguard
           adb shell input keyevent 82
           adb install -t build/controls-apk/SM64DS-Controles-Prueba.apk
           timeout 60 adb shell am instrument -w org.ylports.sm64ds.controls/.ControlsInstrumentation | tee instrumentation.log
