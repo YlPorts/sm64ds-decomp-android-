@@ -1,0 +1,70 @@
+name: Android platform integration (not gameplay)
+'on':
+  push:
+    branches: [android/native-bootstrap]
+    paths: [android/engine/**, android/native/**, .github/workflows/android-platform.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: android-platform-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  platform:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [arm-linux, android-armv7]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ARM Linux execution tools
+        if: matrix.target == 'arm-linux'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends g++-arm-linux-gnueabihf qemu-user
+      - uses: android-actions/setup-android@v3
+        if: matrix.target == 'android-armv7'
+        with:
+          packages: platform-tools
+      - name: Install NDK
+        if: matrix.target == 'android-armv7'
+        run: sdkmanager 'ndk;28.2.13676358'
+      - name: Configure actual platform sources
+        shell: bash
+        env:
+          TARGET: ${{ matrix.target }}
+        run: |
+          set -euo pipefail
+          args=()
+          if [[ "$TARGET" == arm-linux ]]; then
+            args+=(-DCMAKE_SYSTEM_NAME=Linux -DCMAKE_SYSTEM_PROCESSOR=armv7)
+            args+=(-DCMAKE_C_COMPILER=arm-linux-gnueabihf-gcc -DCMAKE_CXX_COMPILER=arm-linux-gnueabihf-g++)
+            args+=(-DCMAKE_ASM_COMPILER=arm-linux-gnueabihf-gcc)
+            args+=('-DCMAKE_CROSSCOMPILING_EMULATOR=qemu-arm;-L;/usr/arm-linux-gnueabihf')
+          else
+            args+=(-DCMAKE_TOOLCHAIN_FILE="$ANDROID_HOME/ndk/28.2.13676358/build/cmake/android.toolchain.cmake")
+            args+=(-DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=android-23 -DANDROID_STL=c++_static)
+          fi
+          cmake -S android/engine -B build/platform -G Ninja -DCMAKE_BUILD_TYPE=Release "${args[@]}"
+      - name: Compile and link real memory and renderer pipeline
+        shell: bash
+        run: |
+          set -o pipefail
+          cmake --build build/platform --parallel 2 -- -k 0 2>&1 | tee build/platform/build.log
+      - name: Execute ARM Linux platform probe (not Android execution)
+        if: matrix.target == 'arm-linux'
+        run: ctest --test-dir build/platform --verbose --output-on-failure
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: platform-${{ matrix.target }}-NOT-GAMEPLAY
+          path: |
+            build/platform/build.log
+            build/platform/compile_commands.json
+            build/platform/Testing/Temporary/LastTest.log
+            build/platform/platform-probe.bmp
+            build/platform/libsm64ds_ntr_platform.a
+            build/platform/sm64ds_platform_probe
+          if-no-files-found: warn
