@@ -44,6 +44,19 @@ jobs:
         run: |
           LLVM="$ANDROID_HOME/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/bin"
           python3 android/full-engine/check_platform_backends.py --cxx "$LLVM/armv7a-linux-androideabi23-clang++" --output build/platform-tests-android
+          # API 26 enables compile-time type comparisons against the NDK declarations.
+          "$LLVM/armv7a-linux-androideabi26-clang++" -std=c++17 -O2 -pthread \
+            -Iandroid/full-engine -Iport/hal/sdat -c android/full-engine/out_android.cpp \
+            -o build/platform-tests-android/aaudio-api26-types.o
+          "$LLVM/llvm-readelf" -d --dyn-syms build/platform-tests-android/audio_tests \
+            > build/platform-tests-android/aaudio-linkage.txt
+          python3 - <<'PYCHECK'
+          import pathlib, re
+          text = pathlib.Path('build/platform-tests-android/aaudio-linkage.txt').read_text()
+          assert not re.search(r'\(NEEDED\).*libaaudio', text), 'AAudio must not be a required library'
+          assert not re.search(r'\bUND\s+AAudio', text), 'AAudio must resolve only through checked dlsym'
+          print('PASS: API-26 function types verified; API-23 ELF has no required AAudio library/symbol')
+          PYCHECK
       - name: Resolve complete upstream game target, no ROM required
         shell: bash
         run: |

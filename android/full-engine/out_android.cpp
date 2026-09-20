@@ -16,6 +16,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <thread>
+#include <type_traits>
 #ifdef __ANDROID__
 #include <aaudio/AAudio.h>
 #include <dlfcn.h>
@@ -25,23 +26,31 @@ class AndroidDevice final: public Device {
 #ifdef __ANDROID__
     void *library_=nullptr;
     AAudioStream *stream_=nullptr;
-#define AA_POINTER(name) decltype(&AAudio##name) name=nullptr;
-    AA_POINTER(_createStreamBuilder)
-    AA_POINTER(StreamBuilder_setDirection)
-    AA_POINTER(StreamBuilder_setSharingMode)
-    AA_POINTER(StreamBuilder_setFormat)
-    AA_POINTER(StreamBuilder_setChannelCount)
-    AA_POINTER(StreamBuilder_setSampleRate)
-    AA_POINTER(StreamBuilder_setBufferCapacityInFrames)
-    AA_POINTER(StreamBuilder_openStream)
-    AA_POINTER(StreamBuilder_delete)
-    AA_POINTER(Stream_getChannelCount)
-    AA_POINTER(Stream_getSampleRate)
-    AA_POINTER(Stream_getFormat)
-    AA_POINTER(Stream_requestStart)
-    AA_POINTER(Stream_requestStop)
-    AA_POINTER(Stream_write)
-    AA_POINTER(Stream_close)
+// Typed dynamic symbols: do not take addresses of unavailable declarations
+// in an API-23 build. On API 26+ verify every type against the NDK itself.
+#if __ANDROID_API__ >= 26
+#define AA_POINTER(result, name, ...) \
+    result (*name)(__VA_ARGS__)=nullptr; \
+    static_assert(std::is_same_v<decltype(name), decltype(&AAudio##name)>, "AAudio type mismatch");
+#else
+#define AA_POINTER(result, name, ...) result (*name)(__VA_ARGS__)=nullptr;
+#endif
+    AA_POINTER(aaudio_result_t, _createStreamBuilder, AAudioStreamBuilder **)
+    AA_POINTER(void, StreamBuilder_setDirection, AAudioStreamBuilder *, aaudio_direction_t)
+    AA_POINTER(void, StreamBuilder_setSharingMode, AAudioStreamBuilder *, aaudio_sharing_mode_t)
+    AA_POINTER(void, StreamBuilder_setFormat, AAudioStreamBuilder *, aaudio_format_t)
+    AA_POINTER(void, StreamBuilder_setChannelCount, AAudioStreamBuilder *, int32_t)
+    AA_POINTER(void, StreamBuilder_setSampleRate, AAudioStreamBuilder *, int32_t)
+    AA_POINTER(void, StreamBuilder_setBufferCapacityInFrames, AAudioStreamBuilder *, int32_t)
+    AA_POINTER(aaudio_result_t, StreamBuilder_openStream, AAudioStreamBuilder *, AAudioStream **)
+    AA_POINTER(aaudio_result_t, StreamBuilder_delete, AAudioStreamBuilder *)
+    AA_POINTER(int32_t, Stream_getChannelCount, AAudioStream *)
+    AA_POINTER(int32_t, Stream_getSampleRate, AAudioStream *)
+    AA_POINTER(aaudio_format_t, Stream_getFormat, AAudioStream *)
+    AA_POINTER(aaudio_result_t, Stream_requestStart, AAudioStream *)
+    AA_POINTER(aaudio_result_t, Stream_requestStop, AAudioStream *)
+    AA_POINTER(aaudio_result_t, Stream_write, AAudioStream *, const void *, int32_t, int64_t)
+    AA_POINTER(aaudio_result_t, Stream_close, AAudioStream *)
 #undef AA_POINTER
 #endif
 public:
