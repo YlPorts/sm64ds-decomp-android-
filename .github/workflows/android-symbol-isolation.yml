@@ -1,0 +1,131 @@
+name: Android native symbol isolation (not playable)
+on:
+  workflow_dispatch:
+  push:
+    branches: [android/native-bootstrap]
+    paths:
+      - 'android/full-engine/isolate_symbols.py'
+      - 'android/full-engine/check_symbol_isolation.py'
+      - 'android/full-engine/check_original_isolation.py'
+      - 'android/full-engine/test_symbol_isolation.py'
+      - 'android/full-engine/isolation-tests/**'
+      - '.github/workflows/android-symbol-isolation.yml'
+permissions:
+  contents: read
+jobs:
+  isolate-and-verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    defaults:
+      run:
+        shell: bash
+    env:
+      SM64DS_LINK_ONLY: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
+          log-accepted-android-sdk-licenses: false
+      - name: Install NDK and ARM execution tools
+        run: |
+          sdkmanager 'ndk;28.2.13676358'
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends g++-arm-linux-gnueabihf qemu-user
+      - name: Test validation and synthetic cross-language conversions
+        run: |
+          python3 -m unittest discover -s android/full-engine -p 'test_*.py' -v
+          python3 android/full-engine/check_symbol_isolation.py --runner native --output build/isolation-gcc
+          python3 android/full-engine/check_symbol_isolation.py --cc clang --cxx clang++ --runner native --output build/isolation-clang
+      - name: Resolve the same complete upstream target
+        run: |
+          mkdir -p build/full-graph/.cmake/api/v1/query/client-android-engine
+          touch build/full-graph/.cmake/api/v1/query/client-android-engine/codemodel-v2
+          cmake -S port -B build/full-graph -G Ninja -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_TOOLCHAIN_FILE="$ANDROID_HOME/ndk/28.2.13676358/build/cmake/android.toolchain.cmake" \
+            -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=android-23 \
+            -DANDROID_STL=c++_static -DPORT_ROM_CLEAN=ON -DPORT_LINK_ONLY=ON
+      - name: First-pass compilation and actual collision census
+        run: |
+          # Exit 1 is recorded, not disguised as a successful game build.
+          rc=0
+          python3 android/full-engine/compile_inventory.py --build build/full-graph \
+            --ndk "$ANDROID_HOME/ndk/28.2.13676358" --output build/full-report --jobs 4 > first-pass.log 2>&1 || rc=$?
+          cat first-pass.log
+          test "$rc" -le 1
+          test -f build/full-report/report.json
+          echo "$rc" > first-pass.exit
+          rc=0
+          python3 android/full-engine/link_inventory.py --build build/full-graph \
+            --report build/full-report --ndk "$ANDROID_HOME/ndk/28.2.13676358" || rc=$?
+          test "$rc" -le 1
+          test -f build/full-report/link-audit/report.json
+          echo "$rc" > first-link.exit
+      - name: Separate identifiers and verify every original provider
+        run: |
+          rc=0
+          python3 android/full-engine/isolate_symbols.py --build build/full-graph \
+            --baseline build/full-report --output build/isolated \
+            --ndk "$ANDROID_HOME/ndk/28.2.13676358" --jobs 4 > isolated.log 2>&1 || rc=$?
+          cat isolated.log
+          test "$rc" -le 1
+          test -f build/isolated/SUMMARY.json
+          echo "$rc" > isolated.exit
+          python3 -c 'import json; assert json.load(open("build/isolated/provider-retention.json"))["passed"]'
+      - name: Execute ARM and Thumb probes and compile them for Android
+        run: |
+          LLVM="$ANDROID_HOME/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/bin"
+          for mode in arm thumb; do
+            python3 android/full-engine/check_symbol_isolation.py \
+              --cc arm-linux-gnueabihf-gcc --cxx arm-linux-gnueabihf-g++ --flags="-m$mode" \
+              --runner='qemu-arm -L /usr/arm-linux-gnueabihf' --output "build/isolation-$mode"
+            python3 android/full-engine/check_original_isolation.py \
+              --cc arm-linux-gnueabihf-gcc --cxx arm-linux-gnueabihf-g++ --flags="-m$mode" \
+              --header build/isolated/native_symbol_isolation.h \
+              --runner='qemu-arm -L /usr/arm-linux-gnueabihf' --output "build/original-$mode"
+          done
+          python3 android/full-engine/check_symbol_isolation.py \
+            --cc "$LLVM/armv7a-linux-androideabi23-clang" --cxx "$LLVM/armv7a-linux-androideabi23-clang++" \
+            --flags='-mthumb -static-libstdc++' --output build/isolation-android
+          python3 android/full-engine/check_original_isolation.py \
+            --cc "$LLVM/armv7a-linux-androideabi23-clang" --cxx "$LLVM/armv7a-linux-androideabi23-clang++" \
+            --flags='-mthumb -static-libstdc++' --header build/isolated/native_symbol_isolation.h --output build/original-android
+      - name: Require a complete link, not just a successful diagnostic
+        run: |
+          cat build/isolated/SUMMARY.json
+          python3 - <<'PY'
+          import json
+          r=json.load(open('build/isolated/SUMMARY.json'))
+          assert not r['compile_counts']['failed'] and not r['compile_counts']['blocked'], 'Compilation is still incomplete'
+          assert r['link_returncode']==0 and r['after_strong_duplicate_groups']==0, 'Engine link is still incomplete'
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: native-symbol-isolation-evidence-NOT-GAMEPLAY
+          path: |
+            first-pass.log
+            first-pass.exit
+            first-link.exit
+            isolated.log
+            isolated.exit
+            build/full-report/*.json
+            build/full-report/link-audit/*.json
+            build/full-report/link-audit/*.txt
+            build/full-report/link-audit/*.log
+            build/isolated/*.json
+            build/isolated/*.h
+            build/isolated/errors
+            build/isolated/link-audit/*.json
+            build/isolated/link-audit/*.txt
+            build/isolated/link-audit/*.log
+            build/isolation-*
+            build/original-*
+            android/full-engine/isolate_symbols.py
+            android/full-engine/check*isolation.py
+            android/full-engine/test_symbol_isolation.py
+            android/full-engine/isolation-tests
+          retention-days: 14
+          if-no-files-found: error
