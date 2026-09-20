@@ -1,0 +1,71 @@
+name: Android native link workspace (development)
+on:
+  workflow_dispatch:
+  push:
+    branches: [android/native-bootstrap]
+    paths: ['.github/workflows/android-link-workspace.yml']
+permissions:
+  contents: read
+jobs:
+  workspace:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: bash
+    env:
+      SM64DS_LINK_ONLY: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
+          log-accepted-android-sdk-licenses: false
+      - run: sdkmanager 'ndk;28.2.13676358'
+      - name: Resolve and compile the selected native engine
+        run: |
+          mkdir -p build/full-graph/.cmake/api/v1/query/client-android-engine
+          touch build/full-graph/.cmake/api/v1/query/client-android-engine/codemodel-v2
+          cmake -S port -B build/full-graph -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE="$ANDROID_HOME/ndk/28.2.13676358/build/cmake/android.toolchain.cmake" -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=android-23 -DANDROID_STL=c++_static -DPORT_ROM_CLEAN=ON -DPORT_LINK_ONLY=ON
+          set +e
+          python3 android/full-engine/compile_inventory.py --build build/full-graph --ndk "$ANDROID_HOME/ndk/28.2.13676358" --output build/full-report --jobs 4 > build/full-compile.log 2>&1
+          rc=$?
+          set -e
+          printf '%s\n' "$rc" > build/full-compile.exit
+          test -f build/full-report/report.json
+          tail -25 build/full-compile.log
+      - name: Package compiler, inputs and objects without credentials or ROM
+        run: |
+          NDK="$ANDROID_HOME/ndk/28.2.13676358"
+          LLVM="$NDK/toolchains/llvm/prebuilt/linux-x86_64"
+          mkdir -p export
+          python3 - "$NDK" <<'PY'
+          import pathlib,sys,tarfile
+          ndk=pathlib.Path(sys.argv[1]); llvm=ndk/'toolchains/llvm/prebuilt/linux-x86_64'
+          paths=[ndk/'source.properties',ndk/'build/cmake',llvm/'lib/clang',llvm/'lib64',llvm/'sysroot/usr/include',llvm/'sysroot/usr/lib/arm-linux-androideabi']
+          for name in ['clang','clang++','ld.lld','lld','llvm-ar','llvm-nm','llvm-readelf','llvm-objdump','llvm-objcopy','llvm-strip','llvm-ranlib']:
+              p=llvm/'bin'/name
+              if p.exists():
+                  paths.append(p)
+                  if p.is_symlink():paths.append(p.resolve())
+          paths.extend((llvm/'bin').glob('armv7a-linux-androideabi*-clang*'))
+          with tarfile.open('export/ndk-armv7-workspace.tar.gz','w:gz',compresslevel=3) as tar:
+              seen=set()
+              for p in paths:
+                  name=p.relative_to(ndk).as_posix()
+                  if name not in seen:
+                      tar.add(p,arcname=name);seen.add(name)
+          PY
+          tar -czf export/engine-link-workspace.tar.gz build/full-graph build/full-report build/full-compile.log build/full-compile.exit
+          git rev-parse HEAD > export/REVISION.txt
+          sha256sum export/*.tar.gz > export/SHA256SUMS.txt
+          ls -lh export
+      - uses: actions/upload-artifact@v4
+        with:
+          name: native-link-offline-workspace
+          path: export
+          retention-days: 3
+          compression-level: 0
+          if-no-files-found: error
