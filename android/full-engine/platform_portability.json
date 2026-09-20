@@ -1,0 +1,158 @@
+{
+  "scope": "Native platform-boundary adaptations. Source identities are retained; not a full engine link.",
+  "sources": {
+    "port/hal/comms_loopback.cpp": {
+      "sha256": "9405b8edf4281dc0e249deecdcfdf331732476cb794fdeff5c160dc8c876eb37",
+      "edits": [
+        {
+          "old": "#include <winsock2.h>\n#include <ws2tcpip.h>\n#include <mstcpip.h>    // SIO_UDP_CONNRESET; see the ioctl in lb_open()\n\n// This SDK's mstcpip.h does not expose it (it is gated behind version macros\n// that the port's 32-bit toolchain build does not set). The value is the\n// documented one and has been stable since Windows 2000, so it is defined here\n// rather than letting a header version decide whether the ioctl happens.\n#ifndef SIO_UDP_CONNRESET\n#define SIO_UDP_CONNRESET _WSAIOW(IOC_VENDOR, 12)\n#endif\n\n",
+          "new": "#include \"sm64ds_posix_net.h\"\n#include \"sm64ds_posix_clock.h\"\n\n",
+          "count": 1,
+          "reason": "Reviewed POSIX platform boundary; preserve existing game logic."
+        },
+        {
+          "old": "struct WsTable {\n    int    (WSAAPI *WSAStartup)(WORD, LPWSADATA);\n    SOCKET (WSAAPI *socket)(int, int, int);\n    int    (WSAAPI *ioctlsocket)(SOCKET, long, u_long *);\n    int    (WSAAPI *WSAIoctl)(SOCKET, DWORD, LPVOID, DWORD, LPVOID, DWORD,\n                              LPDWORD, LPWSAOVERLAPPED,\n                              LPWSAOVERLAPPED_COMPLETION_ROUTINE);\n    int    (WSAAPI *bind)(SOCKET, const struct sockaddr *, int);\n    int    (WSAAPI *sendto)(SOCKET, const char *, int, int,\n                            const struct sockaddr *, int);\n    int    (WSAAPI *recvfrom)(SOCKET, char *, int, int, struct sockaddr *,\n                              int *);\n    int    (WSAAPI *closesocket)(SOCKET);\n    int    (WSAAPI *WSAGetLastError)(void);\n    // ADDRESS MODE ONLY. Both are looked up with the rest of the table, and\n    // both are allowed to be missing: a build of Windows without them still\n    // runs the loopback carrier, which is the default and must not acquire a\n    // new way to fail. resolve() checks the pointer before it calls.\n    unsigned long (WSAAPI *inet_addr)(const char *);\n    struct hostent *(WSAAPI *gethostbyname)(const char *);\n};\nWsTable WS;\nint g_ws_loaded = 0;        // 0 not tried, 1 loaded, -1 refused\n\nbool ws_load() {\n    if (g_ws_loaded) return g_ws_loaded > 0;\n    HMODULE m = ::LoadLibraryA(\"ws2_32.dll\");\n    if (!m) {\n        g_ws_loaded = -1;\n        std::fprintf(stderr, \"[comms:loopback] ws2_32.dll would not load; \"\n                     \"staying idle so the ROM's own bound fires\\n\");\n        return false;\n    }\n#define WS_GET(n) \\\n    *(FARPROC *)&WS.n = ::GetProcAddress(m, #n); \\\n    if (!WS.n) { g_ws_loaded = -1; }\n    WS_GET(WSAStartup); WS_GET(socket);   WS_GET(ioctlsocket);\n    WS_GET(WSAIoctl);   WS_GET(bind);     WS_GET(sendto);\n    WS_GET(recvfrom);   WS_GET(closesocket); WS_GET(WSAGetLastError);\n#undef WS_GET\n    // OPTIONAL ENTRIES, looked up WITHOUT the g_ws_loaded refusal above: these\n    // two are needed only to turn a typed address into bytes, which only the\n    // address modes ever ask for. A missing one must not take the loopback\n    // carrier down with it.\n    *(FARPROC *)&WS.inet_addr      = ::GetProcAddress(m, \"inet_addr\");\n    *(FARPROC *)&WS.gethostbyname  = ::GetProcAddress(m, \"gethostbyname\");\n    if (g_ws_loaded < 0) {\n        std::fprintf(stderr, \"[comms:loopback] ws2_32.dll is missing an entry \"\n                     \"point; staying idle\\n\");\n        return false;\n    }\n    g_ws_loaded = 1;\n    return true;\n}\n\n",
+          "new": "// POSIX sockets require no DLL table or process-wide startup.\n\n",
+          "count": 1,
+          "reason": "Reviewed POSIX platform boundary; preserve existing game logic."
+        },
+        {
+          "old": "bool ws_start() {\n    if (!ws_load()) return false;\n    if (g_wsa_up) return true;\n    WSADATA wsa;\n    if (WS.WSAStartup(MAKEWORD(2, 2), &wsa) != 0) {\n        std::fprintf(stderr, \"[comms:loopback] WSAStartup failed; staying \"\n                     \"idle so the ROM's own bound fires and drops to solo\\n\");\n        return false;\n    }\n    g_wsa_up = true;   // left up for the process lifetime on purpose: a\n                       // WSACleanup here would tear down Winsock under any\n                       // other user of it, and process exit does the job.\n    return true;\n}\n\n",
+          "new": "",
+          "count": 1,
+          "reason": "Reviewed POSIX platform boundary; preserve existing game logic."
+        },
+        {
+          "old": "    if (WS.inet_addr) {\n        const unsigned long v = WS.inet_addr(host);\n        if (v != INADDR_NONE) { out->sin_addr.s_addr = v; return true; }\n    }\n    if (WS.gethostbyname) {\n        struct hostent *he = WS.gethostbyname(host);\n        if (he && he->h_addrtype == AF_INET && he->h_addr_list &&\n            he->h_addr_list[0]) {\n            std::memcpy(&out->sin_addr.s_addr, he->h_addr_list[0], 4);\n            return true;\n        }\n    }\n",
+          "new": "    if (sm64ds_net::resolve_ipv4(host, &out->sin_addr)) return true;\n",
+          "count": 1,
+          "reason": "Reviewed POSIX platform boundary; preserve existing game logic."
+        },
+        {
+          "old": "    u_long nb = 1;\n    WS.ioctlsocket(g_sock, FIONBIO, &nb);\n\n    // Windows turns an ICMP port-unreachable from a peer that is not up yet\n    // into WSAECONNRESET on the NEXT recvfrom of an unconnected UDP socket,\n    // which would show up as a phantom receive error every time a child starts\n    // before its parent. SIO_UDP_CONNRESET off is the documented way to make\n    // the socket behave the way the rest of the world's UDP does.\n    {\n        DWORD off = 0, ret = 0;\n        WS.WSAIoctl(g_sock, SIO_UDP_CONNRESET, &off, sizeof off, 0, 0, &ret,\n                    0, 0);\n    }\n\n",
+          "new": "    if (sm64ds_net::nonblocking(g_sock) != 0) {\n        const int error = errno;\n        ::close(g_sock); g_sock = -1;\n        std::fprintf(stderr, \"[comms:native] nonblocking socket failed (%d); idle\\n\", error);\n        return;\n    }\n    // No SIO_UDP_CONNRESET equivalent is required for this unconnected POSIX UDP socket.\n\n",
+          "count": 1,
+          "reason": "Reviewed POSIX platform boundary; preserve existing game logic."
+        },
+        {
+          "old": "    if (!ws_start()) return false;",
+          "new": "    // No process-wide socket initialization on POSIX.",
+          "count": 1,
+          "reason": "Reviewed POSIX platform boundary; preserve existing game logic."
+        },
+        {
+          "old": "    if (!ws_start()) return;",
+          "new": "    // Open only when the existing session logic requests a transport.",
+          "count": 1,
+          "reason": "Reviewed POSIX platform boundary; preserve existing game logic."
+        },
+        {
+          "old": "bool g_wsa_up = false;",
+          "new": "",
+          "count": 1,
+          "reason": "Reviewed POSIX platform boundary; preserve existing game logic."
+        },
+        {
+          "old": "WS.socket(",
+          "new": "sm64ds_net::open_udp(",
+          "count": 1,
+          "reason": "Native POSIX boundary preserves error status and packet lengths."
+        },
+        {
+          "old": "WS.bind(",
+          "new": "::bind(",
+          "count": 1,
+          "reason": "Native POSIX boundary preserves error status and packet lengths."
+        },
+        {
+          "old": "WS.sendto(",
+          "new": "sm64ds_net::send(",
+          "count": 2,
+          "reason": "Native POSIX boundary preserves error status and packet lengths."
+        },
+        {
+          "old": "WS.recvfrom(",
+          "new": "sm64ds_net::receive(",
+          "count": 1,
+          "reason": "Native POSIX boundary preserves error status and packet lengths."
+        },
+        {
+          "old": "WS.closesocket(",
+          "new": "::close(",
+          "count": 2,
+          "reason": "Native POSIX boundary preserves error status and packet lengths."
+        },
+        {
+          "old": "WS.WSAGetLastError()",
+          "new": "errno",
+          "count": 2,
+          "reason": "Native POSIX boundary preserves error status and packet lengths."
+        }
+      ],
+      "code_tokens": {
+        "SOCKET": "int",
+        "INVALID_SOCKET": "(-1)",
+        "GetTickCount": "sm64ds_ticks_ms"
+      }
+    },
+    "port/hal/rollback_probe.cpp": {
+      "sha256": "bbebda2692c84bd1888023d77cf5ca688ae4814d62489fa54762a69938c284b7",
+      "edits": [
+        {
+          "old": "#include <windows.h>",
+          "new": "#include \"sm64ds_posix_clock.h\"",
+          "count": 1,
+          "reason": "Reviewed POSIX platform boundary; preserve existing game logic."
+        },
+        {
+          "old": "double now_ms()\n{\n    static LARGE_INTEGER qpf;\n    LARGE_INTEGER t;\n    if (!qpf.QuadPart) QueryPerformanceFrequency(&qpf);\n    QueryPerformanceCounter(&t);\n    return t.QuadPart * 1000.0 / (double)qpf.QuadPart;\n}\n",
+          "new": "double now_ms()\n{\n    return static_cast<double>(sm64ds_clock_ns(CLOCK_MONOTONIC)) / 1000000.0;\n}\n",
+          "count": 1,
+          "reason": "Reviewed POSIX platform boundary; preserve existing game logic."
+        }
+      ]
+    },
+    "port/hal/stage_geom.cpp": {
+      "sha256": "fe40bdfe29b16c2af7d9a713ef883a0aa5eda552f08322e2c99a99307c40179d",
+      "edits": [
+        {
+          "old": "#pragma section(\".CRT$XCV\", read)",
+          "new": "// Native installer is invoked explicitly by fs_mods after its own filter is installed.",
+          "count": 1
+        },
+        {
+          "old": "extern \"C\" __declspec(allocate(\".CRT$XCV\"))",
+          "new": "extern \"C\"",
+          "count": 1
+        },
+        {
+          "old": "#if defined(_M_IX86)\n#pragma comment(linker, \"/include:_port_stage_geom_ctor\")\n#else\n#pragma comment(linker, \"/include:port_stage_geom_ctor\")\n#endif\n",
+          "new": "// fs_mods references this constant-initialized pointer, retaining it at link time.\n",
+          "count": 1
+        },
+        {
+          "old": "    g_prev_filter = port_fs_mod_filter;",
+          "new": "    if (port_fs_mod_filter == geom_filter) return;\n    g_prev_filter = port_fs_mod_filter;",
+          "count": 1
+        }
+      ]
+    },
+    "port/hal/fs_mods.cpp": {
+      "sha256": "3831fe025ee7135cc9d54a0998b223106ba0ad9e4b9021509c045cbf092a254c",
+      "edits": [
+        {
+          "old": "        port_fs_mod_filter = mod_filter;",
+          "new": "        port_fs_mod_filter = mod_filter;\n        port_stage_geom_ctor();",
+          "count": 1,
+          "reason": "Reviewed POSIX platform boundary; preserve existing game logic."
+        }
+      ],
+      "prefix": "extern \"C\" void (*port_stage_geom_ctor)(void);\n"
+    },
+    "port/hal/sdat/out_win.cpp": {
+      "sha256": "550aa48ff7b90e085f94efe301ec0e24b155d04649b8c6760ae5727d7b27b770",
+      "replacement": "android/full-engine/out_android.cpp",
+      "description": "AAudio output, native PCM queue; original SDAT mixer and sequencer unchanged."
+    }
+  }
+}

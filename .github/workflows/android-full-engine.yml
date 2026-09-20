@@ -39,6 +39,11 @@ jobs:
         run: |
           LLVM="$ANDROID_HOME/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/bin"
           python3 android/full-engine/check_source_portability.py --cc "$LLVM/armv7a-linux-androideabi23-clang" --cxx "$LLVM/armv7a-linux-androideabi23-clang++" --output build/source-tests-android
+      - name: Compile native audio, UDP and initializer tests for Android
+        shell: bash
+        run: |
+          LLVM="$ANDROID_HOME/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/bin"
+          python3 android/full-engine/check_platform_backends.py --cxx "$LLVM/armv7a-linux-androideabi23-clang++" --output build/platform-tests-android
       - name: Resolve complete upstream game target, no ROM required
         shell: bash
         run: |
@@ -71,6 +76,7 @@ jobs:
             build/full-report/call-abi
             build/full-report/source-ports
             build/source-tests-android
+            build/platform-tests-android
             build/call-abi-android
             android
             .github/workflows/android*.yml
@@ -103,6 +109,11 @@ jobs:
         run: |
           set -o pipefail
           python3 android/full-engine/check_source_portability.py --cc arm-linux-gnueabihf-gcc --cxx arm-linux-gnueabihf-g++ --flags="-m${{ matrix.mode }}" --runner="qemu-arm -L /usr/arm-linux-gnueabihf" --output build/source-tests | tee source-tests.log
+      - name: Execute native audio queue, real UDP transport and initializer chain
+        shell: bash
+        run: |
+          set -o pipefail
+          python3 android/full-engine/check_platform_backends.py --cxx arm-linux-gnueabihf-g++ --flags="-m${{ matrix.mode }}" --runner="qemu-arm -L /usr/arm-linux-gnueabihf" --output build/platform-tests | tee platform-tests.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -110,6 +121,8 @@ jobs:
           path: |
             call-abi.log
             source-tests.log
+            platform-tests.log
+            build/platform-tests
             build/source-tests
             build/call-abi
           retention-days: 14

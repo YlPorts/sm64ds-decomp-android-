@@ -34,7 +34,12 @@ def transform(text: str, rule: dict) -> str:
 
 
 def load_manifest() -> dict:
-    return json.loads(Path(__file__).with_name('source_portability.json').read_text())
+    result = json.loads(Path(__file__).with_name('source_portability.json').read_text())
+    extra = json.loads(Path(__file__).with_name('platform_portability.json').read_text())['sources']
+    if result['sources'].keys() & extra.keys():
+        raise ValueError('Duplicate native platform source rule')
+    result['sources'].update(extra)
+    return result
 
 
 def validate(data: bytes, digest: str, name: str) -> None:
@@ -86,7 +91,13 @@ def prepare(units: list[dict], output: Path) -> list[dict]:
                 validate((root / 'port/tools/hostgen.py').read_bytes(), manifest['hostgen_sha256'], 'hostgen.py')
                 validate(original.read_bytes(), manifest['generated_sha256'][rel], str(original))
             text = Path(unit['source']).read_text()
-            converted = transform(text, rule)
+            if 'replacement' in rule:
+                replacement = (root / rule['replacement']).resolve()
+                if not replacement.is_relative_to(Path(__file__).resolve().parent) or replacement.suffix != '.cpp':
+                    raise ValueError('Replacement must be a native .cpp inside android/full-engine')
+                converted = replacement.read_text()
+            else:
+                converted = transform(text, rule)
             for header in rule.get('redirect_headers', []):
                 old = '"' + Path(header).name + '"'
                 if converted.count(old) != 1:
@@ -96,7 +107,7 @@ def prepare(units: list[dict], output: Path) -> list[dict]:
             target = dest / (key + '_' + Path(unit['source']).name)
             target.write_text('// Generated native source portability; upstream files remain unchanged.\n' + converted)
             item['source'] = str(target)
-            item['adaptation'] = item.get('adaptation', '') + '; pinned declarations/control-flow/POSIX source adaptation'
+            item['adaptation'] = item.get('adaptation', '') + '; pinned source/POSIX boundary adaptation'
             item['group'].setdefault('includes', []).extend([
                 {'path': str(Path(__file__).resolve().parent)},
                 {'path': str((root / rel).parent)},
