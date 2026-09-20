@@ -131,6 +131,9 @@ def main() -> int:
     generated = sorted({u['source'] for u in units if u['generated'] and not Path(u['source']).exists()})
     from generate_sources import generate
     generator_rc = generate(build, generated, out)
+    from adapt_calls import prepare as prepare_calls
+    units = prepare_calls(units, out)
+    (out / 'resolved-units.json').write_text(json.dumps(units, indent=2))
     print(f'Resolved {len(units)} translation units; generator exit={generator_rc}', flush=True)
     compat = Path(__file__).with_name('elf_compat.h').resolve()
 
@@ -141,10 +144,14 @@ def main() -> int:
         obj = out / 'objects' / f'{number:05d}.o'
         source = Path(unit['source'])
         try:
+            if unit.get('adaptation_error'):
+                raise ValueError(unit['adaptation_error'])
             if not source.is_file():
                 raise ValueError('Source was not generated')
             result['source_sha256'] = hashlib.sha256(source.read_bytes()).hexdigest()
             cmd, hazards = command_for(unit, args.ndk.resolve(), obj, compat)
+            if unit.get('adaptation'):
+                hazards.append(unit['adaptation'])
             result['command'], result['abi_review'] = cmd, hazards
             proc = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=45)
             text = proc.stdout.decode('utf-8', errors='replace')

@@ -29,6 +29,11 @@ jobs:
         run: |
           LLVM="$ANDROID_HOME/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/bin"
           python3 android/full-engine/test_elf_sections.py --clang "$LLVM/clang" --linker "$LLVM/ld.lld" --readelf "$LLVM/llvm-readelf"
+      - name: Compile native call ABI tests for Android
+        shell: bash
+        run: |
+          LLVM="$ANDROID_HOME/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/bin"
+          python3 android/full-engine/check_call_abi.py --compiler "$LLVM/armv7a-linux-androideabi23-clang++" --output build/call-abi-android
       - name: Resolve complete upstream game target, no ROM required
         shell: bash
         run: |
@@ -58,8 +63,39 @@ jobs:
             build/full-report/*.log
             build/full-report/errors
             build/full-report/adapted
+            build/full-report/call-abi
+            build/call-abi-android
             android
             .github/workflows/android*.yml
           include-hidden-files: true
           retention-days: 14
           if-no-files-found: error
+
+  call-abi-execution:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [arm, thumb]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install ARM compiler and test runner
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends g++-arm-linux-gnueabihf qemu-user
+      - name: Run native virtual-call and aggregate-return tests
+        shell: bash
+        run: |
+          set -o pipefail
+          python3 android/full-engine/check_call_abi.py --compiler arm-linux-gnueabihf-g++ --flags="-m${{ matrix.mode }}" --runner="qemu-arm -L /usr/arm-linux-gnueabihf" --output build/call-abi | tee call-abi.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: call-abi-${{ matrix.mode }}-execution
+          path: |
+            call-abi.log
+            build/call-abi
+          retention-days: 14
