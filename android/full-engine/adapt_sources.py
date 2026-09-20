@@ -124,4 +124,5 @@ def prepare(units: list[dict], output: Path) -> list[dict]:
             records.append({'source': rel, 'error': str(error)})
         result.append(item)
     (output / 'source-portability-report.json').write_text(json.dumps(records, indent=2) + '\n')
-    return result
+    from adapt_native_faces import prepare as prepare_native_faces
+    return prepare_native_faces(result, output)

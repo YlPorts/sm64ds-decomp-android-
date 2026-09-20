@@ -62,6 +62,11 @@ jobs:
         run: |
           LLVM="$ANDROID_HOME/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/bin"
           python3 android/full-engine/check_host_boundaries.py --cxx "$LLVM/armv7a-linux-androideabi23-clang++" --output build/host-tests-android
+      - name: Compile original native method provider probes for Android
+        shell: bash
+        run: |
+          LLVM="$ANDROID_HOME/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/bin"
+          python3 android/full-engine/check_native_faces.py --cc "$LLVM/armv7a-linux-androideabi23-clang" --cxx "$LLVM/armv7a-linux-androideabi23-clang++" --output build/native-face-tests-android
       - name: Resolve complete upstream game target, no ROM required
         shell: bash
         run: |
@@ -86,6 +91,9 @@ jobs:
         run: |
           test -f build/full-report/report.json
           python3 android/full-engine/link_inventory.py --build build/full-graph --report build/full-report --ndk "$ANDROID_HOME/ndk/28.2.13676358"
+      - name: Verify each retired face retains its unique original method symbol
+        if: ${{ always() && !cancelled() }}
+        run: python3 android/full-engine/check_native_face_symbols.py --report build/full-report
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -99,6 +107,8 @@ jobs:
             build/full-report/adapted
             build/full-report/call-abi
             build/full-report/source-ports
+            build/full-report/native-faces
+            build/native-face-tests-android
             build/host-tests-android
             build/full-report/link-audit/*.json
             build/full-report/link-audit/*.log
@@ -142,6 +152,11 @@ jobs:
         run: |
           set -o pipefail
           python3 android/full-engine/check_platform_backends.py --cxx arm-linux-gnueabihf-g++ --flags="-m${{ matrix.mode }}" --runner="qemu-arm -L /usr/arm-linux-gnueabihf" --output build/platform-tests | tee platform-tests.log
+      - name: Execute C callers through original native method providers
+        shell: bash
+        run: |
+          set -o pipefail
+          python3 android/full-engine/check_native_faces.py --cc arm-linux-gnueabihf-gcc --cxx arm-linux-gnueabihf-g++ --flags="-m${{ matrix.mode }}" --runner="qemu-arm -L /usr/arm-linux-gnueabihf" --output build/native-face-tests | tee native-faces.log
       - name: Execute original snapshot and explicit actor-decline paths
         shell: bash
         run: |
@@ -158,6 +173,8 @@ jobs:
             build/platform-tests
             build/host-tests
             host-tests.log
+            native-faces.log
+            build/native-face-tests
             build/source-tests
             build/call-abi
           retention-days: 14
