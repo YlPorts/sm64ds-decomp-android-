@@ -3,7 +3,7 @@
 set -euo pipefail
 HERE=$(cd "$(dirname "$0")" && pwd)
 SDK=${ANDROID_HOME:?Set ANDROID_HOME}
-NDK=${ANDROID_NDK_HOME:-"$SDK/ndk/28.2.13676358"}
+NDK=${SM64DS_NDK:-"$SDK/ndk/28.2.13676358"}
 BT="$SDK/build-tools/35.0.0"
 JAR="$SDK/platforms/android-35/android.jar"
 OUT=${1:-"$HERE/build-apk"}
@@ -20,7 +20,7 @@ done
 "$BT/aapt2" compile --dir "$HERE/res" -o "$OUT/res.zip"
 "$BT/aapt2" link -I "$JAR" --manifest "$HERE/AndroidManifest.xml" --java "$OUT/gen" -o "$OUT/unsigned.apk" "$OUT/res.zip"
 find "$HERE/java" "$OUT/gen" -name '*.java' > "$OUT/sources.txt"
-javac -source 8 -target 8 -encoding UTF-8 -bootclasspath "$JAR" -d "$OUT/classes" @"$OUT/sources.txt"
+javac --release 8 -encoding UTF-8 -classpath "$JAR" -d "$OUT/classes" @"$OUT/sources.txt"
 jar cf "$OUT/classes.jar" -C "$OUT/classes" .
 "$BT/d8" --min-api 23 --lib "$JAR" --output "$OUT/dex" "$OUT/classes.jar"
 cp "$OUT/dex/classes.dex" "$OUT/package/"
