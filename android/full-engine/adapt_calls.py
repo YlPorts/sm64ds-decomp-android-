@@ -57,6 +57,8 @@ def arguments(code: str, pos: int) -> tuple[int, list[tuple[int, int]]]:
 
 def adapt(text: str) -> tuple[str, dict]:
     """All-or-nothing transform; caller must additionally enforce input hashes."""
+    # Strip a UTF-8 signature before generated headers/comments precede it.
+    text = text.removeprefix("\ufeff")
     code = masked(text)
     edits: dict[tuple[int, int], str] = {}
     protected: list[tuple[int, int]] = []
@@ -232,25 +234,41 @@ def accepted(path: Path, root: Path, blobs: dict, generated: dict) -> bool:
     return hashlib.sha256(data).hexdigest() in generated
 
 
+def rewrite_forced_headers(group: dict, headers: dict[str, Path]) -> dict:
+    """Keep per-file flags, replacing only reviewed force-include paths."""
+    group = deepcopy(group)
+    for fragment in group.get('compileCommandFragments', []):
+        for source, target in headers.items():
+            fragment['fragment'] = fragment['fragment'].replace(source, str(target))
+    return group
+
+
 def prepare(units: list[dict], output: Path) -> list[dict]:
     root = Path(__file__).resolve().parents[2]
     manifest = json.loads(Path(__file__).with_name('call_abi_inputs.json').read_text())
     blobs = verified_blobs(root, manifest)
     dst = output / 'call-abi'
     dst.mkdir(parents=True, exist_ok=True)
-    header = root / 'port/hal/dtor_faces_cpp.h'
-    if not accepted(header, root, blobs, {}):
-        raise ValueError('Unreviewed destructor bridge header')
-    header_out = dst / 'dtor_faces_cpp.h'
-    header_text, header_stats = adapt(header.read_text())
-    header_out.write_text(header_text)
+    headers, header_stats = {}, {}
+    for rel in ('port/hal/dtor_faces_cpp.h', 'port/unmatched/MgSmartball_HostAbi.h'):
+        header = root / rel
+        if not accepted(header, root, blobs, {}):
+            raise ValueError('Unreviewed call bridge header: ' + rel)
+        target = dst / header.name
+        converted, stats = adapt(header.read_text())
+        target.write_text(converted)
+        headers[str(header)] = target
+        header_stats[rel] = stats
     records, result, cache = [], [], {}
     for unit in units:
         p = Path(unit['source'])
         if not p.is_file():
             result.append(unit); continue
         text = p.read_text()
-        if not re.search(r'\b__(?:fastcall|cdecl)\b', masked(text)) and '"dtor_faces_cpp.h"' not in text:
+        has_header = any('"' + target.name + '"' in text for target in headers.values())
+        forced_header = any(source in frag['fragment'] for source in headers
+                            for frag in unit['group'].get('compileCommandFragments', []))
+        if not re.search(r'\b__(?:fastcall|cdecl)\b', masked(text)) and not has_header and not forced_header:
             result.append(unit); continue
         item = deepcopy(unit)
         item.setdefault('original_source', str(p))
@@ -260,7 +278,8 @@ def prepare(units: list[dict], output: Path) -> list[dict]:
                 raise ValueError('Unreviewed call-ABI input: ' + str(p))
             if str(p) not in cache:
                 converted, stats = adapt(text)
-                converted = converted.replace('"dtor_faces_cpp.h"', json.dumps(str(header_out)))
+                for target in headers.values():
+                    converted = converted.replace('"' + target.name + '"', json.dumps(str(target)))
                 target = dst / (digest[:16] + '_' + p.name)
                 target.write_text('// GENERATED ARM call adaptation. Upstream comments describe the x86 baseline.\n' + converted)
                 cache[str(p)] = (target, stats)
@@ -268,11 +287,12 @@ def prepare(units: list[dict], output: Path) -> list[dict]:
             target, stats = cache[str(p)]
             item['source'] = str(target)
             item['adaptation'] = 'reviewed native calls: drop EDX word at both ends; aggregate returns use compiler ABI'
-            group = item['group']
+            group = rewrite_forced_headers(item['group'], headers)
             group.setdefault('includes', []).extend([{'path':str(p.parent)}, {'path':str(Path(__file__).parent)}])
+            item['group'] = group
         except ValueError as exc:
             item['adaptation_error'] = str(exc)
             records.append({'source':str(p), 'error':str(exc)})
         result.append(item)
-    (output / 'call-abi-report.json').write_text(json.dumps({'header':header_stats, 'sources':records},indent=2))
+    (output / 'call-abi-report.json').write_text(json.dumps({'headers':header_stats, 'sources':records},indent=2))
     return result

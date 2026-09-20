@@ -2,9 +2,20 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
-from adapt_calls import adapt, masked, prepare
+from adapt_calls import adapt, masked, prepare, rewrite_forced_headers
 
 class CallAdapterTests(unittest.TestCase):
+    def test_utf8_signature_removed_before_generated_prologue(self):
+        text='\ufeffint __fastcall f(void*s, void*) {return 1;}'
+        converted,_=adapt(text)
+        self.assertNotIn('\ufeff',converted)
+        self.assertEqual(converted,adapt(text[1:])[0])
+    def test_forced_header_rewrite_retains_other_flags(self):
+        group={'compileCommandFragments':[{'fragment':'/FI/base/Host.h /Zp4'}], 'language':'CXX'}
+        changed=rewrite_forced_headers(group,{'/base/Host.h':Path('/build/Host.h')})
+        self.assertEqual(changed['compileCommandFragments'][0]['fragment'],'/FI/build/Host.h /Zp4')
+        self.assertEqual(group['compileCommandFragments'][0]['fragment'],'/FI/base/Host.h /Zp4')
+        self.assertEqual(changed['language'],'CXX')
     def test_receiver_only_preserved(self):
         s,n=adapt('int __fastcall tick(void *s) { return body(s); }')
         self.assertIn('tick(void *s)',s);self.assertEqual(n['thunks'],1)
