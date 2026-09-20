@@ -1,0 +1,42 @@
+name: Android local development inputs
+on:
+  workflow_dispatch:
+  push:
+    branches: [android/native-bootstrap]
+    paths: ['.github/workflows/android-local-development.yml']
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
+          log-accepted-android-sdk-licenses: false
+      - name: Prepare public build and test tools
+        run: |
+          sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq qemu-user-static g++-arm-linux-gnueabihf
+      - name: Export source and development tools only
+        run: |
+          mkdir -p export
+          git archive --format=tar.gz HEAD > export/source.tar.gz
+          tar -czf export/android-sdk-minimal.tar.gz -C "$ANDROID_HOME" platforms/android-35 build-tools/35.0.0
+          tar -czf export/linux-arm-tools.tar.gz /usr/bin/qemu-arm-static /usr/bin/arm-linux-gnueabihf-* /usr/lib/gcc-cross/arm-linux-gnueabihf /usr/arm-linux-gnueabihf
+          git rev-parse HEAD > export/REVISION.txt
+          sha256sum export/*.tar.gz > export/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: android-local-development-inputs
+          path: export
+          retention-days: 3
+          if-no-files-found: error
