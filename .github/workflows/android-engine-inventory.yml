@@ -1,0 +1,67 @@
+name: Android full-engine inventory (not gameplay)
+on:
+  workflow_dispatch:
+  push:
+    branches: [android/native-bootstrap]
+    paths: ['.github/workflows/android-engine-inventory.yml']
+permissions:
+  contents: read
+jobs:
+  source-inventory:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Export tracked text sources only
+        shell: python
+        run: |
+          import pathlib, subprocess, zipfile, json
+          root = pathlib.Path('.')
+          paths = subprocess.check_output(['git','ls-files','-z']).decode().split('\0')
+          extensions = {'.c','.cpp','.cc','.h','.hpp','.S','.s','.py','.cmake','.txt','.json','.yml','.yaml','.md','.in','.def','.inc','.cmd','.bat','.sh','.toml','.ld'}
+          included = []
+          with zipfile.ZipFile('engine-sources.zip','w',zipfile.ZIP_DEFLATED) as z:
+              for name in paths:
+                  p = root / name
+                  if not name or not p.is_file() or p.is_symlink(): continue
+                  if p.suffix not in extensions and p.name not in {'LICENSE','CMakeLists.txt'}: continue
+                  if p.parts[0] not in {'src','include','port','android','.github','tools','config'} and len(p.parts)>1: continue
+                  data = p.read_bytes()
+                  try: data.decode('utf-8')
+                  except UnicodeDecodeError: continue
+                  z.writestr(name,data)
+                  included.append({'path':name,'bytes':len(data)})
+              z.writestr('SOURCE_INVENTORY.json',json.dumps({'commit':subprocess.check_output(['git','rev-parse','HEAD']).decode().strip(),'files':included},indent=2))
+          print('Exported',len(included),'text files; no git metadata, secrets, ROMs or binary assets')
+      - uses: actions/upload-artifact@v4
+        with:
+          name: engine-text-source-inventory
+          path: engine-sources.zip
+          retention-days: 7
+          if-no-files-found: error
+  windows-build-graph:
+    runs-on: windows-2022
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Request CMake code model for source and dependency resolution
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force build/engine-graph/.cmake/api/v1/query/client-android-port | Out-Null
+          New-Item -ItemType File build/engine-graph/.cmake/api/v1/query/client-android-port/codemodel-v2 | Out-Null
+          cmake -S port -B build/engine-graph -A Win32 2>&1 | Tee-Object -FilePath engine-configure.log
+          exit $LASTEXITCODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: upstream-engine-build-graph
+          path: |
+            engine-configure.log
+            build/engine-graph/.cmake/api/v1/reply
+          include-hidden-files: true
+          retention-days: 7
+          if-no-files-found: error
