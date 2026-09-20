@@ -65,6 +65,16 @@ class SourcePortabilityTests(unittest.TestCase):
                 converted,_=adapt(text)
                 with self.subTest(source=rel): transform(converted,rule)
 
+    def test_native_vs_diagnostics_do_not_read_x86_stack(self):
+        rel='port/hal/scene_vs_menu.cpp'
+        text,_=adapt((ROOT/rel).read_text())
+        out=transform(text,MANIFEST['sources'][rel])
+        self.assertNotIn('_AddressOfReturnAddress',masked(out))
+        self.assertNotIn('g_r3h_pmf3_stale',masked(out))
+        self.assertIn('((VsPmfBody)(void *)&func_ov075_0211b1cc)(self);',out)
+        self.assertIn('g_r3h_pmf3_recv = self;',out)
+        self.assertIn('x86 stale-stack probe NOT APPLICABLE.',out)
+
     def test_original_selection_preserved_and_error_reported(self):
         rel='src/func_0200d8c8.c'
         with tempfile.TemporaryDirectory() as tmp:
