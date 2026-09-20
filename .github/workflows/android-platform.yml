@@ -28,6 +28,7 @@ jobs:
         if: matrix.target == 'android-armv7'
         with:
           packages: platform-tools
+          log-accepted-android-sdk-licenses: false
       - name: Install NDK
         if: matrix.target == 'android-armv7'
         run: sdkmanager 'ndk;28.2.13676358'
@@ -37,6 +38,7 @@ jobs:
           TARGET: ${{ matrix.target }}
         run: |
           set -euo pipefail
+          python3 -m unittest discover -s android/engine/tests -p 'test_*.py' -v
           args=()
           if [[ "$TARGET" == arm-linux ]]; then
             args+=(-DCMAKE_SYSTEM_NAME=Linux -DCMAKE_SYSTEM_PROCESSOR=armv7)
