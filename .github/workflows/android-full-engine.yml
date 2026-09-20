@@ -24,6 +24,11 @@ jobs:
         run: sdkmanager 'ndk;28.2.13676358'
       - name: Check inventory tool
         run: python3 -m unittest discover -s android/full-engine -p 'test_*.py' -v
+      - name: Verify ARM ELF state layout and retained packed offsets
+        shell: bash
+        run: |
+          LLVM="$ANDROID_HOME/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/bin"
+          python3 android/full-engine/test_elf_sections.py --clang "$LLVM/clang" --linker "$LLVM/ld.lld" --readelf "$LLVM/llvm-readelf"
       - name: Resolve complete upstream game target, no ROM required
         shell: bash
         run: |
@@ -52,5 +57,9 @@ jobs:
             build/full-report/*.md
             build/full-report/*.log
             build/full-report/errors
+            build/full-report/adapted
+            android
+            .github/workflows/android*.yml
+          include-hidden-files: true
           retention-days: 14
           if-no-files-found: error

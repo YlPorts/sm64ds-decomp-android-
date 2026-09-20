@@ -42,7 +42,8 @@ def load_units(build: Path, target: str) -> list[dict]:
         for src in data.get('sources', []):
             if 'compileGroupIndex' not in src:
                 continue
-            group = data['compileGroups'][src['compileGroupIndex']]
+            group = {k: v for k, v in data['compileGroups'][src['compileGroupIndex']].items()
+                     if k in ('language', 'defines', 'includes', 'compileCommandFragments')}
             path = Path(src['path'])
             if not path.is_absolute():
                 path = (build_root if src.get('isGenerated') else source_root) / path
@@ -103,7 +104,11 @@ def command_for(unit: dict, ndk: Path, output: Path, compat: Path) -> tuple[list
         cmd.append('-D' + d)
     for inc in group.get('includes', []):
         cmd += ['-isystem' if inc.get('isSystem') else '-I', inc['path']]
-    cmd += flags + ['-c', unit['source'], '-o', str(output)]
+    cmd += flags
+    if unit['generated'] and Path(unit['source']).name.startswith(('ov', 'romdata')):
+        cmd.append('-O0')
+        hazards.append('Synthetic LINK-ONLY data setup compiled at O0; not release resource validation')
+    cmd += ['-c', unit['source'], '-o', str(output)]
     return cmd, hazards
 
 
@@ -120,21 +125,19 @@ def main() -> int:
     (out / 'objects').mkdir(exist_ok=True)
     (out / 'errors').mkdir(exist_ok=True)
     units = load_units(build, args.target)
+    from prepare_inputs import prepare
+    units = prepare(units, out)
     (out / 'resolved-units.json').write_text(json.dumps(units, indent=2))
     generated = sorted({u['source'] for u in units if u['generated'] and not Path(u['source']).exists()})
-    generator_rc = 0
-    if generated:
-        # Request ONLY generated source outputs; never compile the Windows target.
-        with (out / 'generators.log').open('w') as log:
-            generator_rc = subprocess.run(['ninja', '-C', str(build), '-k', '0', '-j', str(max(1, args.jobs)),
-                                            *generated], stdout=log, stderr=subprocess.STDOUT,
-                                           env={**os.environ, 'SM64DS_LINK_ONLY': '1'}).returncode
+    from generate_sources import generate
+    generator_rc = generate(build, generated, out)
     print(f'Resolved {len(units)} translation units; generator exit={generator_rc}', flush=True)
     compat = Path(__file__).with_name('elf_compat.h').resolve()
 
     def compile_one(pair: tuple[int, dict]) -> dict:
         number, unit = pair
         result = {'index': number, **{k: unit[k] for k in ('source', 'target', 'generated')}}
+        result['original_source'] = unit.get('original_source', unit['source'])
         obj = out / 'objects' / f'{number:05d}.o'
         source = Path(unit['source'])
         try:
