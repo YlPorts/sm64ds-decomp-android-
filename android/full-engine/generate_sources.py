@@ -3,9 +3,10 @@
 The upstream graph gives certain generated files an order-only dependency on the
 whole Windows object library. Building those outputs normally also tries to build
 that library. This driver does not delete dependencies: it extracts the ordered
-commands and executes only the six reviewed source-generation tools. No compiler
-or linker command is run, no source generator is replaced, and missing outputs
-remain failures. LINK-ONLY still requires the upstream explicit double opt-in.
+commands and executes only the reviewed source-generation tools. No compiler or
+linker command is run, no source generator is replaced, and missing outputs remain
+failures. LINK-ONLY still requires the upstream explicit double opt-in. The two
+real-ROM verification/recipe steps are explicitly NOT RUN, including their stamp.
 """
 from __future__ import annotations
 import json
@@ -68,7 +69,7 @@ def generate(build: Path, paths: list[str], output: Path) -> int:
     if plan.returncode:
         (output / 'generators.log').write_text(plan.stdout + plan.stderr)
         return plan.returncode
-    records, skipped = [], 0
+    records, skipped, resource_checks = [], 0, []
     with (output / 'generators.log').open('w') as log:
         for line in plan.stdout.splitlines():
             try:
@@ -79,6 +80,13 @@ def generate(build: Path, paths: list[str], output: Path) -> int:
                 continue
             if not commands:
                 skipped += 1
+                continue
+            if Path(commands[0][1]).name in ('romblob_verify.py', 'romblob_recipe.py'):
+                # These consume real cartridge bytes and do not produce C/C++.
+                # Do not execute their success stamp or imply resource validity.
+                resource_checks.append({'commands': commands,
+                                        'status': 'NOT RUN: requires real extracted ROM'})
+                log.write('NOT RUN (requires real ROM): ' + line + '\n')
                 continue
             for cmd in commands:
                 log.write('$ ' + shlex.join(cmd) + '\n')
@@ -93,8 +101,9 @@ def generate(build: Path, paths: list[str], output: Path) -> int:
     missing = [p for p in paths if not Path(p).is_file()]
     report = {'executed': len(records), 'skipped_compile_commands': skipped,
               'failed': sum(r['returncode'] != 0 for r in records),
-              'missing_outputs': missing, 'commands': records}
+              'missing_outputs': missing, 'skipped_resource_checks': resource_checks, 'commands': records}
     (output / 'generators.json').write_text(json.dumps(report, indent=2))
     print(f"Generators: {report['executed']} commands, {report['failed']} failures, "
-          f"{len(missing)} missing outputs; no compiler invoked in this phase", flush=True)
+          f"{len(missing)} missing outputs; {len(resource_checks)} real-ROM checks NOT RUN; "
+          "no compiler invoked in this phase", flush=True)
     return 1 if report['failed'] or missing else 0

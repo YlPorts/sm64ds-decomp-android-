@@ -19,9 +19,12 @@ int host_data = 9;
 __declspec(align(16)) __declspec(allocate(".dsstate$mmm0100")) char aligned_span[84];
 __declspec(selectany) int optional_value = 5;
 /* Deliberately declared out of order, as contributions from separate files can be. */
-__declspec(allocate(".dsstate$mmmCARD0002")) __declspec(align(1)) char record[1444];
-__declspec(allocate(".dsstate$mmmCARD0001")) __declspec(align(1)) char work[60];
-__declspec(allocate(".dsstate$mmmCARD0003")) __declspec(align(1)) char device[4];
+__declspec(allocate(".dsstate$card01")) __declspec(align(1)) char record[1444];
+__declspec(allocate(".dsstate$card00")) __declspec(align(1)) char work[60];
+__declspec(allocate(".dsstate$card02")) __declspec(align(1)) char device[4];
+__declspec(allocate(".dsstate$oamsh0002")) __declspec(align(4)) char oam_tail[992];
+__declspec(allocate(".dsstate$oamsh0000")) __declspec(align(4)) char oam_head[8];
+__declspec(allocate(".dsstate$oamsh0001")) __declspec(align(4)) char oam_middle[24];
 '''
 
 def verify(clang: str, linker: str, readelf: str) -> None:
@@ -42,7 +45,7 @@ def verify(clang: str, linker: str, readelf: str) -> None:
                 value, size, kind, binding, section, name = m.groups()
                 symbols[name] = (int(value,16), int(size), binding, section)
         lo, hi = symbols['dsstate_lo'], symbols['dsstate_hi']
-        for name in ('saved_bss', 'saved_data', 'aligned_span', 'work', 'record', 'device'):
+        for name in ('saved_bss', 'saved_data', 'aligned_span', 'work', 'record', 'device', 'oam_head', 'oam_middle', 'oam_tail'):
             value, size, binding, section = symbols[name]
             assert section == lo[3] == hi[3] and lo[0] <= value and value + size <= hi[0], name
         assert symbols['host_bss'][3] != lo[3]
@@ -50,9 +53,11 @@ def verify(clang: str, linker: str, readelf: str) -> None:
         assert symbols['aligned_span'][0] % 16 == 0
         assert symbols['record'][0] - symbols['work'][0] == 60
         assert symbols['device'][0] - symbols['record'][0] == 1444
+        assert symbols['oam_middle'][0] - symbols['oam_head'][0] == 8
+        assert symbols['oam_tail'][0] - symbols['oam_head'][0] == 32
         assert symbols['optional_value'][2] == 'WEAK'
         print('PASS: ARM ELF saved-data boundaries; host data excluded; 16-byte alignment;')
-        print('PASS: lexical section order retains +60/+1444 packed offsets; weak definition.')
+        print('PASS: cartridge +60/+1444 and OAM +8/+32 offsets in actual section families; weak definition.')
 
 if __name__ == '__main__':
     p = argparse.ArgumentParser(description=__doc__)
