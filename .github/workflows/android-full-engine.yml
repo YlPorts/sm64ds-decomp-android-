@@ -1,0 +1,56 @@
+name: Android full-engine compile (not playable)
+on:
+  workflow_dispatch:
+  push:
+    branches: [android/native-bootstrap]
+    paths: ['android/full-engine/**', '.github/workflows/android-full-engine.yml']
+permissions:
+  contents: read
+jobs:
+  compile-inventory:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      SM64DS_LINK_ONLY: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
+          log-accepted-android-sdk-licenses: false
+      - name: Install pinned NDK
+        run: sdkmanager 'ndk;28.2.13676358'
+      - name: Check inventory tool
+        run: python3 -m unittest discover -s android/full-engine -p 'test_*.py' -v
+      - name: Resolve complete upstream game target, no ROM required
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p build/full-graph/.cmake/api/v1/query/client-android-engine
+          touch build/full-graph/.cmake/api/v1/query/client-android-engine/codemodel-v2
+          cmake -S port -B build/full-graph -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_TOOLCHAIN_FILE="$ANDROID_HOME/ndk/28.2.13676358/build/cmake/android.toolchain.cmake" \
+            -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=android-23 \
+            -DANDROID_STL=c++_static -DPORT_ROM_CLEAN=ON -DPORT_LINK_ONLY=ON
+      - name: Compile resolved game translation units with native Android Clang
+        shell: bash
+        run: |
+          set -o pipefail
+          python3 android/full-engine/compile_inventory.py \
+            --build build/full-graph --ndk "$ANDROID_HOME/ndk/28.2.13676358" \
+            --target walk_window --output build/full-report --jobs 4 | tee full-engine.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: android-full-engine-compilation-report
+          path: |
+            full-engine.log
+            build/full-report/*.json
+            build/full-report/*.md
+            build/full-report/*.log
+            build/full-report/errors
+          retention-days: 14
+          if-no-files-found: error
