@@ -34,6 +34,11 @@ jobs:
         run: |
           LLVM="$ANDROID_HOME/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/bin"
           python3 android/full-engine/check_call_abi.py --compiler "$LLVM/armv7a-linux-androideabi23-clang++" --output build/call-abi-android
+      - name: Compile native source and service tests for Android
+        shell: bash
+        run: |
+          LLVM="$ANDROID_HOME/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/bin"
+          python3 android/full-engine/check_source_portability.py --cc "$LLVM/armv7a-linux-androideabi23-clang" --cxx "$LLVM/armv7a-linux-androideabi23-clang++" --output build/source-tests-android
       - name: Resolve complete upstream game target, no ROM required
         shell: bash
         run: |
@@ -64,6 +69,8 @@ jobs:
             build/full-report/errors
             build/full-report/adapted
             build/full-report/call-abi
+            build/full-report/source-ports
+            build/source-tests-android
             build/call-abi-android
             android
             .github/workflows/android*.yml
@@ -91,11 +98,18 @@ jobs:
         run: |
           set -o pipefail
           python3 android/full-engine/check_call_abi.py --compiler arm-linux-gnueabihf-g++ --flags="-m${{ matrix.mode }}" --runner="qemu-arm -L /usr/arm-linux-gnueabihf" --output build/call-abi | tee call-abi.log
+      - name: Execute recovered-source and native service probes
+        shell: bash
+        run: |
+          set -o pipefail
+          python3 android/full-engine/check_source_portability.py --cc arm-linux-gnueabihf-gcc --cxx arm-linux-gnueabihf-g++ --flags="-m${{ matrix.mode }}" --runner="qemu-arm -L /usr/arm-linux-gnueabihf" --output build/source-tests | tee source-tests.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: call-abi-${{ matrix.mode }}-execution
           path: |
             call-abi.log
+            source-tests.log
+            build/source-tests
             build/call-abi
           retention-days: 14

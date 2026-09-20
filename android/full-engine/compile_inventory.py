@@ -133,6 +133,8 @@ def main() -> int:
     generator_rc = generate(build, generated, out)
     from adapt_calls import prepare as prepare_calls
     units = prepare_calls(units, out)
+    from adapt_sources import prepare as prepare_sources
+    units = prepare_sources(units, out)
     (out / 'resolved-units.json').write_text(json.dumps(units, indent=2))
     print(f'Resolved {len(units)} translation units; generator exit={generator_rc}', flush=True)
     compat = Path(__file__).with_name('elf_compat.h').resolve()
