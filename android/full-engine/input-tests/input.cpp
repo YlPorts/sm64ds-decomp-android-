@@ -66,6 +66,13 @@ int main() {
     reset();setenv("SM64DS_PAD_BACKEND","none",1);CHECK(!port_pad_init());focus(true);
     CHECK(!key(1,Gamepad,96,0));CHECK(key(1,Keyboard,29,0)&&legacy_key_held('A'));
     virtual_pad(v,true);CHECK(port_pad_poll(&p)&&p.buttons==0x1000); // touchscreen still usable
+    // UI taps shorter than one poll must survive exactly one consumer read.
+    virtual_pad({},false);virtual_pad(v,true);virtual_pad({},true);
+    CHECK(port_pad_poll(&p)&&p.buttons==0x1000);CHECK(port_pad_poll(&p)&&p.buttons==0);
+    PortPadState crouch{};crouch.rt=255;virtual_pad(crouch,true);virtual_pad({},true);
+    CHECK(port_pad_poll(&p)&&p.rt==255);CHECK(port_pad_poll(&p)&&p.rt==0);
+    virtual_pad(v,true);virtual_pad({},true);virtual_pad({},false);CHECK(!port_pad_poll(&p));
+    virtual_pad(v,true);virtual_pad({},true);focus(false);focus(true);CHECK(!port_pad_poll(&p));
     unsetenv("SM64DS_PAD_BACKEND");reset();
     std::printf("input backend: %d checks PASS; 100000 coherent concurrent snapshots\n",checks);
 }

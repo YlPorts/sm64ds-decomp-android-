@@ -1,0 +1,11 @@
+{
+  "sources": {
+    "port/hal/asset_root_refuse.cpp": {
+      "sha256": "0e13a653b1ce9e8f240c45108a4f331fa5826ac71e96e96a94685e91143660d1",
+      "replacement": "android/full-engine/asset_errors_android.cpp",
+      "redirect_headers": [
+        "port/hal/instance_tag.h"
+      ]
+    }
+  }
+}

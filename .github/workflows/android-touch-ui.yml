@@ -1,0 +1,87 @@
+name: Android touch controls APK (diagnostic only)
+on:
+  workflow_dispatch:
+  push:
+    branches: [android/native-bootstrap]
+    paths: ['android/touch-ui/**', 'android/full-engine/pad_android.cpp', 'android/full-engine/asset_errors_android.cpp', '.github/workflows/android-touch-ui.yml']
+permissions:
+  contents: read
+jobs:
+  controls-apk:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: android-actions/setup-android@v3
+        with:
+          log-accepted-android-sdk-licenses: false
+      - name: Install pinned build tools
+        run: sdkmanager 'ndk;28.2.13676358' 'platforms;android-35' 'build-tools;35.0.0'
+      - name: Exercise gesture router through JNI and the real native backend
+        run: bash android/touch-ui/test_local.sh "$PWD/build/touch-local" | tee touch-local.log
+      - name: Execute fatal resource-reporting paths in separate native processes
+        shell: bash
+        run: |
+          mkdir -p build/touch-errors
+          python3 - <<'PY'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0,'android/full-engine')
+          from adapt_sources import load_manifest,transform,validate
+          src=Path('port/hal/instance_tag.h');rule=load_manifest()['sources'][str(src)]
+          validate(src.read_bytes(),rule['sha256'],str(src))
+          Path('build/touch-errors/instance_tag.h').write_text(transform(src.read_text(),rule))
+          PY
+          g++ -std=c++17 -Ibuild/touch-errors android/full-engine/asset_errors_android.cpp android/touch-ui/tests/asset_errors.cpp -o build/touch-errors/probe
+          python3 android/touch-ui/tests/test_asset_errors.py build/touch-errors/probe | tee asset-errors.log
+      - name: Build installable controls diagnostic, not the game
+        run: bash android/touch-ui/build_apk.sh "$PWD/build/controls-apk" | tee controls-build.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SM64DS-Controles-Prueba-APK
+          path: |
+            build/controls-apk/SM64DS-Controles-Prueba.apk
+            build/controls-apk/signature.txt
+            build/controls-apk/SHA256SUMS.txt
+          if-no-files-found: error
+      - name: Enable emulator acceleration
+        run: sudo chmod a+rw /dev/kvm
+      - name: Verify MotionEvents on Android emulator and capture actual View
+        shell: bash
+        run: |
+          set -euo pipefail
+          sdkmanager 'emulator' 'system-images;android-29;google_apis;x86'
+          echo no | avdmanager create avd --force --name controls --package 'system-images;android-29;google_apis;x86' --device pixel_2
+          "$ANDROID_HOME/emulator/emulator" -avd controls -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect -accel on > emulator.log 2>&1 &
+          trap 'adb emu kill || true' EXIT
+          timeout 180 adb wait-for-device
+          for i in $(seq 1 180);do
+            if [[ "$(adb shell getprop sys.boot_completed | tr -d '\r')" == 1 ]];then break;fi
+            sleep 1
+          done
+          [[ "$(adb shell getprop sys.boot_completed | tr -d '\r')" == 1 ]]
+          adb shell settings put system accelerometer_rotation 0
+          adb shell settings put system user_rotation 1
+          adb install -t build/controls-apk/SM64DS-Controles-Prueba.apk
+          adb shell am instrument -w org.ylports.sm64ds.controls/.ControlsInstrumentation | tee instrumentation.log
+          grep -q 'PASS.*framework/JNI input checks' instrumentation.log
+          adb exec-out run-as org.ylports.sm64ds.controls cat files/controls.png > controls.png
+          adb logcat -d -s AndroidRuntime > android-runtime.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: touch-controls-evidence-NOT-GAMEPLAY
+          path: |
+            touch-local.log
+            asset-errors.log
+            controls-build.log
+            instrumentation.log
+            controls.png
+            android-runtime.log
+            emulator.log
+            android/touch-ui
+            android/full-engine/pad_android.cpp
+            android/full-engine/asset_errors_android.cpp
+          if-no-files-found: error

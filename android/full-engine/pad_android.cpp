@@ -39,6 +39,8 @@ struct Input {
     bool touch_down{}, virtual_enabled{};
     int touch_device{}, touch_id{-1}, x{}, y{};
     PortPadState virtual_state{};
+    unsigned short virtual_edges{};
+    unsigned char virtual_lt_edge{}, virtual_rt_edge{};
 };
 Input &state() {static Input value; return value;}
 bool source_has(unsigned source,unsigned kind) {return (source&kind)==kind;}
@@ -96,6 +98,7 @@ short strongest(short a,short b) {return std::abs(int(b))>std::abs(int(a))?b:a;}
 void clear_held(Input &s) {
     for(auto &d:s.devices){d.keys.reset();d.analog={};}
     s.touch_down=false;s.touch_id=-1;s.virtual_enabled=false;s.virtual_state={};
+    s.virtual_edges=0;s.virtual_lt_edge=s.virtual_rt_edge=0;
     ++s.generation;++s.gesture;
 }
 }
@@ -158,6 +161,13 @@ bool pointer(int id,int pid,int action,float x,float y) {
 void virtual_pad(const PortPadState &pad,bool enabled) {
     auto &s=state();std::lock_guard<std::mutex> guard(s.lock);
     if(!s.initialized||!s.focus)return;
+    // Preserve a quick virtual press until the sole engine consumer polls it.
+    // Repeated taps between two polls coalesce, rather than creating an unbounded queue.
+    if(enabled){
+        s.virtual_edges |= pad.buttons & ~s.virtual_state.buttons;
+        if(pad.lt && !s.virtual_state.lt)s.virtual_lt_edge=pad.lt;
+        if(pad.rt && !s.virtual_state.rt)s.virtual_rt_edge=pad.rt;
+    }else{s.virtual_edges=0;s.virtual_lt_edge=s.virtual_rt_edge=0;}
     s.virtual_state=pad;
     for(short *v : {&s.virtual_state.lx,&s.virtual_state.ly,&s.virtual_state.rx,&s.virtual_state.ry})
         if(*v < -32767)*v=-32767;
@@ -182,8 +192,9 @@ int port_pad_poll(PortPadState *out) {
     PortPadState p{};bool live=false;
     if(!s.disabled)for(const auto &d:s.devices)if(d.used&&d.pad){p=translate(d);live=true;break;}
     if(s.virtual_enabled){
-        const auto &v=s.virtual_state;p.buttons|=v.buttons;
-        p.lt=std::max(p.lt,v.lt);p.rt=std::max(p.rt,v.rt);
+        const auto &v=s.virtual_state;p.buttons|=v.buttons|s.virtual_edges;
+        p.lt=std::max({p.lt,v.lt,s.virtual_lt_edge});p.rt=std::max({p.rt,v.rt,s.virtual_rt_edge});
+        s.virtual_edges=0;s.virtual_lt_edge=s.virtual_rt_edge=0;
         p.lx=strongest(p.lx,v.lx);p.ly=strongest(p.ly,v.ly);
         p.rx=strongest(p.rx,v.rx);p.ry=strongest(p.ry,v.ry);live=true;
     }

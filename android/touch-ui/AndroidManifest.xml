@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.ylports.sm64ds.controls" android:versionCode="10" android:versionName="0.10-controls">
+    <uses-sdk android:minSdkVersion="23" android:targetSdkVersion="35" />
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+    <application android:label="SM64DS Controles · Prueba" android:theme="@style/AppTheme" android:icon="@drawable/icon" android:allowBackup="false" android:debuggable="true" android:extractNativeLibs="true" android:supportsRtl="true">
+        <activity android:name=".ControlsActivity" android:exported="true" android:screenOrientation="sensorLandscape" android:configChanges="orientation|screenSize|keyboardHidden|density">
+            <intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter>
+        </activity>
+    </application>
+    <instrumentation android:name=".ControlsInstrumentation" android:targetPackage="org.ylports.sm64ds.controls" android:label="Controls integration checks" />
+</manifest>
