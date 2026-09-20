@@ -1,0 +1,66 @@
+name: Android original scheduler (not playable)
+'on':
+  push:
+    branches: [android/native-bootstrap]
+    paths: [android/native/**, .github/workflows/android-scheduler.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: android-scheduler-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  arm32-execution:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ARM Linux compiler and instruction runner
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends g++-arm-linux-gnueabihf qemu-user
+      - name: Test generators and execute actual ARM scheduler code
+        run: |
+          python3 -m unittest discover -s android/native/tests -p 'test_*.py' -v
+          cmake -S android/native -B build/arm32-scheduler -G Ninja \
+            -DCMAKE_SYSTEM_NAME=Linux -DCMAKE_SYSTEM_PROCESSOR=armv7 \
+            -DCMAKE_C_COMPILER=arm-linux-gnueabihf-gcc \
+            -DCMAKE_CXX_COMPILER=arm-linux-gnueabihf-g++ \
+            -DCMAKE_ASM_COMPILER=arm-linux-gnueabihf-gcc \
+            '-DCMAKE_CROSSCOMPILING_EMULATOR=qemu-arm;-L;/usr/arm-linux-gnueabihf' \
+            -DCMAKE_BUILD_TYPE=Release -DSM64DS_TEST_UPSTREAM_RUNTIME=ON \
+            -DSM64DS_TEST_UPSTREAM_SCHEDULER=ON
+          cmake --build build/arm32-scheduler --parallel 2
+          ctest --test-dir build/arm32-scheduler --output-on-failure
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: arm32-scheduler-execution-report
+          path: build/arm32-scheduler/Testing/Temporary/LastTest.log
+          if-no-files-found: warn
+  android-armv7-build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
+      - name: Install pinned NDK
+        run: sdkmanager 'ndk;28.2.13676358'
+      - name: Compile original scheduler for Android (no game or APK)
+        run: |
+          cmake -S android/native -B build/android-scheduler -G Ninja \
+            -DCMAKE_TOOLCHAIN_FILE="$ANDROID_HOME/ndk/28.2.13676358/build/cmake/android.toolchain.cmake" \
+            -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=android-23 \
+            -DANDROID_STL=c++_static -DCMAKE_BUILD_TYPE=Release \
+            -DSM64DS_TEST_UPSTREAM_SCHEDULER=ON
+          cmake --build build/android-scheduler --parallel 2
+      - uses: actions/upload-artifact@v4
+        with:
+          name: android-armv7-scheduler-NOT-A-GAME
+          path: |
+            build/android-scheduler/libsm64ds_scheduler_support.a
+            build/android-scheduler/libsm64ds_fibers.a
+            build/android-scheduler/sm64ds_scheduler_tests
+          if-no-files-found: error

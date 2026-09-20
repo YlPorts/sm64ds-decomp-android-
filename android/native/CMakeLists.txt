@@ -34,3 +34,5 @@ if(SM64DS_TEST_UPSTREAM_RUNTIME)
     add_test(NAME upstream_runtime COMMAND sm64ds_runtime_tests)
     set_tests_properties(upstream_runtime PROPERTIES TIMEOUT 30)
 endif()
+
+include(scheduler.cmake)
