@@ -28,3 +28,6 @@ extern "C" void *call_model_slots[3]={0,0,(void*)model_set};
 extern "C" int offset_calls=0, complete_calls=0;
 extern "C" void _ZN5Model17UpdateFileOffsetsER8BMD_File(BMD_File &f){++offset_calls;f.marker+=1;}
 extern "C" int func_02017060(BMD_File*){++complete_calls;return 0;}
+/* Test configuration enables the post-vcall callback. This is a fixture, not
+   the game's production settings provider or a resource-loading test. */
+extern "C" int port_model_shrink_enabled(void){return 1;}
