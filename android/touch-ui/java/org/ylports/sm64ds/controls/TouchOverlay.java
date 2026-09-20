@@ -19,6 +19,7 @@ public final class TouchOverlay extends View {
     private float opacity=.38f;
     private boolean haptics=true;
     private int previous;
+    private boolean gestureOpen;
     public TouchOverlay(Context context,TouchControls.Sink sink){
         super(context);controls=new TouchControls(sink);setFocusable(true);
         setContentDescription("Controles de juego: palanca, saltar, atacar, correr, agachar, cámara y pausa");
@@ -27,11 +28,14 @@ public final class TouchOverlay extends View {
     public float opacity(){return opacity;}
     public void haptics(boolean value){haptics=value;}
     public boolean haptics(){return haptics;}
-    public void release(){controls.cancel();previous=0;invalidate();}
+    public void release(){controls.cancel();previous=0;gestureOpen=false;invalidate();}
     @Override public boolean onTouchEvent(MotionEvent event){
         int action=event.getActionMasked();
         if(action==MotionEvent.ACTION_CANCEL){release();return true;}
-        if(action==MotionEvent.ACTION_DOWN)controls.cancel();
+        if(action==MotionEvent.ACTION_DOWN){
+            // Clear an orphaned gesture, not the pending pulse of a completed tap.
+            if(gestureOpen)controls.cancel();gestureOpen=true;
+        }
         if(action==MotionEvent.ACTION_DOWN||action==MotionEvent.ACTION_POINTER_DOWN||
             action==MotionEvent.ACTION_UP||action==MotionEvent.ACTION_POINTER_UP){
             int i=event.getActionIndex();
@@ -41,6 +45,7 @@ public final class TouchOverlay extends View {
             // All IDs are stable even when Android reorders pointer indices.
             for(int i=0;i<event.getPointerCount();i++)controls.event(event.getPointerId(i),TouchControls.MOVE,event.getX(i),event.getY(i));
         }else return false;
+        if(action==MotionEvent.ACTION_UP)gestureOpen=false;
         int rising=controls.buttons&~previous;
         if(rising!=0&&haptics&&!controls.editing())performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
         previous=controls.buttons;invalidate();return true;

@@ -57,9 +57,19 @@ jobs:
         run: |
           set -euo pipefail
           sdkmanager 'emulator' 'system-images;android-29;google_apis;x86'
-          echo no | avdmanager create avd --force --name controls --package 'system-images;android-29;google_apis;x86' --device pixel_2
+          export ANDROID_USER_HOME="$RUNNER_TEMP/sm64ds-android"
+          export ANDROID_EMULATOR_HOME="$ANDROID_USER_HOME"
+          export ANDROID_AVD_HOME="$ANDROID_USER_HOME/avd"
+          mkdir -p "$ANDROID_AVD_HOME"
+          echo no | avdmanager create avd --force --name controls --path "$ANDROID_AVD_HOME/controls.avd" --package 'system-images;android-29;google_apis;x86' --device pixel_2
+          printf 'avd.ini.encoding=UTF-8\npath=%s\ntarget=android-29\n' "$ANDROID_AVD_HOME/controls.avd" > "$ANDROID_AVD_HOME/controls.ini"
+          "$ANDROID_HOME/emulator/emulator" -list-avds | tee avds.log
+          grep -qx controls avds.log
           "$ANDROID_HOME/emulator/emulator" -avd controls -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect -accel on > emulator.log 2>&1 &
-          trap 'adb emu kill || true' EXIT
+          EMU_PID=$!
+          trap 'adb logcat -d -s AndroidRuntime > android-runtime.log || true; adb emu kill || true' EXIT
+          sleep 1
+          kill -0 "$EMU_PID" || { cat emulator.log; exit 1; }
           timeout 180 adb wait-for-device
           for i in $(seq 1 180);do
             if [[ "$(adb shell getprop sys.boot_completed | tr -d '\r')" == 1 ]];then break;fi
@@ -68,8 +78,9 @@ jobs:
           [[ "$(adb shell getprop sys.boot_completed | tr -d '\r')" == 1 ]]
           adb shell settings put system accelerometer_rotation 0
           adb shell settings put system user_rotation 1
+          adb shell input keyevent 82
           adb install -t build/controls-apk/SM64DS-Controles-Prueba.apk
-          adb shell am instrument -w org.ylports.sm64ds.controls/.ControlsInstrumentation | tee instrumentation.log
+          timeout 60 adb shell am instrument -w org.ylports.sm64ds.controls/.ControlsInstrumentation | tee instrumentation.log
           grep -q 'PASS.*framework/JNI input checks' instrumentation.log
           adb exec-out run-as org.ylports.sm64ds.controls cat files/controls.png > controls.png
           adb logcat -d -s AndroidRuntime > android-runtime.log

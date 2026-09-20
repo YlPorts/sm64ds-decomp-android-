@@ -45,6 +45,11 @@ public final class ControlsInstrumentation extends Instrumentation {
                 event(v,3,new int[]{3,17},new float[]{jx,jy,tx,ty});p=NativeBridge.poll();check(p[0]==0&&p[1]==0&&p[4]==0,"cancel clears everything");
                 event(v,0,new int[]{9},new float[]{ax,ay});event(v,1,new int[]{9},new float[]{ax,ay});
                 check(NativeBridge.poll()[0]==0x1000,"quick tap latched");check(NativeBridge.poll()[0]==0,"quick tap release");
+                TouchControls.Control attack=c.controls[2];
+                event(v,0,new int[]{9},new float[]{ax,ay});event(v,1,new int[]{9},new float[]{ax,ay});
+                event(v,0,new int[]{2},new float[]{attack.x,attack.y});event(v,1,new int[]{2},new float[]{attack.x,attack.y});
+                check(NativeBridge.poll()[0]==0x3000,"two completed gestures retain both pending buttons");
+                check(NativeBridge.poll()[0]==0,"combined pulses do not stick");
                 c.editing(true);event(v,0,new int[]{9},new float[]{ax,ay});check(NativeBridge.poll()[0]==0,"editing not gameplay");
                 event(v,1,new int[]{9},new float[]{ax,ay});c.editing(false);
                 c.focus(false);NativeBridge.focus(false);event(v,0,new int[]{9},new float[]{ax,ay});check(NativeBridge.poll()[0]==0,"unfocused input ignored");
