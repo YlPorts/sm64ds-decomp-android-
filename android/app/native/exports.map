@@ -1,0 +1,6 @@
+{
+  global:
+    Java_org_ylports_sm64ds_nativeport_EngineBridge_*;
+    Java_org_ylports_sm64ds_controls_NativeBridge_*;
+  local: *;
+};
