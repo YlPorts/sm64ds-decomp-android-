@@ -6,6 +6,12 @@ on:
     paths:
       - 'android/full-engine/*signature*.py'
       - 'android/full-engine/*prepare_rom.py'
+      - 'android/full-engine/*linkage*'
+      - 'android/full-engine/native_virtual_calls.py'
+      - 'android/full-engine/native_controls.cpp'
+      - 'android/full-engine/native_scene_main.cpp'
+      - 'android/full-engine/smartball_native.cpp'
+      - 'android/full-engine/linkage-tests/**'
       - '.github/workflows/android-signature-tests.yml'
 permissions:
   contents: read
@@ -30,9 +36,20 @@ jobs:
           python3 android/full-engine/check_native_signatures.py --clang clang++ \
             --cxx arm-linux-gnueabihf-g++ --cc arm-linux-gnueabihf-gcc --flags='-mthumb' \
             --runner='qemu-arm -L /usr/arm-linux-gnueabihf' --output build/signature-arm
+      - name: Execute native linkage and original render bodies
+        run: |
+          python3 android/full-engine/check_native_linkage.py --clang clang++ --output build/linkage-tests-host
+          python3 android/full-engine/check_native_linkage.py --clang clang++ \
+            --cxx arm-linux-gnueabihf-g++ --cc arm-linux-gnueabihf-gcc --objcopy arm-linux-gnueabihf-objcopy \
+            --flags='-mthumb' --arm-layout --runner='qemu-arm -L /usr/arm-linux-gnueabihf' \
+            --output build/linkage-tests-arm
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: signature-routing-evidence-NOT-GAMEPLAY
-          path: build/signature-*
+          path: |
+            build/signature-*
+            build/linkage-tests-*/report.json
+            build/linkage-tests-*/*-run.log
+            build/linkage-tests-*/*-evidence.json
           retention-days: 14

@@ -85,7 +85,9 @@ def main() -> int:
     (out/'link.log').write_text(proc.stdout)
     undefined = sorted(set(re.findall(r'undefined symbol: (.+)',proc.stdout)))
     duplicate_errors = sorted(set(re.findall(r'duplicate symbol: (.+)',proc.stdout)))
-    summary = {'scope':'Object-symbol census and retained-reference diagnostic; NOT a complete game/app link',
+    complete = not missing and not duplicates and proc.returncode == 0
+    summary = {'scope': ('Complete retained engine/native-frontend link; gameplay and Android app integration NOT verified'
+                         if complete else 'Object-symbol census and retained-reference diagnostic; NOT a complete game/app link'),
                'resource_mode':data['resource_mode'],'selected_units':data['total'],
                'compiled_objects':len(all_objects),'uncompiled_units':missing,
                'target_kinds':{t:kinds[t] for t in groups},

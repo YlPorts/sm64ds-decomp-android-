@@ -1,0 +1,5263 @@
+{
+  "scope": "Explicit ELF translations of existing MSVC alternatename chains; no invented providers",
+  "source_sha256": {
+    "port/hal/cxx_aliases.cpp": "1a46cca4b48e95d96471f188854eaac972bc8480a5e8e102ade9b72d85903ce4",
+    "port/hal/actor_classes_ov063.cpp": "3dc76505e5f76691c01abd226e8854670ff029bb4a374fc2fa12fb457ef4020e",
+    "port/hal/actor_classes_scuttlebug.cpp": "fca4fccd96590bb2ab550c4dab5d19daad609db429210228fd5d92629c810ec7",
+    "port/hal/actor_classes_ov055.cpp": "112d49f6b3e782af47829784f36c7e5a996b61b1d449d2b4a16e9aaeaad4b214",
+    "port/hal/fwd_forwarders.cpp": "2d4b17eb4c81134474708a9434c6d8462ebfc07c1a6c05b16450a0121b8d3713",
+    "port/hal/lk4_solidheap_seat.cpp": "82622c011d1c22fc8a9e0fb9e3b5cb2d2bb40998269c8e506a1b5c9395bd979b",
+    "port/hal/cxxname_bridge.cpp": "be72558efdc723b1c82791c5146860cad8b145acd755718589deb92cfcc856b3",
+    "port/hal/actor_classes_ccm.cpp": "06511f0f230ce48bfb12c2ed5bbf048967a7d9c388403a18cb0ba38ab4837b9a",
+    "port/unmatched/MgJump2_Faces.cpp": "b6a9765f2df82b188caf07d8c8dd6d50cb85d3cf5a01894c05049187e1453935",
+    "port/unmatched/MgTrampolineTerror_Faces.cpp": "ae6a1b9fe4b2e8bad42c344f5701eee9aa5f62eeae23f1462da94386218b6fb8",
+    "port/unmatched/MgTrampolineTime_Faces.cpp": "d5359b24a12192c406621fc45ccbfcf131534e9d250acb847021040c4fd9f084",
+    "port/hal/scene_mg_jump.cpp": "649ae14f7c62b97a79dfdb883050cee2ef273ed90c16c99075c6c6e5d91d4b2d",
+    "port/hal/actor_classes_ov035.cpp": "7c9fce6a0391ea3750597bcde57c8aab683b4acb0211b306427b42c41344abc8",
+    "port/hal/actor_classes_ov091.cpp": "706af5ed208c9b2c380353d887016b34938c889adeaef0a56597b72253346dd2",
+    "port/hal/bob_enemy_bridges.cpp": "0d9411be8da7db8a8e83e300a54a3def06e2eadc98e9dbba3ac7665a3321bbe8",
+    "port/hal/actor_faces_bob.cpp": "dfce291f3ea199afa940e59f1945fb36d6780efb4a511997f8bd423f635c0feb",
+    "port/hal/actor_classes_ov066.cpp": "6d08ffbb551faa1095165d615fcc6a4bb0a1bd5f62038ea8e2962ce51352c9c4",
+    "port/hal/actor_classes_ov060.cpp": "5828fc5db609df7d38a8f2c9a82581d2db69fe576f10ee6cb1bb65ad4a78504d",
+    "port/hal/actor_classes_hmc.cpp": "9eeb22496d54bccccc0efe20008bb9b9b353991741b5614fafcfaa56b4ecf1f9",
+    "port/unmatched/RacingPenguin_ShadowFaces.cpp": "a61dd13a29e74960d9d620081754e17535c9126544e8ec6144b8ba72487f5af6",
+    "port/hal/actor_classes_ov034.cpp": "56a7c9858bd12a67b5246fad8aad5a2a488302fa3e255a04e71ccce9c82f2e5b",
+    "port/hal/actor_classes_ov027.cpp": "9b48d95e10f75d23bfe55182d7b27ae3e1ed19f024dce03b34ba39d2fdcbe7f4",
+    "port/hal/actor_classes_ov065.cpp": "b8940e81b4b434010248b0b79871eaba7f3d7625020e8164cf3acdf76b5476f7",
+    "port/hal/actor_classes_ov090.cpp": "e50b472275d21e96c43aef6f5987ffe8d771020f600a90fbb5430f34893ba856",
+    "port/hal/actor_classes_bullet.cpp": "0e95ae9339c1f8e976b81e9413df0e2ff914872ab70ae877047c8cd0a5facc77",
+    "port/hal/actor_classes_intro.cpp": "23338c6fbaf29da9defc8a0c3645a22b07bc6b91347453cdfd86bf50ab71e3b6",
+    "port/hal/actor_classes_ov070.cpp": "2830b2908852e3af01784375f4564acefd4c1cbbdff97e843391d5951ad46151",
+    "port/hal/actor_classes_ov064.cpp": "4234151d6925fd4ed23ae1beceea9826a5471b855ad2280c91620bb8d628f3ab",
+    "port/hal/wf_enemy_bridges.cpp": "4b2f2a776d7ccdadbc49481f64013a173c1e7ee81410b1945bed59eb9485cc71",
+    "port/hal/actor_classes_ov100pl.cpp": "cedc6f8f3d851038d9faf3abf2da6f683b35100f6089439c3f16fa179b6c4d1c",
+    "port/hal/actor_classes_bob_world.cpp": "c6d73170a30e4af3c240e1b0a7e0732e44acbff9261fd8e47e1ddcdda495c393",
+    "port/unmatched/Cap_StateDispatch.cpp": "64940a0d90c7a5e8e1a44475246adae9cd5846d4eb61bbc444c05a481c6c6afb",
+    "port/hal/snd_globals.cpp": "3d4d76ffc44022f2086ddb68c4e82b4c2f519a6a7b487be661062c747b85b99e",
+    "port/hal/vs_aliases.inc": "0cc81e015cfdd67b0ffb4016cf5c1ccd2e5df12c9f23064f52be0e09b4db2e72",
+    "port/hal/heap_vtable.cpp": "25546dc231f58870870d9af4a496a5225b8ff2ac2a478d7d6526dffdfbcccc00",
+    "port/hal/actor_classes_ov074.cpp": "95f0de8295018caa79d23783e7376983187f8fe9d04764edecd9cd0d2b63e6b7",
+    "port/hal/actor_classes_koopa_chuckya.cpp": "3049c9a47e30e50ed7be59d0470c553759205fcdc5d8bcfbbb0af8e32f199752",
+    "port/hal/actor_classes_star.cpp": "7e0820b8ce1a15aa979fe04233f4b23fc92e2d76ce38b022df8cc102813335cd",
+    "port/hal/actor_classes.cpp": "53307b47f1f4f808b7b7debba5eb7ddf1205e13afad2ec78dd8f6bd72a4c4958",
+    "port/hal/actor_classes_ov089.cpp": "cff32f3813c215a1d72fbdaf4cf420365734f38b23ecce5ef157261d3e7ae9d4",
+    "port/hal/actor_classes_ov019_w3e.cpp": "35db51bc5e4ee59d53475fe51b5229f967ec49bb6e8713969cebb7a3da160438",
+    "port/hal/actor_classes_montymole.cpp": "52afd96e1364688d92d370f27328bc9f8123e9de14537ed6887446b5855ed4b8",
+    "port/hal/actor_classes_enemy_spawner.cpp": "14ba4405d67f5c2ebe5fde9b8244118d41f695dfb3baa06eb616e712a939646e",
+    "port/hal/actor_classes_vspopup.cpp": "50f85d4588f91f48fcd3ba825f766524ec1f03803ad934c14b7b0c6cb4c4f340",
+    "port/hal/actor_classes_ov085.cpp": "dc60c174981e89b9a0eadecf518a7f0dddad86a24c4ad2cdbc4792a5fd78f55f",
+    "port/hal/actor_classes_flame.cpp": "ae82807b028e005c42df4ed18c29936eaa336c472fff54b550ca61c8bc7983c0",
+    "port/hal/actor_classes_ov064_w3c.cpp": "12ec034f64bc19a052eddce7f4a9d289feb8461a06395bc20f216870b08308fb",
+    "port/unmatched/MgLuigi_Faces.cpp": "99aceefdafade5f68b4f6fc5c219c538939b8fa77fe4f3a29e1f020c8a0929f0",
+    "port/unmatched/MgPanel_Faces.cpp": "f915c57be8794162c18e4ab928a26258e4df62094e8c6d6e690f54427e6d1f9b",
+    "port/hal/actor_classes_bob_enemy.cpp": "8fdb695a1e9b561f6cdefd7226399816c3e33b0925978a130bb1876217e2e105",
+    "port/hal/actor_classes_runtime_spawns.cpp": "d45125ad58387e3f791c1e396550003c7cff2979e890b3e3d672a94edbd33957",
+    "port/hal/actor_classes_ov013.cpp": "be5362f8342a242863553a1dae272596d711a3184d887967006e70acf17de44d",
+    "port/hal/actor_classes_ov064_w12.cpp": "225c5af3c6c6c71aa99c0ef0006fbcff3da46bbe8e5e318c072788e28db08fdb",
+    "port/hal/actor_classes_ov081.cpp": "6c1c04285cf1227270d0661b134140ead514decfcd992594533d3b260ef1991c",
+    "port/hal/scene_mg_booseek.cpp": "cf03d830bf198d5659baec92e62db97f0c0bf0676a1fd65533d121085c91646b",
+    "port/hal/actor_classes_jrb.cpp": "e103d63dd8ce8436ff15922db3a39f9d857f1d20805a0fb69a0d462c3d3393d6",
+    "port/hal/scene_mg_faces.cpp": "11afd9e7a49aebcc8c01e6e3cb2758d2e53364fb3cc4219685c2f472bfd57bc4",
+    "port/hal/actor_classes_montymolerock.cpp": "3c2edb8695f2d91c02ea82d2191e556ebca9b00eef9dfa28eb365064cb671be9",
+    "port/hal/actor_classes_wf.cpp": "bc741cc2da2f572d9d68c56882071ab234d0b61f969618ee2103f6ac8885198f",
+    "port/hal/actor_classes_ov012.cpp": "8500c4e23f0c91cd5a184f2753a295a7bee5dbe6b7d093c4693b3cc23782e2c8",
+    "port/hal/actor_classes_ov025.cpp": "954eff96167f4e44b1d888d221d84f5fd7e6775a57baadf6f4ce7a4d52a9cc10",
+    "port/hal/actor_classes_ov017.cpp": "6d7f647a7406a19d627a9bda9dd85cfa249177f1179c7b88dfc59f4bda14a5c3",
+    "port/hal/actor_classes_ov032.cpp": "9f548f9c906c0d4d47f264dc267248a95bbe8f4aa2125e9ecdb61cc524504bf6",
+    "port/hal/scene_mg_curling2.cpp": "ed16b9ad8dcfd72b3878b6fdbd0c83465372b9f30eca0ba4e77d6053b3833db1",
+    "port/unmatched/MgPachinko_Faces.cpp": "c93fab8b11d4bc54169a12d8f2fe58beee657ae22105e1d71a2bece824fc705e",
+    "port/unmatched/MgPachinko2_Faces.cpp": "da5fc38f2a2c2887e843d2aa57ec43cc697bbf44874415fdefae4e8b08511a71",
+    "port/hal/actor_classes_ov024.cpp": "5c2e83955c747ed4bca9f6648bb82459be13e8ecd71d377027ace5b013048739",
+    "port/hal/actor_classes_ov002_w15.cpp": "1fa1cdc06e744dd0d671451961c146b0ac19ee0c3e196d0bfadd2520639ad4c3",
+    "port/hal/actor_classes_ov045.cpp": "e279d44c6df6351fa99e49b212d1e8a64704ac488a0b982594b54716ffd06df3",
+    "port/hal/actor_classes_ov002g200.cpp": "23ceeca68bc58c7e1872b7c21641e7d14b9ebd2ae1bc07ab1b455b9e66424e2a",
+    "port/hal/actor_classes_bowserpuzzle.cpp": "4d159161840210954e5007675ab409de53e2dba340d03b57151b3e7230e26a6a",
+    "port/hal/actor_classes_ov022_w3e.cpp": "b8ef411a6af9b0fe4737e60aacd6a8ec162c805a9066f7d26bcc8c9d896e3a39",
+    "port/hal/actor_classes_l7.cpp": "681697369dd472e95a95800326b1c3644053ca43ae76cc8c6e9a41f96528cece",
+    "port/hal/actor_classes_ov064_gate178.cpp": "dd4ece728b3d2bac443ac2dad7ca346e929da4ec5612d57c7f8f50aa7cdb03b5",
+    "port/hal/actor_classes_ov025_w3e.cpp": "074158a028ffee95abf7d7b8250e6691921ee0e75d0ffde92af76b2db821c291",
+    "port/hal/actor_classes_ov077.cpp": "d6f48ddec6300882a690132bac38a7e9e04f7f283757f4dbc937d9aa2d88e4f5",
+    "port/hal/actor_classes_wf_enemy.cpp": "0e2ad1a02bf63021822f5f57e4795c2e27939e03442cdbf6192e3f54d93a10b9",
+    "port/hal/actor_classes_ov030.cpp": "6f7eb84fb996727362d085c03b7eca1ffb7d8fdf9f8705321de452014a0acbc7",
+    "port/hal/actor_classes_ov094.cpp": "a5c1d21b0ba592804962bdf63231796912d2db59a1f1ff701fc2bc783303a225",
+    "port/hal/actor_classes_ov096.cpp": "a536dd34c9109fa9311a754d968a141a23da773c1bc5977074b6d9968178c40b",
+    "port/hal/actor_classes_ov071.cpp": "84b29ddf8356b52c29ba6f9abbb15e21007c57546e822cefc4509db0b7a0166b",
+    "port/hal/scene_boot.cpp": "f4e05a130849853a99ca0c7f75a300f5b03661f7f785ab4f3f4aceb0da78db95",
+    "port/hal/actor_classes_bbh.cpp": "f0ab6eea3054c7cc0747500e2534d80be9d78d12b2a4690ad30176402a320451",
+    "port/hal/stage_slot0.cpp": "8b1976ac4eb67dee0d727664b01e7d6204491476979123fe40e3724769b90598",
+    "port/hal/actor_vtables.cpp": "a7fbf78ffacb4584323338356be9a47ab7eee462ec580ce26eb9dc1921e07d18",
+    "port/hal/heap_globals.cpp": "e104ec161981079edcf713cfcd4904544cb024f162c68e05eedc7a6a3bb77cd9",
+    "port/hal/sub_actors.cpp": "831e864e8c27b016db202ed4881f4d043d7955cd9b30b277a365120f323c1558",
+    "port/hal/scene_mg_flower.cpp": "9719e83f2c5006f636615eff49bd8570d9e18166fb443fb17e4db2df360134b1",
+    "port/hal/actor_classes_ov043.cpp": "9adc678272ee2cb4132762cc9e2794cf5a6c50f41d5600cac4761e4ef411706b",
+    "port/hal/actor_classes_ov022.cpp": "189f62add382e1ff7f0b63a6726332818ab22e27343d66c32fef7d1676577480",
+    "port/hal/actor_classes_ov044.cpp": "6ab04d2c0265df4f4ad98d2be1e53327398072d59eb0e308786d8a5ac6dded72",
+    "port/hal/fader_wipes.cpp": "dba4c57ab2b79e4a4c1e7c9b4b3bfa60f5c4d362e43cc0f0951ea8e342b5be9a",
+    "port/hal/method_faces.cpp": "c7bcf137d532cdcd8adb3a15b8cd38048f6d8b114e8587a40ba2a4558933fd13",
+    "port/hal/wm_arm7.cpp": "ddd4208bf63d3ab281c24a3bc6b4f9954ea3b4fcb4674e7a07e2eeeda20df0be",
+    "port/unmatched/Jrb_Aliases.cpp": "634cef682842a6857dc4bbd62102f98e210d07a87745b55cc25c6cf22ceabd05",
+    "port/hal/scene_mg_roulette.cpp": "a75f02cd239fd4e05251867fda60256cf95f5ca68cc9e80520f163bfaab23093",
+    "port/unmatched/MgMemory2_Faces.cpp": "28ce1d4a60f04193faa852be9a9d1fe11ac7ad426772460f9194769cfdb22cbd",
+    "port/unmatched/MgSmartball_Faces.cpp": "906fc41c1692b81aaee4af254015893becfc3480d00e0d815cfc8fc44ebfc284",
+    "port/unmatched/MgCoin_Faces.cpp": "89dafe7c8c12c060e427cf8f36d3ddb78bae7c9abd61b0a5b262574e293dfb56",
+    "port/hal/ptr_tables.cpp": "ee3d9efaa6921fcf97ff39dbec75891f8892447270bd4827e00770e855cf1a97",
+    "port/hal/actor_classes_ov010.cpp": "ea3f9b48387b095073bc3c233f69f89699dfb91f249315f70f3e5eb8844a72d2",
+    "port/hal/actor_classes_ov023.cpp": "526ae505f368afe6d720b92f98896e343813c04fbcb82b1ecb59abd81f1bb21e",
+    "port/hal/actor_classes_ov026.cpp": "a73bb75a7cbea6a36ebcf69dbd61ffad7cec6a4685e0f5a296419fbe3fc8eead",
+    "port/hal/actor_classes_ov033.cpp": "1f0dcacf019d917e2edb5af381ed9a6237c98c0a221e2803f8b845af32f487fe"
+  },
+  "bindings": {
+    "ActorBase_MarkForDestruction": {
+      "target": "_ZN9ActorBase18MarkForDestructionEv",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1924,
+          "from": "_ActorBase_MarkForDestruction",
+          "to": "__ZN9ActorBase18MarkForDestructionEv"
+        }
+      ]
+    },
+    "Actor_ClosestPlayer": {
+      "target": "sm64ds_cabi_ZN5Actor13ClosestPlayerEv",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov063.cpp",
+          "line": 766,
+          "from": "_Actor_ClosestPlayer",
+          "to": "__ZN5Actor13ClosestPlayerEv"
+        }
+      ]
+    },
+    "AnimLoadFile": {
+      "target": "_ZN9Animation8LoadFileER13SharedFilePtr",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_scuttlebug.cpp",
+          "line": 159,
+          "from": "_AnimLoadFile",
+          "to": "?LoadFile@Animation@@SAPADAAUSharedFilePtr@@@Z"
+        }
+      ]
+    },
+    "Animation_LoadFile": {
+      "target": "sm64ds_cabi_ZN9Animation8LoadFileER13SharedFilePtr",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov055.cpp",
+          "line": 166,
+          "from": "_Animation_LoadFile",
+          "to": "__ZN9Animation8LoadFileER13SharedFilePtr"
+        }
+      ]
+    },
+    "ApproachLinearI": {
+      "target": "sm64ds_cabi_Z14ApproachLinearRiii",
+      "upstream": [
+        {
+          "path": "port/hal/fwd_forwarders.cpp",
+          "line": 198,
+          "from": "_ApproachLinearI",
+          "to": "__Z14ApproachLinearRiii"
+        }
+      ]
+    },
+    "G": {
+      "target": "data_020a0ea0",
+      "upstream": [
+        {
+          "path": "port/hal/lk4_solidheap_seat.cpp",
+          "line": 173,
+          "from": "_G",
+          "to": "_data_020a0ea0"
+        }
+      ]
+    },
+    "G0": {
+      "target": "data_020a0eac_c",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1469,
+          "from": "_G0",
+          "to": "_data_020a0eac"
+        },
+        {
+          "path": "port/hal/cxxname_bridge.cpp",
+          "line": 290,
+          "from": "_data_020a0eac",
+          "to": "_data_020a0eac_c"
+        }
+      ]
+    },
+    "G1": {
+      "target": "data_ov002_0210e05c",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1942,
+          "from": "_G1",
+          "to": "_data_ov002_0210e05c"
+        }
+      ]
+    },
+    "HEAP": {
+      "target": "data_020a0eac_c",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1479,
+          "from": "_HEAP",
+          "to": "_data_020a0eac"
+        },
+        {
+          "path": "port/hal/cxxname_bridge.cpp",
+          "line": 290,
+          "from": "_data_020a0eac",
+          "to": "_data_020a0eac_c"
+        }
+      ]
+    },
+    "IceSheet_ClsnFile": {
+      "target": "data_ov018_02113c7c",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ccm.cpp",
+          "line": 475,
+          "from": "?IceSheet_ClsnFile@@3PAHA",
+          "to": "_data_ov018_02113c7c"
+        }
+      ]
+    },
+    "IceSheet_ModelFile": {
+      "target": "data_ov018_02113c84",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ccm.cpp",
+          "line": 474,
+          "from": "?IceSheet_ModelFile@@3PAHA",
+          "to": "_data_ov018_02113c84"
+        }
+      ]
+    },
+    "ModelAnim_SetAnim": {
+      "target": "_ZN9ModelAnim7SetAnimEP8BCA_Filei5Fix12IiEj",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov055.cpp",
+          "line": 163,
+          "from": "_ModelAnim_SetAnim",
+          "to": "__ZN9ModelAnim7SetAnimEP8BCA_Filei5Fix12IiEj"
+        }
+      ]
+    },
+    "PARTICLE_SYS_TRACKER": {
+      "target": "data_0209ee74",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 560,
+          "from": "_PARTICLE_SYS_TRACKER",
+          "to": "_data_0209ee74"
+        }
+      ]
+    },
+    "RockPillar_ClsnFile": {
+      "target": "data_ov016_02114e1c",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 2176,
+          "from": "_RockPillar_ClsnFile",
+          "to": "_data_ov016_02114e1c"
+        }
+      ]
+    },
+    "RockPillar_ModelFile": {
+      "target": "data_ov016_02114e24",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 2177,
+          "from": "_RockPillar_ModelFile",
+          "to": "_data_ov016_02114e24"
+        }
+      ]
+    },
+    "STAR_MARKERS": {
+      "target": "data_0209f40c",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1359,
+          "from": "_STAR_MARKERS",
+          "to": "_data_0209f40c"
+        }
+      ]
+    },
+    "Scene_AfterRender": {
+      "target": "_ZN5Scene11AfterRenderEj",
+      "upstream": [
+        {
+          "path": "port/unmatched/MgJump2_Faces.cpp",
+          "line": 131,
+          "from": "_Scene_AfterRender",
+          "to": "__ZN5Scene11AfterRenderEj"
+        },
+        {
+          "path": "port/unmatched/MgTrampolineTerror_Faces.cpp",
+          "line": 132,
+          "from": "_Scene_AfterRender",
+          "to": "__ZN5Scene11AfterRenderEj"
+        },
+        {
+          "path": "port/unmatched/MgTrampolineTime_Faces.cpp",
+          "line": 220,
+          "from": "_Scene_AfterRender",
+          "to": "__ZN5Scene11AfterRenderEj"
+        },
+        {
+          "path": "port/hal/scene_mg_jump.cpp",
+          "line": 276,
+          "from": "_Scene_AfterRender",
+          "to": "__ZN5Scene11AfterRenderEj"
+        }
+      ]
+    },
+    "ShadowModel_InitCylinder": {
+      "target": "sm64ds_cabi_ZN11ShadowModel12InitCylinderEv",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov055.cpp",
+          "line": 162,
+          "from": "_ShadowModel_InitCylinder",
+          "to": "__ZN11ShadowModel12InitCylinderEv"
+        }
+      ]
+    },
+    "SignPost_ClsnFile": {
+      "target": "data_ov002_0210e05c",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1601,
+          "from": "?SignPost_ClsnFile@@3PAHA",
+          "to": "_data_ov002_0210e05c"
+        }
+      ]
+    },
+    "SignPost_ModelFile": {
+      "target": "data_ov002_0210e064",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1600,
+          "from": "?SignPost_ModelFile@@3PAHA",
+          "to": "_data_ov002_0210e064"
+        }
+      ]
+    },
+    "TextureSequence_Prepare": {
+      "target": "sm64ds_cabi_ZN15TextureSequence7PrepareER8BMD_FileR8BTP_File",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov055.cpp",
+          "line": 164,
+          "from": "_TextureSequence_Prepare",
+          "to": "__ZN15TextureSequence7PrepareER8BMD_FileR8BTP_File"
+        }
+      ]
+    },
+    "TextureSequence_SetFile": {
+      "target": "_ZN15TextureSequence7SetFileER8BTP_Filei5Fix12IiEj",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov055.cpp",
+          "line": 165,
+          "from": "_TextureSequence_SetFile",
+          "to": "__ZN15TextureSequence7SetFileER8BTP_Filei5Fix12IiEj"
+        }
+      ]
+    },
+    "UpdatePosWithTransformSym": {
+      "target": "_ZN16MeshColliderBase22UpdatePosWithTransformERS_P5ActorR10ClsnResultR7Vector3P10Vector3_16S8_",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov035.cpp",
+          "line": 203,
+          "from": "_UpdatePosWithTransformSym",
+          "to": "?UpdatePosWithTransform@MeshColliderBase@@SAXAAU1@PAUActor@@AAUClsnResult@@AAUVector3@@PAUVector3_16@@4@Z"
+        }
+      ]
+    },
+    "UpdatePosWithVelocitySym": {
+      "target": "_ZN16MeshColliderBase21UpdatePosWithVelocityERS_P5ActorR10ClsnResultR7Vector3P10Vector3_16S8_",
+      "upstream": [
+        {
+          "path": "port/hal/fwd_forwarders.cpp",
+          "line": 200,
+          "from": "_UpdatePosWithVelocitySym",
+          "to": "__ZN16MeshColliderBase21UpdatePosWithVelocityERS_P5ActorR10ClsnResultR7Vector3P10Vector3_16S8_"
+        }
+      ]
+    },
+    "VT": {
+      "target": "data_ov002_021081e4",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1478,
+          "from": "_VT",
+          "to": "_data_ov002_021081e4"
+        }
+      ]
+    },
+    "Vec3_DistSq": {
+      "target": "func_0203cf94",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1358,
+          "from": "_Vec3_DistSq",
+          "to": "_func_0203cf94"
+        }
+      ]
+    },
+    "Vec3_equal": {
+      "target": "Vec3_Equal",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov091.cpp",
+          "line": 665,
+          "from": "_Vec3_equal",
+          "to": "_Vec3_Equal"
+        }
+      ]
+    },
+    "WithMeshClsn_IsOnGround": {
+      "target": "sm64ds_cabi_ZNK12WithMeshClsn10IsOnGroundEv",
+      "upstream": [
+        {
+          "path": "port/hal/bob_enemy_bridges.cpp",
+          "line": 399,
+          "from": "_WithMeshClsn_IsOnGround",
+          "to": "__ZNK12WithMeshClsn10IsOnGroundEv"
+        }
+      ]
+    },
+    "_Z10Vec3_EqualPvS_": {
+      "target": "Vec3_Equal",
+      "upstream": [
+        {
+          "path": "port/hal/actor_faces_bob.cpp",
+          "line": 98,
+          "from": "?Vec3_Equal@@YAHPAX0@Z",
+          "to": "_Vec3_Equal"
+        }
+      ]
+    },
+    "_Z13func_020072c0v": {
+      "target": "func_020072c0",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1306,
+          "from": "?func_020072c0@@YAXXZ",
+          "to": "_func_020072c0"
+        }
+      ]
+    },
+    "_Z13func_020393a4Pii": {
+      "target": "func_020393a4",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1852,
+          "from": "?func_020393a4@@YAXPAHH@Z",
+          "to": "_func_020393a4"
+        }
+      ]
+    },
+    "_Z13func_020393c4PvS_": {
+      "target": "func_020393c4",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov066.cpp",
+          "line": 372,
+          "from": "?func_020393c4@@YAXPAX0@Z",
+          "to": "_func_020393c4"
+        }
+      ]
+    },
+    "_Z13func_020393d4PvS_": {
+      "target": "func_020393d4",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov060.cpp",
+          "line": 287,
+          "from": "?func_020393d4@@YAHPAX0@Z",
+          "to": "_func_020393d4"
+        },
+        {
+          "path": "port/hal/actor_classes_ov066.cpp",
+          "line": 371,
+          "from": "?func_020393d4@@YAXPAX0@Z",
+          "to": "_func_020393d4"
+        }
+      ]
+    },
+    "_Z16DecIfAbove0_BytePh": {
+      "target": "DecIfAbove0_Byte",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1451,
+          "from": "?DecIfAbove0_Byte@@YAEPAE@Z",
+          "to": "_DecIfAbove0_Byte"
+        }
+      ]
+    },
+    "_Z17LoadBlueCoinModelPv": {
+      "target": "LoadBlueCoinModel",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov063.cpp",
+          "line": 761,
+          "from": "?LoadBlueCoinModel@@YAXPAX@Z",
+          "to": "_LoadBlueCoinModel"
+        }
+      ]
+    },
+    "_Z19data_ov025_02112c88v": {
+      "target": "data_ov025_02112c88",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov066.cpp",
+          "line": 321,
+          "from": "?data_ov025_02112c88@@YAXXZ",
+          "to": "_data_ov025_02112c88"
+        }
+      ]
+    },
+    "_Z19data_ov025_02112cc8v": {
+      "target": "data_ov025_02112cc8",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov066.cpp",
+          "line": 320,
+          "from": "?data_ov025_02112cc8@@YAXXZ",
+          "to": "_data_ov025_02112cc8"
+        }
+      ]
+    },
+    "_Z19func_ov001_020ab228PvS_iii": {
+      "target": "func_ov001_020ab228",
+      "upstream": [
+        {
+          "path": "port/hal/actor_faces_bob.cpp",
+          "line": 101,
+          "from": "?func_ov001_020ab228@@YAXPAX0HHH@Z",
+          "to": "_func_ov001_020ab228"
+        }
+      ]
+    },
+    "_Z19func_ov002_020b7f2cPvS_": {
+      "target": "func_ov002_020b7f2c",
+      "upstream": [
+        {
+          "path": "port/hal/actor_faces_bob.cpp",
+          "line": 102,
+          "from": "?func_ov002_020b7f2c@@YAXPAX0@Z",
+          "to": "_func_ov002_020b7f2c"
+        }
+      ]
+    },
+    "_Z19func_ov002_020b7f7cPv": {
+      "target": "func_ov002_020b7f7c",
+      "upstream": [
+        {
+          "path": "port/hal/actor_faces_bob.cpp",
+          "line": 103,
+          "from": "?func_ov002_020b7f7c@@YAXPAX@Z",
+          "to": "_func_ov002_020b7f7c"
+        }
+      ]
+    },
+    "_Z19func_ov002_020ef228Pvi": {
+      "target": "func_ov002_020ef228",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_hmc.cpp",
+          "line": 85,
+          "from": "?func_ov002_020ef228@@YAHPAXH@Z",
+          "to": "_func_ov002_020ef228"
+        }
+      ]
+    },
+    "_Z19func_ov066_0211a35cv": {
+      "target": "func_ov066_0211a35c",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov066.cpp",
+          "line": 322,
+          "from": "?func_ov066_0211a35c@@YAXXZ",
+          "to": "_func_ov066_0211a35c"
+        }
+      ]
+    },
+    "_Z22IsStarCollectedInLevelai": {
+      "target": "IsStarCollectedInLevel",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1427,
+          "from": "?IsStarCollectedInLevel@@YAHCH@Z",
+          "to": "_IsStarCollectedInLevel"
+        }
+      ]
+    },
+    "_Z25_ZN12CylinderClsn5ClearEvPc": {
+      "target": "_ZN12CylinderClsn5ClearEv",
+      "upstream": [
+        {
+          "path": "port/unmatched/RacingPenguin_ShadowFaces.cpp",
+          "line": 111,
+          "from": "?_ZN12CylinderClsn5ClearEv@@YAXPAD@Z",
+          "to": "__ZN12CylinderClsn5ClearEv"
+        }
+      ]
+    },
+    "_Z26_ZN12CylinderClsn6UpdateEvPc": {
+      "target": "_ZN12CylinderClsn6UpdateEv",
+      "upstream": [
+        {
+          "path": "port/unmatched/RacingPenguin_ShadowFaces.cpp",
+          "line": 112,
+          "from": "?_ZN12CylinderClsn6UpdateEv@@YAXPAD@Z",
+          "to": "__ZN12CylinderClsn6UpdateEv"
+        }
+      ]
+    },
+    "_Z26_ZN3Fog4InitEt5Fix12IiES1_Pvtii": {
+      "target": "_ZN3Fog4InitEt5Fix12IiES1_",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 2199,
+          "from": "?_ZN3Fog4InitEt5Fix12IiES1_@@YAXPAXGHH@Z",
+          "to": "__ZN3Fog4InitEt5Fix12IiES1_"
+        }
+      ]
+    },
+    "_Z31sm64ds_cabi_ZN7PathPtr6FromIDEjPvj": {
+      "target": "sm64ds_cabi_ZN7PathPtr6FromIDEj",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1686,
+          "from": "?_ZN7PathPtr6FromIDEj@@YAXPAXI@Z",
+          "to": "__ZN7PathPtr6FromIDEj"
+        }
+      ]
+    },
+    "_Z32_ZN5Actor10PoofDustAtERK7Vector3PvPK7Vector3": {
+      "target": "_ZN5Actor10PoofDustAtERK7Vector3",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov034.cpp",
+          "line": 198,
+          "from": "?_ZN5Actor10PoofDustAtERK7Vector3@@YAXPAXPBUVector3@@@Z",
+          "to": "__ZN5Actor10PoofDustAtERK7Vector3"
+        }
+      ]
+    },
+    "_Z33_ZN5Sound8PlayLongEjjjRK7Vector3jijjPvj": {
+      "target": "_ZN5Sound8PlayLongEjjjRK7Vector3j",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov027.cpp",
+          "line": 246,
+          "from": "?_ZN5Sound8PlayLongEjjjRK7Vector3j@@YAHHIIPAXI@Z",
+          "to": "__ZN5Sound8PlayLongEjjjRK7Vector3j"
+        }
+      ]
+    },
+    "_Z33sm64ds_cabi_ZN5Actor9TrackStarEjjPvjj": {
+      "target": "sm64ds_cabi_ZN5Actor9TrackStarEjj",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov066.cpp",
+          "line": 363,
+          "from": "?_ZN5Actor9TrackStarEjj@@YAEPAXII@Z",
+          "to": "__ZN5Actor9TrackStarEjj"
+        }
+      ]
+    },
+    "_Z34sm64ds_cabi_ZN9Animation7AdvanceEvPc": {
+      "target": "sm64ds_cabi_ZN9Animation7AdvanceEv",
+      "upstream": [
+        {
+          "path": "port/unmatched/RacingPenguin_ShadowFaces.cpp",
+          "line": 110,
+          "from": "?_ZN9Animation7AdvanceEv@@YAXPAD@Z",
+          "to": "__ZN9Animation7AdvanceEv"
+        }
+      ]
+    },
+    "_Z35_ZN9ActorBase18MarkForDestructionEvPv": {
+      "target": "_ZN9ActorBase18MarkForDestructionEv",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 991,
+          "from": "?_ZN9ActorBase18MarkForDestructionEv@@YAXPAX@Z",
+          "to": "__ZN9ActorBase18MarkForDestructionEv"
+        }
+      ]
+    },
+    "_Z37sm64ds_cabi_ZN5Actor13ClosestPlayerEvPv": {
+      "target": "sm64ds_cabi_ZN5Actor13ClosestPlayerEv",
+      "upstream": [
+        {
+          "path": "port/hal/actor_faces_bob.cpp",
+          "line": 99,
+          "from": "?_ZN5Actor13ClosestPlayerEv@@YAHPAX@Z",
+          "to": "__ZN5Actor13ClosestPlayerEv"
+        }
+      ]
+    },
+    "_Z41sm64ds_cabi_ZN11ShadowModel10InitCuboidEvPv": {
+      "target": "sm64ds_cabi_ZN11ShadowModel10InitCuboidEv",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 1042,
+          "from": "?_ZN11ShadowModel10InitCuboidEv@@YAXPAX@Z",
+          "to": "__ZN11ShadowModel10InitCuboidEv"
+        }
+      ]
+    },
+    "_Z42sm64ds_cabi_ZNK7PathPtr7GetNodeER7Vector3jPvS_j": {
+      "target": "sm64ds_cabi_ZNK7PathPtr7GetNodeER7Vector3j",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1690,
+          "from": "?_ZNK7PathPtr7GetNodeER7Vector3j@@YAXPAX0I@Z",
+          "to": "__ZNK7PathPtr7GetNodeER7Vector3j"
+        }
+      ]
+    },
+    "_Z43_ZN9ModelAnim7SetAnimEP8BCA_Filei5Fix12IiEjPvP8BCA_Fileiij": {
+      "target": "_ZN9ModelAnim7SetAnimEP8BCA_Filei5Fix12IiEj",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov090.cpp",
+          "line": 612,
+          "from": "?_ZN9ModelAnim7SetAnimEP8BCA_Filei5Fix12IiEj@@YAXPAXPAUBCA_File@@HHI@Z",
+          "to": "__ZN9ModelAnim7SetAnimEP8BCA_Filei5Fix12IiEj"
+        }
+      ]
+    },
+    "_Z43sm64ds_cabi_ZN11ShadowModel12InitCylinderEvPv": {
+      "target": "sm64ds_cabi_ZN11ShadowModel12InitCylinderEv",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov066.cpp",
+          "line": 367,
+          "from": "?_ZN11ShadowModel12InitCylinderEv@@YAXPAX@Z",
+          "to": "__ZN11ShadowModel12InitCylinderEv"
+        },
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1681,
+          "from": "?_ZN11ShadowModel12InitCylinderEv@@YAHPAX@Z",
+          "to": "__ZN11ShadowModel12InitCylinderEv"
+        }
+      ]
+    },
+    "_Z44_ZN5Actor5SpawnEjjRK7Vector3PK10Vector3_16iijjP7Vector3Pvii": {
+      "target": "_ZN5Actor5SpawnEjjRK7Vector3PK10Vector3_16ii",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov066.cpp",
+          "line": 369,
+          "from": "?_ZN5Actor5SpawnEjjRK7Vector3PK10Vector3_16ii@@YAPAXIIPAUVector3@@PAXHH@Z",
+          "to": "__ZN5Actor5SpawnEjjRK7Vector3PK10Vector3_16ii"
+        }
+      ]
+    },
+    "_Z45sm64ds_cabi_ZN9ModelBase7SetFileEP8BMD_FileiiPcP8BMD_Fileii": {
+      "target": "sm64ds_cabi_ZN9ModelBase7SetFileEP8BMD_Fileii",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bullet.cpp",
+          "line": 64,
+          "from": "?_ZN9ModelBase7SetFileEP8BMD_Fileii@@YAHPADPAUBMD_File@@HH@Z",
+          "to": "__ZN9ModelBase7SetFileEP8BMD_Fileii"
+        }
+      ]
+    },
+    "_Z45sm64ds_cabi_ZN9ModelBase7SetFileEP8BMD_FileiiPvP8BMD_Fileii": {
+      "target": "sm64ds_cabi_ZN9ModelBase7SetFileEP8BMD_Fileii",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 1049,
+          "from": "?_ZN9ModelBase7SetFileEP8BMD_Fileii@@YAXPAXPAUBMD_File@@HH@Z",
+          "to": "__ZN9ModelBase7SetFileEP8BMD_Fileii"
+        }
+      ]
+    },
+    "_Z45sm64ds_cabi_ZN9ModelBase7SetFileEP8BMD_FileiiPvS_ii": {
+      "target": "sm64ds_cabi_ZN9ModelBase7SetFileEP8BMD_Fileii",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1689,
+          "from": "?_ZN9ModelBase7SetFileEP8BMD_Fileii@@YAHPAX0HH@Z",
+          "to": "__ZN9ModelBase7SetFileEP8BMD_Fileii"
+        },
+        {
+          "path": "port/hal/actor_classes_ov091.cpp",
+          "line": 642,
+          "from": "?_ZN9ModelBase7SetFileEP8BMD_Fileii@@YAXPAX0HH@Z",
+          "to": "__ZN9ModelBase7SetFileEP8BMD_Fileii"
+        },
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 1048,
+          "from": "?_ZN9ModelBase7SetFileEP8BMD_Fileii@@YAXPAX0HH@Z",
+          "to": "__ZN9ModelBase7SetFileEP8BMD_Fileii"
+        }
+      ]
+    },
+    "_Z46sm64ds_cabi_ZN5Actor9UpdatePosEP12CylinderClsnPvS_": {
+      "target": "sm64ds_cabi_ZN5Actor9UpdatePosEP12CylinderClsn",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1849,
+          "from": "?_ZN5Actor9UpdatePosEP12CylinderClsn@@YAXPAX0@Z",
+          "to": "__ZN5Actor9UpdatePosEP12CylinderClsn"
+        }
+      ]
+    },
+    "_Z46sm64ds_cabi_ZN5Model8LoadFileER13SharedFilePtrPv": {
+      "target": "sm64ds_cabi_ZN5Model8LoadFileER13SharedFilePtr",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov063.cpp",
+          "line": 762,
+          "from": "?_ZN5Model8LoadFileER13SharedFilePtr@@YAXPAX@Z",
+          "to": "__ZN5Model8LoadFileER13SharedFilePtr"
+        },
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1685,
+          "from": "?_ZN5Model8LoadFileER13SharedFilePtr@@YAPAXPAX@Z",
+          "to": "__ZN5Model8LoadFileER13SharedFilePtr"
+        },
+        {
+          "path": "port/hal/actor_classes_bullet.cpp",
+          "line": 63,
+          "from": "?_ZN5Model8LoadFileER13SharedFilePtr@@YAPAUBMD_File@@PAX@Z",
+          "to": "__ZN5Model8LoadFileER13SharedFilePtr"
+        }
+      ]
+    },
+    "_Z46sm64ds_cabi_ZN5Model8LoadFileER13SharedFilePtrR13SharedFilePtr": {
+      "target": "sm64ds_cabi_ZN5Model8LoadFileER13SharedFilePtr",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 1045,
+          "from": "?_ZN5Model8LoadFileER13SharedFilePtr@@YAPAUBMD_File@@AAUSharedFilePtr@@@Z",
+          "to": "__ZN5Model8LoadFileER13SharedFilePtr"
+        }
+      ]
+    },
+    "_Z46sm64ds_cabi_ZN8Platform19UpdateClsnPosAndRotEvPv": {
+      "target": "sm64ds_cabi_ZN8Platform19UpdateClsnPosAndRotEv",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov091.cpp",
+          "line": 643,
+          "from": "?_ZN8Platform19UpdateClsnPosAndRotEv@@YAXPAX@Z",
+          "to": "__ZN8Platform19UpdateClsnPosAndRotEv"
+        },
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 1046,
+          "from": "?_ZN8Platform19UpdateClsnPosAndRotEv@@YAXPAX@Z",
+          "to": "__ZN8Platform19UpdateClsnPosAndRotEv"
+        }
+      ]
+    },
+    "_Z48_ZN6Player11ShowMessageER9ActorBasejPK7Vector3jjPvS_jPK7Vector3jj": {
+      "target": "_ZN6Player11ShowMessageER9ActorBasejPK7Vector3jj",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov027.cpp",
+          "line": 245,
+          "from": "?_ZN6Player11ShowMessageER9ActorBasejPK7Vector3jj@@YAHPAX0IPBUVector3@@II@Z",
+          "to": "__ZN6Player11ShowMessageER9ActorBasejPK7Vector3jj"
+        }
+      ]
+    },
+    "_Z48sm64ds_cabi_ZN8Platform21UpdateModelPosAndRotYEvPv": {
+      "target": "sm64ds_cabi_ZN8Platform21UpdateModelPosAndRotYEv",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 1047,
+          "from": "?_ZN8Platform21UpdateModelPosAndRotYEv@@YAXPAX@Z",
+          "to": "__ZN8Platform21UpdateModelPosAndRotYEv"
+        }
+      ]
+    },
+    "_Z50_ZN18MovingCylinderClsn4InitEP5Actor5Fix12IiES3_jjPcP5Actoriijj": {
+      "target": "_ZN18MovingCylinderClsn4InitEP5Actor5Fix12IiES3_jj",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bullet.cpp",
+          "line": 65,
+          "from": "?_ZN18MovingCylinderClsn4InitEP5Actor5Fix12IiES3_jj@@YAXPADPAUActor@@HHII@Z",
+          "to": "__ZN18MovingCylinderClsn4InitEP5Actor5Fix12IiES3_jj"
+        }
+      ]
+    },
+    "_Z50_ZN18MovingCylinderClsn4InitEP5Actor5Fix12IiES3_jjPvS_iijj": {
+      "target": "_ZN18MovingCylinderClsn4InitEP5Actor5Fix12IiES3_jj",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1683,
+          "from": "?_ZN18MovingCylinderClsn4InitEP5Actor5Fix12IiES3_jj@@YAXPAX0HHII@Z",
+          "to": "__ZN18MovingCylinderClsn4InitEP5Actor5Fix12IiES3_jj"
+        }
+      ]
+    },
+    "_Z50sm64ds_cabi_ZN9Animation8LoadFileER13SharedFilePtrPv": {
+      "target": "sm64ds_cabi_ZN9Animation8LoadFileER13SharedFilePtr",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1688,
+          "from": "?_ZN9Animation8LoadFileER13SharedFilePtr@@YAXPAX@Z",
+          "to": "__ZN9Animation8LoadFileER13SharedFilePtr"
+        }
+      ]
+    },
+    "_Z54sm64ds_cabi_ZN12MeshCollider8LoadFileER13SharedFilePtrPv": {
+      "target": "sm64ds_cabi_ZN12MeshCollider8LoadFileER13SharedFilePtr",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 898,
+          "from": "?_ZN12MeshCollider8LoadFileER13SharedFilePtr@@YAPAXPAX@Z",
+          "to": "__ZN12MeshCollider8LoadFileER13SharedFilePtr"
+        },
+        {
+          "path": "port/hal/actor_classes_ov066.cpp",
+          "line": 365,
+          "from": "?_ZN12MeshCollider8LoadFileER13SharedFilePtr@@YAXPAX@Z",
+          "to": "__ZN12MeshCollider8LoadFileER13SharedFilePtr"
+        }
+      ]
+    },
+    "_Z54sm64ds_cabi_ZN12MeshCollider8LoadFileER13SharedFilePtrR13SharedFilePtr": {
+      "target": "sm64ds_cabi_ZN12MeshCollider8LoadFileER13SharedFilePtr",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 1043,
+          "from": "?_ZN12MeshCollider8LoadFileER13SharedFilePtr@@YAPAUKCL_File@@AAUSharedFilePtr@@@Z",
+          "to": "__ZN12MeshCollider8LoadFileER13SharedFilePtr"
+        }
+      ]
+    },
+    "_Z56sm64ds_cabi_ZN5Actor19UntrackAndSpawnStarERajRK7Vector3jPvPajPK7Vector3j": {
+      "target": "sm64ds_cabi_ZN5Actor19UntrackAndSpawnStarERajRK7Vector3j",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov034.cpp",
+          "line": 199,
+          "from": "?_ZN5Actor19UntrackAndSpawnStarERajRK7Vector3j@@YAXPAXPACIPBUVector3@@I@Z",
+          "to": "__ZN5Actor19UntrackAndSpawnStarERajRK7Vector3j"
+        }
+      ]
+    },
+    "_Z57sm64ds_cabi_ZN15TextureSequence8LoadFileER13SharedFilePtrPv": {
+      "target": "sm64ds_cabi_ZN15TextureSequence8LoadFileER13SharedFilePtr",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov066.cpp",
+          "line": 364,
+          "from": "?_ZN15TextureSequence8LoadFileER13SharedFilePtr@@YAXPAX@Z",
+          "to": "__ZN15TextureSequence8LoadFileER13SharedFilePtr"
+        }
+      ]
+    },
+    "_Z58_ZN12WithMeshClsn4InitEP5Actor5Fix12IiES3_P10Vector3_16S5_PcP5ActoriiP10Vector3_16i": {
+      "target": "_ZN12WithMeshClsn4InitEP5Actor5Fix12IiES3_P10Vector3_16S5_",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bullet.cpp",
+          "line": 66,
+          "from": "?_ZN12WithMeshClsn4InitEP5Actor5Fix12IiES3_P10Vector3_16S5_@@YAXPADPAUActor@@HHPAUVector3_16@@H@Z",
+          "to": "__ZN12WithMeshClsn4InitEP5Actor5Fix12IiES3_P10Vector3_16S5_"
+        }
+      ]
+    },
+    "_Z58_ZN12WithMeshClsn4InitEP5Actor5Fix12IiES3_P10Vector3_16S5_PvP5ActoriiP10Vector3_16i": {
+      "target": "_ZN12WithMeshClsn4InitEP5Actor5Fix12IiES3_P10Vector3_16S5_",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov090.cpp",
+          "line": 611,
+          "from": "?_ZN12WithMeshClsn4InitEP5Actor5Fix12IiES3_P10Vector3_16S5_@@YAXPAXPAUActor@@HHPAUVector3_16@@H@Z",
+          "to": "__ZN12WithMeshClsn4InitEP5Actor5Fix12IiES3_P10Vector3_16S5_"
+        }
+      ]
+    },
+    "_Z58_ZN12WithMeshClsn4InitEP5Actor5Fix12IiES3_P10Vector3_16S5_PvS_iiS_S_": {
+      "target": "_ZN12WithMeshClsn4InitEP5Actor5Fix12IiES3_P10Vector3_16S5_",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1682,
+          "from": "?_ZN12WithMeshClsn4InitEP5Actor5Fix12IiES3_P10Vector3_16S5_@@YAXPAX0HH00@Z",
+          "to": "__ZN12WithMeshClsn4InitEP5Actor5Fix12IiES3_P10Vector3_16S5_"
+        }
+      ]
+    },
+    "_Z58_ZN12WithMeshClsn4InitEP5Actor5Fix12IiES3_P10Vector3_16S5_PvS_iiS_i": {
+      "target": "_ZN12WithMeshClsn4InitEP5Actor5Fix12IiES3_P10Vector3_16S5_",
+      "upstream": [
+        {
+          "path": "port/hal/actor_faces_bob.cpp",
+          "line": 100,
+          "from": "?_ZN12WithMeshClsn4InitEP5Actor5Fix12IiES3_P10Vector3_16S5_@@YAXPAX0HH0H@Z",
+          "to": "__ZN12WithMeshClsn4InitEP5Actor5Fix12IiES3_P10Vector3_16S5_"
+        }
+      ]
+    },
+    "_Z5_Znwji": {
+      "target": "_Znwj",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_intro.cpp",
+          "line": 722,
+          "from": "?_Znwj@@YAPAXH@Z",
+          "to": "__Znwj"
+        }
+      ]
+    },
+    "_Z5_Znwjj": {
+      "target": "_Znwj",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 2198,
+          "from": "?_Znwj@@YAPAXI@Z",
+          "to": "__Znwj"
+        }
+      ]
+    },
+    "_Z60sm64ds_cabi_ZN15TextureSequence7PrepareER8BMD_FileR8BTP_Fileii": {
+      "target": "sm64ds_cabi_ZN15TextureSequence7PrepareER8BMD_FileR8BTP_File",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov066.cpp",
+          "line": 366,
+          "from": "?_ZN15TextureSequence7PrepareER8BMD_FileR8BTP_File@@YAXHH@Z",
+          "to": "__ZN15TextureSequence7PrepareER8BMD_FileR8BTP_File"
+        }
+      ]
+    },
+    "_Z67_ZN25MovingCylinderClsnWithPos4InitEP5ActorRK7Vector35Fix12IiES6_jjPvP5ActorRK7Vector3iijj": {
+      "target": "_ZN25MovingCylinderClsnWithPos4InitEP5ActorRK7Vector35Fix12IiES6_jj",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov090.cpp",
+          "line": 610,
+          "from": "?_ZN25MovingCylinderClsnWithPos4InitEP5ActorRK7Vector35Fix12IiES6_jj@@YAXPAXPAUActor@@ABUVector3@@HHII@Z",
+          "to": "__ZN25MovingCylinderClsnWithPos4InitEP5ActorRK7Vector35Fix12IiES6_jj"
+        }
+      ]
+    },
+    "_Z67_ZN25MovingCylinderClsnWithPos4InitEP5ActorRK7Vector35Fix12IiES6_jjPvS_P7Vector3iijj": {
+      "target": "_ZN25MovingCylinderClsnWithPos4InitEP5ActorRK7Vector35Fix12IiES6_jj",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov066.cpp",
+          "line": 368,
+          "from": "?_ZN25MovingCylinderClsnWithPos4InitEP5ActorRK7Vector35Fix12IiES6_jj@@YAXPAX0PAUVector3@@HHII@Z",
+          "to": "__ZN25MovingCylinderClsnWithPos4InitEP5ActorRK7Vector35Fix12IiES6_jj"
+        }
+      ]
+    },
+    "_Z67_ZN25MovingCylinderClsnWithPos4InitEP5ActorRK7Vector35Fix12IiES6_jjPvS_PK7Vector3iijj": {
+      "target": "_ZN25MovingCylinderClsnWithPos4InitEP5ActorRK7Vector35Fix12IiES6_jj",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov070.cpp",
+          "line": 298,
+          "from": "?_ZN25MovingCylinderClsnWithPos4InitEP5ActorRK7Vector35Fix12IiES6_jj@@YAXPAX0PBUVector3@@HHII@Z",
+          "to": "__ZN25MovingCylinderClsnWithPos4InitEP5ActorRK7Vector35Fix12IiES6_jj"
+        }
+      ]
+    },
+    "_Z67_ZN25MovingCylinderClsnWithPos4InitEP5ActorRK7Vector35Fix12IiES6_jjPvS_PKviijj": {
+      "target": "_ZN25MovingCylinderClsnWithPos4InitEP5ActorRK7Vector35Fix12IiES6_jj",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 2131,
+          "from": "?_ZN25MovingCylinderClsnWithPos4InitEP5ActorRK7Vector35Fix12IiES6_jj@@YAXPAX0PBXHHII@Z",
+          "to": "__ZN25MovingCylinderClsnWithPos4InitEP5ActorRK7Vector35Fix12IiES6_jj"
+        }
+      ]
+    },
+    "_Z70_ZN8Particle6System3NewEjj5Fix12IiES2_S2_PK11Vector3_16fPNS_8CallbackEjjiiiPK11Vector3_16fP8Callback": {
+      "target": "_ZN8Particle6System3NewEjj5Fix12IiES2_S2_PK11Vector3_16fPNS_8CallbackE",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov064.cpp",
+          "line": 180,
+          "from": "?_ZN8Particle6System3NewEjj5Fix12IiES2_S2_PK11Vector3_16fPNS_8CallbackE@@YAPAXIIHHHPBUVector3_16f@@PAUCallback@@@Z",
+          "to": "__ZN8Particle6System3NewEjj5Fix12IiES2_S2_PK11Vector3_16fPNS_8CallbackE"
+        }
+      ]
+    },
+    "_Z70_ZN8Particle6System3NewEjj5Fix12IiES2_S2_PK11Vector3_16fPNS_8CallbackEjjiiiPKvPv": {
+      "target": "_ZN8Particle6System3NewEjj5Fix12IiES2_S2_PK11Vector3_16fPNS_8CallbackE",
+      "upstream": [
+        {
+          "path": "port/hal/bob_enemy_bridges.cpp",
+          "line": 50,
+          "from": "?_ZN8Particle6System3NewEjj5Fix12IiES2_S2_PK11Vector3_16fPNS_8CallbackE@@YAPAXIIHHHPBXPAX@Z",
+          "to": "__ZN8Particle6System3NewEjj5Fix12IiES2_S2_PK11Vector3_16fPNS_8CallbackE"
+        }
+      ]
+    },
+    "_Z77_ZN18MovingMeshCollider7SetFileEP8KCL_FileRK9Matrix4x35Fix12IiEsR10CLPS_BlockPvP8KCL_FileRK9Matrix4x3isR10CLPS_Block": {
+      "target": "_ZN18MovingMeshCollider7SetFileEP8KCL_FileRK9Matrix4x35Fix12IiEsR10CLPS_Block",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 1044,
+          "from": "?_ZN18MovingMeshCollider7SetFileEP8KCL_FileRK9Matrix4x35Fix12IiEsR10CLPS_Block@@YAXPAXPAUKCL_File@@ABUMatrix4x3@@HFAAUCLPS_Block@@@Z",
+          "to": "__ZN18MovingMeshCollider7SetFileEP8KCL_FileRK9Matrix4x35Fix12IiEsR10CLPS_Block"
+        }
+      ]
+    },
+    "_Z77_ZN18MovingMeshCollider7SetFileEP8KCL_FileRK9Matrix4x35Fix12IiEsR10CLPS_BlockPvS_S_isS_": {
+      "target": "_ZN18MovingMeshCollider7SetFileEP8KCL_FileRK9Matrix4x35Fix12IiEsR10CLPS_Block",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov035.cpp",
+          "line": 196,
+          "from": "?_ZN18MovingMeshCollider7SetFileEP8KCL_FileRK9Matrix4x35Fix12IiEsR10CLPS_Block@@YAXPAX00HF0@Z",
+          "to": "__ZN18MovingMeshCollider7SetFileEP8KCL_FileRK9Matrix4x35Fix12IiEsR10CLPS_Block"
+        },
+        {
+          "path": "port/hal/actor_classes_ov060.cpp",
+          "line": 286,
+          "from": "?_ZN18MovingMeshCollider7SetFileEP8KCL_FileRK9Matrix4x35Fix12IiEsR10CLPS_Block@@YAHPAX00HF0@Z",
+          "to": "__ZN18MovingMeshCollider7SetFileEP8KCL_FileRK9Matrix4x35Fix12IiEsR10CLPS_Block"
+        }
+      ]
+    },
+    "_Z77_ZN18MovingMeshCollider7SetFileEP8KCL_FileRK9Matrix4x35Fix12IiEsR10CLPS_BlockPviS_isS_": {
+      "target": "_ZN18MovingMeshCollider7SetFileEP8KCL_FileRK9Matrix4x35Fix12IiEsR10CLPS_Block",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov066.cpp",
+          "line": 370,
+          "from": "?_ZN18MovingMeshCollider7SetFileEP8KCL_FileRK9Matrix4x35Fix12IiEsR10CLPS_Block@@YAXPAXH0HF0@Z",
+          "to": "__ZN18MovingMeshCollider7SetFileEP8KCL_FileRK9Matrix4x35Fix12IiEsR10CLPS_Block"
+        }
+      ]
+    },
+    "_Z88_ZN16MeshColliderBase16UpdatePosAndAngsERS_P5ActorR10ClsnResultR7Vector3P10Vector3_16S8_v": {
+      "target": "_ZN16MeshColliderBase16UpdatePosAndAngsERS_P5ActorR10ClsnResultR7Vector3P10Vector3_16S8_",
+      "upstream": [
+        {
+          "path": "port/hal/wf_enemy_bridges.cpp",
+          "line": 158,
+          "from": "?_ZN16MeshColliderBase16UpdatePosAndAngsERS_P5ActorR10ClsnResultR7Vector3P10Vector3_16S8_@@YAXXZ",
+          "to": "__ZN16MeshColliderBase16UpdatePosAndAngsERS_P5ActorR10ClsnResultR7Vector3P10Vector3_16S8_"
+        },
+        {
+          "path": "port/hal/actor_classes_ov060.cpp",
+          "line": 288,
+          "from": "?_ZN16MeshColliderBase16UpdatePosAndAngsERS_P5ActorR10ClsnResultR7Vector3P10Vector3_16S8_@@YAHXZ",
+          "to": "__ZN16MeshColliderBase16UpdatePosAndAngsERS_P5ActorR10ClsnResultR7Vector3P10Vector3_16S8_"
+        }
+      ]
+    },
+    "_Z94_ZN16MeshColliderBase22UpdatePosWithTransformERS_P5ActorR10ClsnResultR7Vector3P10Vector3_16S8_v": {
+      "target": "_ZN16MeshColliderBase22UpdatePosWithTransformERS_P5ActorR10ClsnResultR7Vector3P10Vector3_16S8_",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov060.cpp",
+          "line": 271,
+          "from": "?_ZN16MeshColliderBase22UpdatePosWithTransformERS_P5ActorR10ClsnResultR7Vector3P10Vector3_16S8_@@YAXXZ",
+          "to": "?UpdatePosWithTransform@MeshColliderBase@@SAXAAU1@PAUActor@@AAUClsnResult@@AAUVector3@@PAUVector3_16@@4@Z"
+        }
+      ]
+    },
+    "_Z9Vec3_DistPK7Vector3S1_": {
+      "target": "Vec3_Dist",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov100pl.cpp",
+          "line": 234,
+          "from": "?Vec3_Dist@@YAHPBUVector3@@0@Z",
+          "to": "_Vec3_Dist"
+        }
+      ]
+    },
+    "_ZN12WithMeshClsn4InitEP5ActoriiPvi": {
+      "target": "_ZN12WithMeshClsn4InitEP5ActoriiP10Vector3_16i",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_scuttlebug.cpp",
+          "line": 160,
+          "from": "?Init@WithMeshClsn@@QAEXPAUActor@@HHPAXH@Z",
+          "to": "?Init@WithMeshClsn@@QAEXPAUActor@@HHPAUVector3_16@@H@Z"
+        }
+      ]
+    },
+    "_ZN13RaycastGround12SetObjAndPosERK7Vector3Pv": {
+      "target": "_ZN13RaycastGround12SetObjAndPosB15sm64ds_ret_voidERK7Vector3P5Actor",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1859,
+          "from": "?SetObjAndPos@RaycastGround@@QAEXABUVector3@@PAX@Z",
+          "to": "?SetObjAndPos@RaycastGround@@QAEXABUVector3@@PAUActor@@@Z"
+        }
+      ]
+    },
+    "_ZN14StarMarkerFace27SpawnRedCoinStarIfNecessaryEv": {
+      "target": "_ZN10StarMarker27SpawnRedCoinStarIfNecessaryEv",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bob_world.cpp",
+          "line": 326,
+          "from": "?SpawnRedCoinStarIfNecessary@StarMarkerFace@@QAEXXZ",
+          "to": "?SpawnRedCoinStarIfNecessary@StarMarker@@QAEXXZ"
+        }
+      ]
+    },
+    "_ZN15ModelRenderFace6RenderEPK7Vector3": {
+      "target": "_ZN5Model6RenderEPK7Vector3",
+      "upstream": [
+        {
+          "path": "port/hal/actor_faces_bob.cpp",
+          "line": 172,
+          "from": "?Render@ModelRenderFace@@QAEXPBUVector3@@@Z",
+          "to": "?Render@Model@@UAEXPBUVector3@@@Z"
+        }
+      ]
+    },
+    "_ZN16MeshColliderBase6EnableEPv": {
+      "target": "_ZN16MeshColliderBase6EnableB14sm64ds_ret_intEP5Actor",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov100pl.cpp",
+          "line": 239,
+          "from": "?Enable@MeshColliderBase@@QAEXPAX@Z",
+          "to": "?Enable@MeshColliderBase@@QAEHPAUActor@@@Z"
+        }
+      ]
+    },
+    "_ZN16PlayerMetalWario14InitMetalWarioEv": {
+      "target": "_ZN6Player14InitMetalWarioEv",
+      "upstream": [
+        {
+          "path": "port/unmatched/Cap_StateDispatch.cpp",
+          "line": 67,
+          "from": "?InitMetalWario@PlayerMetalWario@@QAEXXZ",
+          "to": "?InitMetalWario@Player@@QAEXXZ"
+        }
+      ]
+    },
+    "_ZN18NestedHeapIterator4NextB28sm64ds_ret_HeapAllocator_ptrEP13HeapAllocator": {
+      "target": "_ZN18NestedHeapIterator4NextB14sm64ds_ret_intEP13HeapAllocator",
+      "upstream": [
+        {
+          "path": "port/hal/snd_globals.cpp",
+          "line": 220,
+          "from": "?Next@NestedHeapIterator@@QAEPAUHeapAllocator@@PAU2@@Z",
+          "to": "?Next@NestedHeapIterator@@QAEHPAUHeapAllocator@@@Z"
+        }
+      ]
+    },
+    "_ZN3G2x18SetBlendBrightnessEPVtis": {
+      "target": "_ZN3G2x18SetBlendBrightnessEPVtts",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 2534,
+          "from": "?SetBlendBrightness@G2x@@SAXPCGHF@Z",
+          "to": "__ZN3G2x18SetBlendBrightnessEPVtts"
+        }
+      ]
+    },
+    "_ZN3G3i13PerspectiveW_EiiiiiibP9Matrix4x3": {
+      "target": "_ZN3G3i13PerspectiveW_E5Fix12IiES1_S1_S1_S1_S1_bP9Matrix4x3",
+      "upstream": [
+        {
+          "path": "port/hal/vs_aliases.inc",
+          "line": 11,
+          "from": "?PerspectiveW_@G3i@@YAXHHHHHH_NPAUMatrix4x3@@@Z",
+          "to": "__ZN3G3i13PerspectiveW_E5Fix12IiES1_S1_S1_S1_S1_bP9Matrix4x3"
+        },
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1350,
+          "from": "?PerspectiveW_@G3i@@SAXHHHHHH_NPAUMatrix4x3@@@Z",
+          "to": "__ZN3G3i13PerspectiveW_E5Fix12IiES1_S1_S1_S1_S1_bP9Matrix4x3"
+        }
+      ]
+    },
+    "_ZN3OAM12RenderSub_iiEP7OamAttrii": {
+      "target": "_ZN3OAM9RenderSubEP7OamAttrii",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_intro.cpp",
+          "line": 749,
+          "from": "?RenderSub_ii@OAM@@SAXPAUOamAttr@@HH@Z",
+          "to": "__ZN3OAM9RenderSubEP7OamAttrii"
+        }
+      ]
+    },
+    "_ZN3OAM6RenderEbP7OamAttriiiiiS1_ii": {
+      "target": "sm64ds_cabi_ZN3OAM6RenderEbP7OamAttriiii5Fix12IiES3_ii",
+      "upstream": [
+        {
+          "path": "port/hal/vs_aliases.inc",
+          "line": 12,
+          "from": "?Render@OAM@@SAH_NPAUOamAttr@@HHHHH1HH@Z",
+          "to": "__ZN3OAM6RenderEbP7OamAttriiii5Fix12IiES3_ii"
+        }
+      ]
+    },
+    "_ZN3OAM6RenderEbP7OamAttriiiiii": {
+      "target": "_ZN3OAM6RenderEbP7OamAttriiii5Fix12IiEi",
+      "upstream": [
+        {
+          "path": "port/hal/vs_aliases.inc",
+          "line": 13,
+          "from": "?Render@OAM@@SAH_NPAUOamAttr@@HHHHHH@Z",
+          "to": "__ZN3OAM6RenderEbP7OamAttriiii5Fix12IiEi"
+        }
+      ]
+    },
+    "_ZN3OAM6RenderEbP7OamAttriiiiiiii": {
+      "target": "sm64ds_cabi_ZN3OAM6RenderEbP7OamAttriiii5Fix12IiES3_ii",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1354,
+          "from": "?Render@OAM@@SAX_NPAUOamAttr@@HHHHHHHH@Z",
+          "to": "__ZN3OAM6RenderEbP7OamAttriiii5Fix12IiES3_ii"
+        }
+      ]
+    },
+    "_ZN4PSys12FromUniqueIDEj": {
+      "target": "_ZN8Particle6System12FromUniqueIDEj",
+      "upstream": [
+        {
+          "path": "port/hal/fwd_forwarders.cpp",
+          "line": 315,
+          "from": "?FromUniqueID@PSys@@SAPAXI@Z",
+          "to": "__ZN8Particle6System12FromUniqueIDEj"
+        }
+      ]
+    },
+    "_ZN4PSys17NewUnkCallback818EjjiiiPv": {
+      "target": "_ZN8Particle6System17NewUnkCallback818Ejj5Fix12IiES2_S2_PK11Vector3_16f",
+      "upstream": [
+        {
+          "path": "port/hal/fwd_forwarders.cpp",
+          "line": 314,
+          "from": "?NewUnkCallback818@PSys@@SAPAXIIHHHPAX@Z",
+          "to": "__ZN8Particle6System17NewUnkCallback818Ejj5Fix12IiES2_S2_PK11Vector3_16f"
+        }
+      ]
+    },
+    "_ZN4cstd5atan2Eii": {
+      "target": "_ZN4cstd5atan2E5Fix12IiES1_",
+      "upstream": [
+        {
+          "path": "port/hal/bob_enemy_bridges.cpp",
+          "line": 376,
+          "from": "?atan2@cstd@@YAHHH@Z",
+          "to": "__ZN4cstd5atan2E5Fix12IiES1_"
+        }
+      ]
+    },
+    "_ZN5Actor19UntrackAndSpawnStarERajRK7Vector3h": {
+      "target": "sm64ds_cabi_ZN5Actor19UntrackAndSpawnStarERajRK7Vector3j",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 2102,
+          "from": "__ZN5Actor19UntrackAndSpawnStarERajRK7Vector3h",
+          "to": "__ZN5Actor19UntrackAndSpawnStarERajRK7Vector3j"
+        }
+      ]
+    },
+    "_ZN5Actor5SpawnEjjRK7Vector3PK10Vector3_16as": {
+      "target": "_ZN5Actor5SpawnEjjRK7Vector3PK10Vector3_16ii",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 2074,
+          "from": "__ZN5Actor5SpawnEjjRK7Vector3PK10Vector3_16as",
+          "to": "__ZN5Actor5SpawnEjjRK7Vector3PK10Vector3_16ii"
+        }
+      ]
+    },
+    "_ZN5Actor9SetRangesEiiii": {
+      "target": "_ZN18ActorSetRangesFace9SetRangesEiiii",
+      "upstream": [
+        {
+          "path": "port/unmatched/Cap_StateDispatch.cpp",
+          "line": 48,
+          "from": "?SetRanges@Actor@@QAEXHHHH@Z",
+          "to": "?SetRanges@ActorSetRangesFace@@QAEXHHHH@Z"
+        }
+      ]
+    },
+    "_ZN5Actor9UpdatePosEP5dCc_c": {
+      "target": "sm64ds_cabi_ZN5Actor9UpdatePosEP12CylinderClsn",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov034.cpp",
+          "line": 273,
+          "from": "__ZN5Actor9UpdatePosEP5dCc_c",
+          "to": "__ZN5Actor9UpdatePosEP12CylinderClsn"
+        }
+      ]
+    },
+    "_ZN5Enemy12UpdateWMClsnER10dBgCh_Actrj": {
+      "target": "sm64ds_cabi_ZN5Enemy12UpdateWMClsnER12WithMeshClsnj",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov034.cpp",
+          "line": 278,
+          "from": "__ZN5Enemy12UpdateWMClsnER10dBgCh_Actrj",
+          "to": "__ZN5Enemy12UpdateWMClsnER12WithMeshClsnj"
+        }
+      ]
+    },
+    "_ZN5dCc_c5ClearEv": {
+      "target": "_ZN12CylinderClsn5ClearEv",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov034.cpp",
+          "line": 275,
+          "from": "__ZN5dCc_c5ClearEv",
+          "to": "__ZN12CylinderClsn5ClearEv"
+        }
+      ]
+    },
+    "_ZN5dCc_c6UpdateEv": {
+      "target": "_ZN12CylinderClsn6UpdateEv",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov034.cpp",
+          "line": 274,
+          "from": "__ZN5dCc_c6UpdateEv",
+          "to": "__ZN12CylinderClsn6UpdateEv"
+        }
+      ]
+    },
+    "_ZN6Memory14defaultHeapPtrE": {
+      "target": "data_020a0ea0",
+      "upstream": [
+        {
+          "path": "port/hal/heap_vtable.cpp",
+          "line": 145,
+          "from": "?defaultHeapPtr@Memory@@3PAVHeap@@A",
+          "to": "_data_020a0ea0"
+        }
+      ]
+    },
+    "_ZN6Memory15rootParamOffsetE": {
+      "target": "data_020a0ea4",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1132,
+          "from": "?rootParamOffset@Memory@@3IA",
+          "to": "_data_020a0ea4"
+        }
+      ]
+    },
+    "_ZN6Player11ShowMessageER7fBase_cjPK7Vector3hh": {
+      "target": "_ZN6Player11ShowMessageER9ActorBasejPK7Vector3jj",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov074.cpp",
+          "line": 392,
+          "from": "__ZN6Player11ShowMessageER7fBase_cjPK7Vector3hh",
+          "to": "__ZN6Player11ShowMessageER9ActorBasejPK7Vector3jj"
+        }
+      ]
+    },
+    "_ZN6Player7ST_WAITE": {
+      "target": "data_ov002_02110154",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1108,
+          "from": "__ZN6Player7ST_WAITE",
+          "to": "_data_ov002_02110154"
+        }
+      ]
+    },
+    "_ZN6Player9StartTalkER7fBase_cb": {
+      "target": "sm64ds_cabi_ZN6Player9StartTalkER9ActorBaseb",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov074.cpp",
+          "line": 391,
+          "from": "__ZN6Player9StartTalkER7fBase_cb",
+          "to": "__ZN6Player9StartTalkER9ActorBaseb"
+        }
+      ]
+    },
+    "_ZN6System3NewEjjiiiPK11Vector3_16fP8Callback": {
+      "target": "_ZN8Particle6System3NewEjj5Fix12IiES2_S2_PK11Vector3_16fPNS_8CallbackE",
+      "upstream": [
+        {
+          "path": "port/unmatched/MgTrampolineTerror_Faces.cpp",
+          "line": 122,
+          "from": "?New@System@@SAPAU1@IIHHHPBUVector3_16f@@PAUCallback@@@Z",
+          "to": "__ZN8Particle6System3NewEjj5Fix12IiES2_S2_PK11Vector3_16fPNS_8CallbackE"
+        }
+      ]
+    },
+    "_ZN7Actor_s10FindWithIDEj": {
+      "target": "sm64ds_cabi_ZN5Actor10FindWithIDEj",
+      "upstream": [
+        {
+          "path": "port/hal/wf_enemy_bridges.cpp",
+          "line": 151,
+          "from": "?FindWithID@Actor_s@@SAPAUActor@@I@Z",
+          "to": "__ZN5Actor10FindWithIDEj"
+        }
+      ]
+    },
+    "_ZN7Actor_s5SpawnEjjRK7Vector3PK10Vector3_16ii": {
+      "target": "_ZN5Actor5SpawnEjjRK7Vector3PK10Vector3_16ii",
+      "upstream": [
+        {
+          "path": "port/hal/wf_enemy_bridges.cpp",
+          "line": 152,
+          "from": "?Spawn@Actor_s@@SAPAUActor@@IIABUVector3@@PBUVector3_16@@HH@Z",
+          "to": "__ZN5Actor5SpawnEjjRK7Vector3PK10Vector3_16ii"
+        }
+      ]
+    },
+    "_ZN7Clipper13Func_020156DCEPviiii": {
+      "target": "_ZN7Clipper13Func_020156DCEv",
+      "upstream": [
+        {
+          "path": "port/hal/vs_aliases.inc",
+          "line": 9,
+          "from": "?Func_020156DC@Clipper@@YAXPAXHHHH@Z",
+          "to": "__ZN7Clipper13Func_020156DCEv"
+        }
+      ]
+    },
+    "_ZN8Particle20RunningSlidingDustAtEiii": {
+      "target": "_ZN8Particle20RunningSlidingDustAtE5Fix12IiES1_S1_",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_koopa_chuckya.cpp",
+          "line": 197,
+          "from": "?RunningSlidingDustAt@Particle@@SAXHHH@Z",
+          "to": "__ZN8Particle20RunningSlidingDustAtE5Fix12IiES1_S1_"
+        }
+      ]
+    },
+    "_ZN8Particle6System3NewEjjiiiPK10Vector3_16PNS_8CallbackE": {
+      "target": "_ZN8Particle6System3NewEjj5Fix12IiES2_S2_PK11Vector3_16fPNS_8CallbackE",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 730,
+          "from": "?New@System@Particle@@SAXIIHHHPBUVector3_16@@PAUCallback@2@@Z",
+          "to": "__ZN8Particle6System3NewEjj5Fix12IiES2_S2_PK11Vector3_16fPNS_8CallbackE"
+        }
+      ]
+    },
+    "_ZN8Particle6System3NewEjjiiiPK7Vector3PNS_8CallbackE": {
+      "target": "_ZN8Particle6System3NewEjj5Fix12IiES2_S2_PK11Vector3_16fPNS_8CallbackE",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_star.cpp",
+          "line": 292,
+          "from": "?New@System@Particle@@SAPAU12@IIHHHPBUVector3@@PAUCallback@2@@Z",
+          "to": "__ZN8Particle6System3NewEjj5Fix12IiES2_S2_PK11Vector3_16fPNS_8CallbackE"
+        }
+      ]
+    },
+    "_ZN8Particle6System9NewSimpleB15sm64ds_ret_voidEjiii": {
+      "target": "_ZN8Particle6System9NewSimpleEj5Fix12IiES2_S2_",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 712,
+          "from": "?NewSimple@System@Particle@@SAXIHHH@Z",
+          "to": "__ZN8Particle6System9NewSimpleEj5Fix12IiES2_S2_"
+        }
+      ]
+    },
+    "_ZN8dActor_c13ClosestPlayerEv": {
+      "target": "sm64ds_cabi_ZN5Actor13ClosestPlayerEv",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov074.cpp",
+          "line": 390,
+          "from": "__ZN8dActor_c13ClosestPlayerEv",
+          "to": "__ZN5Actor13ClosestPlayerEv"
+        }
+      ]
+    },
+    "_ZNK10dBgCh_Actr10IsOnGroundEv": {
+      "target": "sm64ds_cabi_ZNK12WithMeshClsn10IsOnGroundEv",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov034.cpp",
+          "line": 276,
+          "from": "__ZNK10dBgCh_Actr10IsOnGroundEv",
+          "to": "__ZNK12WithMeshClsn10IsOnGroundEv"
+        }
+      ]
+    },
+    "_ZNK10dBgCh_Actr13JustHitGroundEv": {
+      "target": "sm64ds_cabi_ZNK12WithMeshClsn13JustHitGroundEv",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov034.cpp",
+          "line": 277,
+          "from": "__ZNK10dBgCh_Actr13JustHitGroundEv",
+          "to": "__ZNK12WithMeshClsn13JustHitGroundEv"
+        }
+      ]
+    },
+    "_ZTV10daHolhei_c": {
+      "target": "_ZTV7Chuckya",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_koopa_chuckya.cpp",
+          "line": 171,
+          "from": "__ZTV10daHolhei_c",
+          "to": "__ZTV7Chuckya"
+        }
+      ]
+    },
+    "_ZTV10daHyuhyu_c": {
+      "target": "_ZTV5Stump",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov091.cpp",
+          "line": 598,
+          "from": "__ZTV10daHyuhyu_c",
+          "to": "__ZTV5Stump"
+        }
+      ]
+    },
+    "_ZTV10daKpa2Bg_c": {
+      "target": "_ZTV18BowserFireSeaArena",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov060.cpp",
+          "line": 213,
+          "from": "__ZTV10daKpa2Bg_c",
+          "to": "__ZTV18BowserFireSeaArena"
+        }
+      ]
+    },
+    "_ZTV10daMcFlag_c": {
+      "target": "sm64ds_cabi_ZTV4Flag",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes.cpp",
+          "line": 1496,
+          "from": "__ZTV10daMcFlag_c",
+          "to": "__ZTV4Flag"
+        }
+      ]
+    },
+    "_ZTV10daObjKey_c": {
+      "target": "_ZTV3Key",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov089.cpp",
+          "line": 156,
+          "from": "__ZTV10daObjKey_c",
+          "to": "__ZTV3Key"
+        }
+      ]
+    },
+    "_ZTV10daPgMthr_c": {
+      "target": "sm64ds_cabi_ZTV7SkiLift",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ccm.cpp",
+          "line": 484,
+          "from": "__ZTV10daPgMthr_c",
+          "to": "__ZTV7SkiLift"
+        }
+      ]
+    },
+    "_ZTV10daPgRcer_c": {
+      "target": "sm64ds_cabi_ZTV13RacingPenguin",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov019_w3e.cpp",
+          "line": 198,
+          "from": "__ZTV10daPgRcer_c",
+          "to": "__ZTV13RacingPenguin"
+        }
+      ]
+    },
+    "_ZTV11dCapEnemy_c": {
+      "target": "data_ov002_02108284",
+      "upstream": [
+        {
+          "path": "port/hal/bob_enemy_bridges.cpp",
+          "line": 283,
+          "from": "__ZTV11dCapEnemy_c",
+          "to": "_data_ov002_02108284"
+        }
+      ]
+    },
+    "_ZTV11daC_Jugem_c": {
+      "target": "_ZTV9LakituBro",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes.cpp",
+          "line": 1715,
+          "from": "__ZTV11daC_Jugem_c",
+          "to": "__ZTV9LakituBro"
+        }
+      ]
+    },
+    "_ZTV11daChoropu_c": {
+      "target": "sm64ds_cabi_ZTV9MontyMole",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_montymole.cpp",
+          "line": 107,
+          "from": "__ZTV11daChoropu_c",
+          "to": "__ZTV9MontyMole"
+        }
+      ]
+    },
+    "_ZTV11daDonketu_c": {
+      "target": "_ZTV5Bully",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov064.cpp",
+          "line": 168,
+          "from": "__ZTV11daDonketu_c",
+          "to": "__ZTV5Bully"
+        }
+      ]
+    },
+    "_ZTV11daESwitch_c": {
+      "target": "sm64ds_cabi_ZTV14EnemySwitchTag",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_enemy_spawner.cpp",
+          "line": 115,
+          "from": "__ZTV11daESwitch_c",
+          "to": "__ZTV14EnemySwitchTag"
+        }
+      ]
+    },
+    "_ZTV11daFeather_c": {
+      "target": "sm64ds_cabi_ZTV11WingFeather",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_vspopup.cpp",
+          "line": 308,
+          "from": "__ZTV11daFeather_c",
+          "to": "__ZTV11WingFeather"
+        }
+      ]
+    },
+    "_ZTV11daKinopio_c": {
+      "target": "sm64ds_cabi_ZTV4Toad",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov085.cpp",
+          "line": 214,
+          "from": "__ZTV11daKinopio_c",
+          "to": "__ZTV4Toad"
+        }
+      ]
+    },
+    "_ZTV11daKpaFire_c": {
+      "target": "_ZTV10BowserFire",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov060.cpp",
+          "line": 225,
+          "from": "__ZTV11daKpaFire_c",
+          "to": "__ZTV10BowserFire"
+        }
+      ]
+    },
+    "_ZTV11daKpaTail_c": {
+      "target": "sm64ds_cabi_ZTV10BowserTail",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov060.cpp",
+          "line": 224,
+          "from": "__ZTV11daKpaTail_c",
+          "to": "__ZTV10BowserTail"
+        }
+      ]
+    },
+    "_ZTV11daObjFire_c": {
+      "target": "sm64ds_cabi_ZTV9BlueFlame",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_flame.cpp",
+          "line": 96,
+          "from": "__ZTV11daObjFire_c",
+          "to": "__ZTV9BlueFlame"
+        }
+      ]
+    },
+    "_ZTV11daObjKumo_c": {
+      "target": "sm64ds_cabi_ZTV5Cloud",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 2283,
+          "from": "__ZTV11daObjKumo_c",
+          "to": "__ZTV5Cloud"
+        }
+      ]
+    },
+    "_ZTV11daObjTbox_c": {
+      "target": "sm64ds_cabi_ZTV13TreasureChest",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov064_w3c.cpp",
+          "line": 178,
+          "from": "__ZTV11daObjTbox_c",
+          "to": "__ZTV13TreasureChest"
+        }
+      ]
+    },
+    "_ZTV11daTBasket_c": {
+      "target": "_ZTV7BooCage",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov063.cpp",
+          "line": 457,
+          "from": "__ZTV11daTBasket_c",
+          "to": "__ZTV7BooCage"
+        }
+      ]
+    },
+    "_ZTV11daTrsTrap_c": {
+      "target": "_ZTV12MansionSteps",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov063.cpp",
+          "line": 513,
+          "from": "__ZTV11daTrsTrap_c",
+          "to": "__ZTV12MansionSteps"
+        }
+      ]
+    },
+    "_ZTV11daWarpkun_c": {
+      "target": "data_ov002_0210acbc",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bob_world.cpp",
+          "line": 1871,
+          "from": "__ZTV11daWarpkun_c",
+          "to": "_data_ov002_0210acbc"
+        }
+      ]
+    },
+    "_ZTV12ActorDerived": {
+      "target": "data_0208e4b8",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1420,
+          "from": "__ZTV12ActorDerived",
+          "to": "_data_0208e4b8"
+        }
+      ]
+    },
+    "_ZTV12dScMgLuigi_c": {
+      "target": "data_ov006_0213cf10",
+      "upstream": [
+        {
+          "path": "port/unmatched/MgLuigi_Faces.cpp",
+          "line": 36,
+          "from": "__ZTV12dScMgLuigi_c",
+          "to": "_data_ov006_0213cf10"
+        }
+      ]
+    },
+    "_ZTV12dScMgPanel_c": {
+      "target": "data_ov006_0213e24c",
+      "upstream": [
+        {
+          "path": "port/unmatched/MgPanel_Faces.cpp",
+          "line": 68,
+          "from": "__ZTV12dScMgPanel_c",
+          "to": "_data_ov006_0213e24c"
+        }
+      ]
+    },
+    "_ZTV12daBDonketu_c": {
+      "target": "_ZTV8BigBully",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov064.cpp",
+          "line": 169,
+          "from": "__ZTV12daBDonketu_c",
+          "to": "__ZTV8BigBully"
+        }
+      ]
+    },
+    "_ZTV12daBasabasa_c": {
+      "target": "_ZTV5Swoop",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 451,
+          "from": "__ZTV12daBasabasa_c",
+          "to": "__ZTV5Swoop"
+        }
+      ]
+    },
+    "_ZTV12daBombking_c": {
+      "target": "_ZTV10KingBobOmb",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bob_enemy.cpp",
+          "line": 856,
+          "from": "__ZTV12daBombking_c",
+          "to": "__ZTV10KingBobOmb"
+        }
+      ]
+    },
+    "_ZTV12daDossyCap_c": {
+      "target": "_ZTV9DorrieCap",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 566,
+          "from": "__ZTV12daDossyCap_c",
+          "to": "__ZTV9DorrieCap"
+        }
+      ]
+    },
+    "_ZTV12daFPknBall_c": {
+      "target": "_ZTV8Fireball",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_runtime_spawns.cpp",
+          "line": 243,
+          "from": "__ZTV12daFPknBall_c",
+          "to": "__ZTV8Fireball"
+        }
+      ]
+    },
+    "_ZTV12daObjAbuku_c": {
+      "target": "data_ov002_02108964",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_runtime_spawns.cpp",
+          "line": 385,
+          "from": "__ZTV12daObjAbuku_c",
+          "to": "_data_ov002_02108964"
+        }
+      ]
+    },
+    "_ZTV12daObjClock_c": {
+      "target": "sm64ds_cabi_ZTV22ClockPaintingHandShort",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov013.cpp",
+          "line": 113,
+          "from": "__ZTV12daObjClock_c",
+          "to": "__ZTV22ClockPaintingHandShort"
+        }
+      ]
+    },
+    "_ZTV12daObjHeart_c": {
+      "target": "sm64ds_cabi_ZTV7Seaweed",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bob_world.cpp",
+          "line": 1168,
+          "from": "__ZTV12daObjHeart_c",
+          "to": "__ZTV7Seaweed"
+        }
+      ]
+    },
+    "_ZTV12daObjShell_c": {
+      "target": "sm64ds_cabi_ZTV4Clam",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov064_w12.cpp",
+          "line": 148,
+          "from": "__ZTV12daObjShell_c",
+          "to": "__ZTV4Clam"
+        }
+      ]
+    },
+    "_ZTV12daPukupuku_c": {
+      "target": "_ZTV10CheepCheep",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov090.cpp",
+          "line": 577,
+          "from": "__ZTV12daPukupuku_c",
+          "to": "__ZTV10CheepCheep"
+        }
+      ]
+    },
+    "_ZTV12daSnowball_c": {
+      "target": "_ZTV8Snowball",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov081.cpp",
+          "line": 581,
+          "from": "__ZTV12daSnowball_c",
+          "to": "__ZTV8Snowball"
+        }
+      ]
+    },
+    "_ZTV12daStarBase_c": {
+      "target": "sm64ds_cabi_ZTV10StarMarker",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes.cpp",
+          "line": 865,
+          "from": "__ZTV12daStarBase_c",
+          "to": "__ZTV10StarMarker"
+        }
+      ]
+    },
+    "_ZTV12daStarGate_c": {
+      "target": "sm64ds_cabi_ZTV4Door",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes.cpp",
+          "line": 2324,
+          "from": "__ZTV12daStarGate_c",
+          "to": "__ZTV4Door"
+        }
+      ]
+    },
+    "_ZTV13TTC_MovingBar": {
+      "target": "_ZTV18daObjCtKaitendai_c",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 948,
+          "from": "__ZTV13TTC_MovingBar",
+          "to": "__ZTV18daObjCtKaitendai_c"
+        }
+      ]
+    },
+    "_ZTV13dScMgTeresa_c": {
+      "target": "data_ov006_0213fa0c",
+      "upstream": [
+        {
+          "path": "port/hal/scene_mg_booseek.cpp",
+          "line": 196,
+          "from": "__ZTV13dScMgTeresa_c",
+          "to": "_data_ov006_0213fa0c"
+        }
+      ]
+    },
+    "_ZTV13daObjKanban_c": {
+      "target": "_ZTV8WallSign",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov085.cpp",
+          "line": 213,
+          "from": "__ZTV13daObjKanban_c",
+          "to": "__ZTV8WallSign"
+        }
+      ]
+    },
+    "_ZTV13daObjNumber_c": {
+      "target": "sm64ds_cabi_ZTV15InvisibleSecret",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_vspopup.cpp",
+          "line": 307,
+          "from": "__ZTV13daObjNumber_c",
+          "to": "__ZTV15InvisibleSecret"
+        }
+      ]
+    },
+    "_ZTV13daSlide_Box_c": {
+      "target": "_ZTV23FloatOnWaterPlatformJrb",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_jrb.cpp",
+          "line": 223,
+          "from": "__ZTV13daSlide_Box_c",
+          "to": "__ZTV23FloatOnWaterPlatformJrb"
+        }
+      ]
+    },
+    "_ZTV14TtcMovingCubeA": {
+      "target": "_ZTV16daObjCtMecha09_c",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 950,
+          "from": "__ZTV14TtcMovingCubeA",
+          "to": "__ZTV16daObjCtMecha09_c"
+        }
+      ]
+    },
+    "_ZTV14dScMgCurling_c": {
+      "target": "data_ov006_0213c304",
+      "upstream": [
+        {
+          "path": "port/hal/scene_mg_faces.cpp",
+          "line": 247,
+          "from": "__ZTV14dScMgCurling_c",
+          "to": "_data_ov006_0213c304"
+        }
+      ]
+    },
+    "_ZTV14daChoro_Rock_c": {
+      "target": "_ZTV13MontyMoleRock",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_montymolerock.cpp",
+          "line": 105,
+          "from": "__ZTV14daChoro_Rock_c",
+          "to": "__ZTV13MontyMoleRock"
+        }
+      ]
+    },
+    "_ZTV14daObj1UpLogo_c": {
+      "target": "sm64ds_cabi_ZTV9OneUpLogo",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ccm.cpp",
+          "line": 477,
+          "from": "__ZTV14daObj1UpLogo_c",
+          "to": "__ZTV9OneUpLogo"
+        }
+      ]
+    },
+    "_ZTV14daObjBk_Lift_c": {
+      "target": "_ZTV14MovingBarSmall",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_wf.cpp",
+          "line": 378,
+          "from": "__ZTV14daObjBk_Lift_c",
+          "to": "__ZTV14MovingBarSmall"
+        }
+      ]
+    },
+    "_ZTV14daObjC0Water_c": {
+      "target": "_ZTV12SwitchPillar",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov012.cpp",
+          "line": 107,
+          "from": "__ZTV14daObjC0Water_c",
+          "to": "__ZTV12SwitchPillar"
+        }
+      ]
+    },
+    "_ZTV14daObjC1Peach_c": {
+      "target": "sm64ds_cabi_ZTV13PeachPainting",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes.cpp",
+          "line": 2553,
+          "from": "__ZTV14daObjC1Peach_c",
+          "to": "__ZTV13PeachPainting"
+        }
+      ]
+    },
+    "_ZTV14daObjDpBrock_c": {
+      "target": "_ZTV11PyramidStep",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov025.cpp",
+          "line": 154,
+          "from": "__ZTV14daObjDpBrock_c",
+          "to": "__ZTV11PyramidStep"
+        }
+      ]
+    },
+    "_ZTV14daObjKsWater_c": {
+      "target": "_ZTV9ShipWater",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov017.cpp",
+          "line": 146,
+          "from": "__ZTV14daObjKsWater_c",
+          "to": "__ZTV9ShipWater"
+        }
+      ]
+    },
+    "_ZTV14daObjTdWater_c": {
+      "target": "_ZTV9HugeCover",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov032.cpp",
+          "line": 199,
+          "from": "__ZTV14daObjTdWater_c",
+          "to": "__ZTV9HugeCover"
+        }
+      ]
+    },
+    "_ZTV14daRedBombhei_c": {
+      "target": "sm64ds_cabi_ZTV11BobOmbBuddy",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bob_enemy.cpp",
+          "line": 502,
+          "from": "__ZTV14daRedBombhei_c",
+          "to": "__ZTV11BobOmbBuddy"
+        }
+      ]
+    },
+    "_ZTV14daWater_Ring_c": {
+      "target": "_ZTV9WaterRing",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov064_w3c.cpp",
+          "line": 177,
+          "from": "__ZTV14daWater_Ring_c",
+          "to": "__ZTV9WaterRing"
+        }
+      ]
+    },
+    "_ZTV15TtcRotatingCube": {
+      "target": "_ZTV20daObjCtRotateBlock_c",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 946,
+          "from": "__ZTV15TtcRotatingCube",
+          "to": "__ZTV20daObjCtRotateBlock_c"
+        }
+      ]
+    },
+    "_ZTV15TtcRotatingGear": {
+      "target": "_ZTV16daObjCtMecha08_c",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 949,
+          "from": "__ZTV15TtcRotatingGear",
+          "to": "__ZTV16daObjCtMecha08_c"
+        }
+      ]
+    },
+    "_ZTV15dScMgCurling2_c": {
+      "target": "data_ov006_0213c510",
+      "upstream": [
+        {
+          "path": "port/hal/scene_mg_curling2.cpp",
+          "line": 446,
+          "from": "__ZTV15dScMgCurling2_c",
+          "to": "_data_ov006_0213c510"
+        }
+      ]
+    },
+    "_ZTV15dScMgPachinko_c": {
+      "target": "data_ov006_0213d9cc",
+      "upstream": [
+        {
+          "path": "port/unmatched/MgPachinko_Faces.cpp",
+          "line": 58,
+          "from": "__ZTV15dScMgPachinko_c",
+          "to": "_data_ov006_0213d9cc"
+        }
+      ]
+    },
+    "_ZTV15daObjC1Hikari_c": {
+      "target": "_ZTV4Trap",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes.cpp",
+          "line": 2420,
+          "from": "__ZTV15daObjC1Hikari_c",
+          "to": "__ZTV4Trap"
+        }
+      ]
+    },
+    "_ZTV15daObjIceBlock_c": {
+      "target": "_ZTV8IceBlock",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov081.cpp",
+          "line": 481,
+          "from": "__ZTV15daObjIceBlock_c",
+          "to": "__ZTV8IceBlock"
+        }
+      ]
+    },
+    "_ZTV15daObjMarioCap_c": {
+      "target": "_ZTV13WaterfallMist",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bob_world.cpp",
+          "line": 1015,
+          "from": "__ZTV15daObjMarioCap_c",
+          "to": "__ZTV13WaterfallMist"
+        }
+      ]
+    },
+    "_ZTV15daObjTatefuda_c": {
+      "target": "_ZTV8SignPost",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes.cpp",
+          "line": 984,
+          "from": "__ZTV15daObjTatefuda_c",
+          "to": "__ZTV8SignPost"
+        }
+      ]
+    },
+    "_ZTV15daObjYajirusi_c": {
+      "target": "_ZTV14ArrowSignRight",
+      "upstream": [
+        {
+          "path": "port/hal/actor_faces_bob.cpp",
+          "line": 155,
+          "from": "__ZTV15daObjYajirusi_c",
+          "to": "__ZTV14ArrowSignRight"
+        }
+      ]
+    },
+    "_ZTV15daObj_Mip_Key_c": {
+      "target": "_ZTV9RabbitKey",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes.cpp",
+          "line": 1654,
+          "from": "__ZTV15daObj_Mip_Key_c",
+          "to": "__ZTV9RabbitKey"
+        }
+      ]
+    },
+    "_ZTV15daYurei_Mucho_c": {
+      "target": "_ZTV6Snufit",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 371,
+          "from": "__ZTV15daYurei_Mucho_c",
+          "to": "__ZTV6Snufit"
+        }
+      ]
+    },
+    "_ZTV16dScMgPachinko2_c": {
+      "target": "data_ov006_0213dbbc",
+      "upstream": [
+        {
+          "path": "port/unmatched/MgPachinko2_Faces.cpp",
+          "line": 49,
+          "from": "__ZTV16dScMgPachinko2_c",
+          "to": "_data_ov006_0213dbbc"
+        }
+      ]
+    },
+    "_ZTV16daObjCtMecha03_c": {
+      "target": "data_ov065_0211d0ec",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 955,
+          "from": "__ZTV16daObjCtMecha03_c",
+          "to": "_data_ov065_0211d0ec"
+        }
+      ]
+    },
+    "_ZTV16daObjCtMecha05_c": {
+      "target": "data_ov065_0211d2b4",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 956,
+          "from": "__ZTV16daObjCtMecha05_c",
+          "to": "_data_ov065_0211d2b4"
+        }
+      ]
+    },
+    "_ZTV16daObjCtMecha11_c": {
+      "target": "_ZTV17RotatingClockHand",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov035.cpp",
+          "line": 149,
+          "from": "__ZTV16daObjCtMecha11_c",
+          "to": "__ZTV17RotatingClockHand"
+        }
+      ]
+    },
+    "_ZTV16daObjDlPyramid_c": {
+      "target": "_ZTV10PyramidTop",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov024.cpp",
+          "line": 139,
+          "from": "__ZTV16daObjDlPyramid_c",
+          "to": "__ZTV10PyramidTop"
+        }
+      ]
+    },
+    "_ZTV16daObjKinokoTag_c": {
+      "target": "sm64ds_cabi_ZTV21MegaMushroomCreateTag",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov002_w15.cpp",
+          "line": 140,
+          "from": "__ZTV16daObjKinokoTag_c",
+          "to": "__ZTV21MegaMushroomCreateTag"
+        }
+      ]
+    },
+    "_ZTV17daObjBk_Botaosi_c": {
+      "target": "_ZTV13PoleBillboard",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_wf.cpp",
+          "line": 593,
+          "from": "__ZTV17daObjBk_Botaosi_c",
+          "to": "__ZTV13PoleBillboard"
+        }
+      ]
+    },
+    "_ZTV17daObjKm2_Nobiru_c": {
+      "target": "sm64ds_cabi_ZTV8PoleLift",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov045.cpp",
+          "line": 533,
+          "from": "__ZTV17daObjKm2_Nobiru_c",
+          "to": "__ZTV8PoleLift"
+        }
+      ]
+    },
+    "_ZTV18dMgTrmpln3DMario_c": {
+      "target": "data_ov006_0213b2c4",
+      "upstream": [
+        {
+          "path": "port/unmatched/MgTrampolineTime_Faces.cpp",
+          "line": 218,
+          "from": "__ZTV18dMgTrmpln3DMario_c",
+          "to": "_data_ov006_0213b2c4"
+        }
+      ]
+    },
+    "_ZTV18daObjBkBillboard_c": {
+      "target": "data_ov015_02114360",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_wf.cpp",
+          "line": 512,
+          "from": "__ZTV18daObjBkBillboard_c",
+          "to": "_data_ov015_02114360"
+        }
+      ]
+    },
+    "_ZTV18daObjClockHuriko_c": {
+      "target": "data_ov013_02112128",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov013.cpp",
+          "line": 112,
+          "from": "__ZTV18daObjClockHuriko_c",
+          "to": "_data_ov013_02112128"
+        }
+      ]
+    },
+    "_ZTV18daObjHatenaBlock_c": {
+      "target": "_ZTV13QuestionBlock",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes.cpp",
+          "line": 2619,
+          "from": "__ZTV18daObjHatenaBlock_c",
+          "to": "__ZTV13QuestionBlock"
+        }
+      ]
+    },
+    "_ZTV18daObjKm2_Ami_Bou_c": {
+      "target": "_ZTV15FireSeaElevator",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov045.cpp",
+          "line": 465,
+          "from": "__ZTV18daObjKm2_Ami_Bou_c",
+          "to": "__ZTV15FireSeaElevator"
+        }
+      ]
+    },
+    "_ZTV18daObjPowerUpItem_c": {
+      "target": "sm64ds_cabi_ZTV9PushBlock",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov002g200.cpp",
+          "line": 113,
+          "from": "__ZTV18daObjPowerUpItem_c",
+          "to": "__ZTV9PushBlock"
+        }
+      ]
+    },
+    "_ZTV18daWater_Hakidasi_c": {
+      "target": "_ZTV17BowserPuzzlePiece",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bowserpuzzle.cpp",
+          "line": 182,
+          "from": "__ZTV18daWater_Hakidasi_c",
+          "to": "__ZTV17BowserPuzzlePiece"
+        }
+      ]
+    },
+    "_ZTV20TtcConveyorBeltLarge": {
+      "target": "_ZTV16daObjCtMecha04_c",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 947,
+          "from": "__ZTV20TtcConveyorBeltLarge",
+          "to": "__ZTV16daObjCtMecha04_c"
+        }
+      ]
+    },
+    "_ZTV21daObjDlPyramidDummy_c": {
+      "target": "sm64ds_cabi_ZTV10PyramidTag",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov024.cpp",
+          "line": 140,
+          "from": "__ZTV21daObjDlPyramidDummy_c",
+          "to": "__ZTV10PyramidTag"
+        }
+      ]
+    },
+    "_ZTV21daObj_volcanoCannon_c": {
+      "target": "sm64ds_cabi_ZTV13RollingLogLll",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov022_w3e.cpp",
+          "line": 607,
+          "from": "__ZTV21daObj_volcanoCannon_c",
+          "to": "__ZTV13RollingLogLll"
+        }
+      ]
+    },
+    "_ZTV23daObjRotateUpdownLift_c": {
+      "target": "_ZTV25RotatingUpDownPlatformUtm",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_l7.cpp",
+          "line": 383,
+          "from": "__ZTV23daObjRotateUpdownLift_c",
+          "to": "__ZTV25RotatingUpDownPlatformUtm"
+        }
+      ]
+    },
+    "_ZTV24daPropeller_Heyho_Fire_c": {
+      "target": "_ZTV6Bullet",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bullet.cpp",
+          "line": 54,
+          "from": "__ZTV24daPropeller_Heyho_Fire_c",
+          "to": "__ZTV6Bullet"
+        }
+      ]
+    },
+    "_ZTV7da1up_c": {
+      "target": "_ZTV13OneUpMushroom",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes.cpp",
+          "line": 1140,
+          "from": "__ZTV7da1up_c",
+          "to": "__ZTV13OneUpMushroom"
+        }
+      ]
+    },
+    "_ZTV7daBar_c": {
+      "target": "data_ov002_02108480",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bob_world.cpp",
+          "line": 1395,
+          "from": "__ZTV7daBar_c",
+          "to": "_data_ov002_02108480"
+        }
+      ]
+    },
+    "_ZTV7daBbl_c": {
+      "target": "_ZTV10LavaBubble",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov064_gate178.cpp",
+          "line": 178,
+          "from": "__ZTV7daBbl_c",
+          "to": "__ZTV10LavaBubble"
+        }
+      ]
+    },
+    "_ZTV7daBmb_c": {
+      "target": "_ZTV6BobOmb",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bob_enemy.cpp",
+          "line": 238,
+          "from": "__ZTV7daBmb_c",
+          "to": "__ZTV6BobOmb"
+        }
+      ]
+    },
+    "_ZTV7daBrq_c": {
+      "target": "sm64ds_cabi_ZTV3Amp",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov070.cpp",
+          "line": 256,
+          "from": "__ZTV7daBrq_c",
+          "to": "__ZTV3Amp"
+        }
+      ]
+    },
+    "_ZTV7daCnn_c": {
+      "target": "sm64ds_cabi_ZTV6Cannon",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes.cpp",
+          "line": 1781,
+          "from": "__ZTV7daCnn_c",
+          "to": "__ZTV6Cannon"
+        }
+      ]
+    },
+    "_ZTV7daDkk_c": {
+      "target": "data_ov025_02113850",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov025_w3e.cpp",
+          "line": 156,
+          "from": "__ZTV7daDkk_c",
+          "to": "_data_ov025_02113850"
+        }
+      ]
+    },
+    "_ZTV7daDsn_c": {
+      "target": "data_ov091_021351fc",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_l7.cpp",
+          "line": 223,
+          "from": "__ZTV7daDsn_c",
+          "to": "_data_ov091_021351fc"
+        }
+      ]
+    },
+    "_ZTV7daIbl_c": {
+      "target": "_ZTV15RollingIronBall",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bob_world.cpp",
+          "line": 1722,
+          "from": "__ZTV7daIbl_c",
+          "to": "__ZTV15RollingIronBall"
+        }
+      ]
+    },
+    "_ZTV7daJgm_c": {
+      "target": "sm64ds_cabi_ZTV6Lakitu",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov077.cpp",
+          "line": 155,
+          "from": "__ZTV7daJgm_c",
+          "to": "__ZTV6Lakitu"
+        }
+      ]
+    },
+    "_ZTV7daKlr_c": {
+      "target": "_ZTV10BulletBill",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_wf_enemy.cpp",
+          "line": 299,
+          "from": "__ZTV7daKlr_c",
+          "to": "__ZTV10BulletBill"
+        }
+      ]
+    },
+    "_ZTV7daKpa_c": {
+      "target": "sm64ds_cabi_ZTV6Bowser",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov060.cpp",
+          "line": 223,
+          "from": "__ZTV7daKpa_c",
+          "to": "__ZTV6Bowser"
+        }
+      ]
+    },
+    "_ZTV7daKrb_c": {
+      "target": "_ZTV6Goomba",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bob_enemy.cpp",
+          "line": 421,
+          "from": "__ZTV7daKrb_c",
+          "to": "__ZTV6Goomba"
+        }
+      ]
+    },
+    "_ZTV7daMip_c": {
+      "target": "_ZTV6Rabbit",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes.cpp",
+          "line": 1578,
+          "from": "__ZTV7daMip_c",
+          "to": "__ZTV6Rabbit"
+        }
+      ]
+    },
+    "_ZTV7daMky_c": {
+      "target": "sm64ds_cabi_ZTV13RollingLogTtm",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov030.cpp",
+          "line": 284,
+          "from": "__ZTV7daMky_c",
+          "to": "__ZTV13RollingLogTtm"
+        }
+      ]
+    },
+    "_ZTV7daOwl_c": {
+      "target": "_ZTV10HootTheOwl",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov094.cpp",
+          "line": 89,
+          "from": "__ZTV7daOwl_c",
+          "to": "__ZTV10HootTheOwl"
+        }
+      ]
+    },
+    "_ZTV7daPkn_c": {
+      "target": "_ZTV12PiranhaPlant",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_l7.cpp",
+          "line": 583,
+          "from": "__ZTV7daPkn_c",
+          "to": "__ZTV12PiranhaPlant"
+        }
+      ]
+    },
+    "_ZTV7daRNk_c": {
+      "target": "_ZTV13KoopaTheQuick",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bob_enemy.cpp",
+          "line": 783,
+          "from": "__ZTV7daRNk_c",
+          "to": "__ZTV13KoopaTheQuick"
+        }
+      ]
+    },
+    "_ZTV7daShl_c": {
+      "target": "_ZTV10KoopaShell",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bob_enemy.cpp",
+          "line": 328,
+          "from": "__ZTV7daShl_c",
+          "to": "__ZTV10KoopaShell"
+        }
+      ]
+    },
+    "_ZTV7daSpd_c": {
+      "target": "sm64ds_cabi_ZTV10Scuttlebug",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_scuttlebug.cpp",
+          "line": 118,
+          "from": "__ZTV7daSpd_c",
+          "to": "__ZTV10Scuttlebug"
+        }
+      ]
+    },
+    "_ZTV7daTgz_c": {
+      "target": "sm64ds_cabi_ZTV5Spiny",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov077.cpp",
+          "line": 156,
+          "from": "__ZTV7daTgz_c",
+          "to": "__ZTV5Spiny"
+        }
+      ]
+    },
+    "_ZTV7daTor_c": {
+      "target": "sm64ds_cabi_ZTV7Tornado",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov096.cpp",
+          "line": 171,
+          "from": "__ZTV7daTor_c",
+          "to": "__ZTV7Tornado"
+        }
+      ]
+    },
+    "_ZTV7daWbm_c": {
+      "target": "_ZTV9WaterBomb",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bob_world.cpp",
+          "line": 1671,
+          "from": "__ZTV7daWbm_c",
+          "to": "__ZTV9WaterBomb"
+        }
+      ]
+    },
+    "_ZTV8daBook_c": {
+      "target": "_ZTV8BookShot",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov063.cpp",
+          "line": 840,
+          "from": "__ZTV8daBook_c",
+          "to": "__ZTV8BookShot"
+        }
+      ]
+    },
+    "_ZTV8daCoin_c": {
+      "target": "sm64ds_cabi_ZTV4Coin",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bob_world.cpp",
+          "line": 370,
+          "from": "__ZTV8daCoin_c",
+          "to": "__ZTV4Coin"
+        }
+      ]
+    },
+    "_ZTV8daEyBm_c": {
+      "target": "sm64ds_cabi_ZTV14MrI_Projectile",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov071.cpp",
+          "line": 225,
+          "from": "__ZTV8daEyBm_c",
+          "to": "__ZTV14MrI_Projectile"
+        }
+      ]
+    },
+    "_ZTV8daEykn_c": {
+      "target": "sm64ds_cabi_ZTV3MrI",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov071.cpp",
+          "line": 224,
+          "from": "__ZTV8daEykn_c",
+          "to": "__ZTV3MrI"
+        }
+      ]
+    },
+    "_ZTV8daFPkn_c": {
+      "target": "_ZTV19FirePiranhaPlantBig",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_l7.cpp",
+          "line": 497,
+          "from": "__ZTV8daFPkn_c",
+          "to": "__ZTV19FirePiranhaPlantBig"
+        }
+      ]
+    },
+    "_ZTV8daFish_c": {
+      "target": "sm64ds_cabi_ZTV4Fish",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes.cpp",
+          "line": 2065,
+          "from": "__ZTV8daFish_c",
+          "to": "__ZTV4Fish"
+        }
+      ]
+    },
+    "_ZTV8daGmch_c": {
+      "target": "sm64ds_cabi_ZTV8Moneybag",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov081.cpp",
+          "line": 747,
+          "from": "__ZTV8daGmch_c",
+          "to": "__ZTV8Moneybag"
+        }
+      ]
+    },
+    "_ZTV8daKpFr_c": {
+      "target": "sm64ds_cabi_ZTV14FlameChompFire",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov070.cpp",
+          "line": 258,
+          "from": "__ZTV8daKpFr_c",
+          "to": "__ZTV14FlameChompFire"
+        }
+      ]
+    },
+    "_ZTV8daKrpa_c": {
+      "target": "sm64ds_cabi_ZTV10FlameChomp",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov070.cpp",
+          "line": 257,
+          "from": "__ZTV8daKrpa_c",
+          "to": "__ZTV10FlameChomp"
+        }
+      ]
+    },
+    "_ZTV8daNknk_c": {
+      "target": "_ZTV5Koopa",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_koopa_chuckya.cpp",
+          "line": 172,
+          "from": "__ZTV8daNknk_c",
+          "to": "__ZTV5Koopa"
+        }
+      ]
+    },
+    "_ZTV8daStar_c": {
+      "target": "_ZTV9PowerStar",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_star.cpp",
+          "line": 194,
+          "from": "__ZTV8daStar_c",
+          "to": "__ZTV9PowerStar"
+        }
+      ]
+    },
+    "_ZTV8daYegg_c": {
+      "target": "_ZTV8YoshiEgg",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_runtime_spawns.cpp",
+          "line": 461,
+          "from": "__ZTV8daYegg_c",
+          "to": "__ZTV8YoshiEgg"
+        }
+      ]
+    },
+    "_ZTV9ActorBase": {
+      "target": "data_02099edc",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1363,
+          "from": "__ZTV9ActorBase",
+          "to": "_data_02099edc"
+        }
+      ]
+    },
+    "_ZTV9UkikiCage": {
+      "target": "_ZTV15daObjHmMaruta_c",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov030.cpp",
+          "line": 271,
+          "from": "__ZTV9UkikiCage",
+          "to": "__ZTV15daObjHmMaruta_c"
+        }
+      ]
+    },
+    "_ZTV9dScDSMT_c": {
+      "target": "data_ov007_021032e8",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 246,
+          "from": "__ZTV9dScDSMT_c",
+          "to": "_data_ov007_021032e8"
+        }
+      ]
+    },
+    "_ZTV9daBtfly_c": {
+      "target": "sm64ds_cabi_ZTV9Butterfly",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes.cpp",
+          "line": 1989,
+          "from": "__ZTV9daBtfly_c",
+          "to": "__ZTV9Butterfly"
+        }
+      ]
+    },
+    "_ZTV9daBttBk_c": {
+      "target": "sm64ds_cabi_ZTV11CrazedCrate",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov063.cpp",
+          "line": 976,
+          "from": "__ZTV9daBttBk_c",
+          "to": "__ZTV11CrazedCrate"
+        }
+      ]
+    },
+    "_ZTV9daChair_c": {
+      "target": "sm64ds_cabi_ZTV12HauntedChair",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bbh.cpp",
+          "line": 261,
+          "from": "__ZTV9daChair_c",
+          "to": "__ZTV12HauntedChair"
+        }
+      ]
+    },
+    "_ZTV9daFRing_c": {
+      "target": "_ZTV16BowserShockwaves",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_runtime_spawns.cpp",
+          "line": 321,
+          "from": "__ZTV9daFRing_c",
+          "to": "__ZTV16BowserShockwaves"
+        }
+      ]
+    },
+    "_ZTV9daGrock_c": {
+      "target": "_ZTV11RollingRock",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 678,
+          "from": "__ZTV9daGrock_c",
+          "to": "__ZTV11RollingRock"
+        }
+      ]
+    },
+    "_ZTV9daJango_c": {
+      "target": "_ZTV6Klepto",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_koopa_chuckya.cpp",
+          "line": 465,
+          "from": "__ZTV9daJango_c",
+          "to": "__ZTV6Klepto"
+        }
+      ]
+    },
+    "_ZTV9daKirai_c": {
+      "target": "sm64ds_cabi_ZTV17BowserSkyPlatform",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov060.cpp",
+          "line": 222,
+          "from": "__ZTV9daKirai_c",
+          "to": "__ZTV17BowserSkyPlatform"
+        }
+      ]
+    },
+    "_ZTV9daMenbo_c": {
+      "target": "_ZTV7Skeeter",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov090.cpp",
+          "line": 576,
+          "from": "__ZTV9daMenbo_c",
+          "to": "__ZTV7Skeeter"
+        }
+      ]
+    },
+    "_ZTV9daPeach_c": {
+      "target": "sm64ds_cabi_ZTV13PrincessPeach",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov085.cpp",
+          "line": 502,
+          "from": "__ZTV9daPeach_c",
+          "to": "__ZTV13PrincessPeach"
+        }
+      ]
+    },
+    "_ZTV9daPgBby_c": {
+      "target": "sm64ds_cabi_ZTV11BabyPenguin",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 2141,
+          "from": "__ZTV9daPgBby_c",
+          "to": "__ZTV11BabyPenguin"
+        }
+      ]
+    },
+    "_ZTV9daPopoi_c": {
+      "target": "_ZTV7HeaveHo",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov077.cpp",
+          "line": 157,
+          "from": "__ZTV9daPopoi_c",
+          "to": "__ZTV7HeaveHo"
+        }
+      ]
+    },
+    "_ZTV9daRFlag_c": {
+      "target": "sm64ds_cabi_ZTV9KoopaFlag",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bob_enemy.cpp",
+          "line": 942,
+          "from": "__ZTV9daRFlag_c",
+          "to": "__ZTV9KoopaFlag"
+        }
+      ]
+    },
+    "_ZTV9daSBird_c": {
+      "target": "sm64ds_cabi_ZTV4Bird",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes.cpp",
+          "line": 1324,
+          "from": "__ZTV9daSBird_c",
+          "to": "__ZTV4Bird"
+        }
+      ]
+    },
+    "_ZTV9daSCoin_c": {
+      "target": "data_ov002_0210b030",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bob_world.cpp",
+          "line": 1327,
+          "from": "__ZTV9daSCoin_c",
+          "to": "_data_ov002_0210b030"
+        }
+      ]
+    },
+    "_ZTV9daSanbo_c": {
+      "target": "sm64ds_cabi_ZTV5Pokey",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov096.cpp",
+          "line": 170,
+          "from": "__ZTV9daSanbo_c",
+          "to": "__ZTV5Pokey"
+        }
+      ]
+    },
+    "_ZTV9daShark_c": {
+      "target": "_ZTV5Shark",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov090.cpp",
+          "line": 578,
+          "from": "__ZTV9daShark_c",
+          "to": "__ZTV5Shark"
+        }
+      ]
+    },
+    "__sinit_ov045_02112280": {
+      "target": "data_ov013_02112280",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1149,
+          "from": "___sinit_ov045_02112280",
+          "to": "_data_ov013_02112280"
+        }
+      ]
+    },
+    "base_dtor_MovingCylinderClsn": {
+      "target": "_ZN12CylinderClsnD2Ev",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1605,
+          "from": "_base_dtor_MovingCylinderClsn",
+          "to": "__ZN12CylinderClsnD2Ev"
+        }
+      ]
+    },
+    "base_dtor_MovingCylinderClsnWithPos": {
+      "target": "sm64ds_cabi_ZN18MovingCylinderClsnD2Ev",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1611,
+          "from": "_base_dtor_MovingCylinderClsnWithPos",
+          "to": "__ZN18MovingCylinderClsnD2Ev"
+        }
+      ]
+    },
+    "cstd_atan2": {
+      "target": "_ZN4cstd5atan2E5Fix12IiES1_",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov063.cpp",
+          "line": 767,
+          "from": "_cstd_atan2",
+          "to": "__ZN4cstd5atan2E5Fix12IiES1_"
+        }
+      ]
+    },
+    "data_02075720": {
+      "target": "VS_STAR_SPAWN_ORDERS",
+      "upstream": [
+        {
+          "path": "port/hal/stage_slot0.cpp",
+          "line": 271,
+          "from": "_data_02075720",
+          "to": "_VS_STAR_SPAWN_ORDERS"
+        }
+      ]
+    },
+    "data_0209f2d8": {
+      "target": "data_0209f2d8_c",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 702,
+          "from": "?data_0209f2d8@@3EA",
+          "to": "_data_0209f2d8"
+        },
+        {
+          "path": "port/hal/actor_vtables.cpp",
+          "line": 243,
+          "from": "_data_0209f2d8",
+          "to": "_data_0209f2d8_c"
+        },
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1663,
+          "from": "?data_0209f2d8@@3PAEA",
+          "to": "_data_0209f2d8"
+        }
+      ]
+    },
+    "data_020a0eac": {
+      "target": "data_020a0eac_c",
+      "upstream": [
+        {
+          "path": "port/hal/cxxname_bridge.cpp",
+          "line": 290,
+          "from": "_data_020a0eac",
+          "to": "_data_020a0eac_c"
+        }
+      ]
+    },
+    "data_020a4d38": {
+      "target": "_ZN6Memory16rootHeapIteratorE",
+      "upstream": [
+        {
+          "path": "port/hal/heap_globals.cpp",
+          "line": 43,
+          "from": "_data_020a4d38",
+          "to": "__ZN6Memory16rootHeapIteratorE"
+        }
+      ]
+    },
+    "data_020ad524": {
+      "target": "data_ov001_020ad524",
+      "upstream": [
+        {
+          "path": "port/hal/cxxname_bridge.cpp",
+          "line": 240,
+          "from": "_data_020ad524",
+          "to": "_data_ov001_020ad524"
+        }
+      ]
+    },
+    "data_020ad560": {
+      "target": "data_ov001_020ad560",
+      "upstream": [
+        {
+          "path": "port/hal/actor_vtables.cpp",
+          "line": 651,
+          "from": "_data_020ad560",
+          "to": "_data_ov001_020ad560"
+        }
+      ]
+    },
+    "data_ov000_020ab3c4": {
+      "target": "func_ov001_020ab3c4",
+      "upstream": [
+        {
+          "path": "port/hal/bob_enemy_bridges.cpp",
+          "line": 240,
+          "from": "_data_ov000_020ab3c4",
+          "to": "_func_ov001_020ab3c4"
+        }
+      ]
+    },
+    "data_ov000_020aba70": {
+      "target": "_ZN3OAM7NUMBERSE",
+      "upstream": [
+        {
+          "path": "port/hal/sub_actors.cpp",
+          "line": 1012,
+          "from": "_data_ov000_020aba70",
+          "to": "__ZN3OAM7NUMBERSE"
+        }
+      ]
+    },
+    "data_ov000_020beb74": {
+      "target": "data_ov004_020beb74",
+      "upstream": [
+        {
+          "path": "port/hal/scene_mg_flower.cpp",
+          "line": 625,
+          "from": "_data_ov000_020beb74",
+          "to": "_data_ov004_020beb74"
+        }
+      ]
+    },
+    "data_ov043_021122b8": {
+      "target": "_ZTV19daObjKm1_Ukishima_c",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov043.cpp",
+          "line": 116,
+          "from": "_data_ov043_021122b8",
+          "to": "__ZTV19daObjKm1_Ukishima_c"
+        }
+      ]
+    },
+    "data_ov051_021116b0": {
+      "target": "data_ov013_021116b0",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov013.cpp",
+          "line": 117,
+          "from": "_data_ov051_021116b0",
+          "to": "_data_ov013_021116b0"
+        }
+      ]
+    },
+    "data_ov052_02111e84": {
+      "target": "func_ov010_02111e84",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1249,
+          "from": "_data_ov052_02111e84",
+          "to": "_func_ov010_02111e84"
+        }
+      ]
+    },
+    "data_ov054_02111238": {
+      "target": "func_ov013_02111238",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov013.cpp",
+          "line": 118,
+          "from": "_data_ov054_02111238",
+          "to": "_func_ov013_02111238"
+        }
+      ]
+    },
+    "data_ov059_021114c8": {
+      "target": "func_ov045_021114c8",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov045.cpp",
+          "line": 413,
+          "from": "_data_ov059_021114c8",
+          "to": "_func_ov045_021114c8"
+        }
+      ]
+    },
+    "data_ov059_02111564": {
+      "target": "func_ov022_02111564",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov022.cpp",
+          "line": 469,
+          "from": "_data_ov059_02111564",
+          "to": "_func_ov022_02111564"
+        }
+      ]
+    },
+    "data_ov059_02111680": {
+      "target": "data_ov044_02111680",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov044.cpp",
+          "line": 168,
+          "from": "_data_ov059_02111680",
+          "to": "_data_ov044_02111680"
+        }
+      ]
+    },
+    "data_ov071_02122ecc_d": {
+      "target": "data_ov071_02122ecc",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_scuttlebug.cpp",
+          "line": 146,
+          "from": "_data_ov071_02122ecc_d",
+          "to": "_data_ov071_02122ecc"
+        }
+      ]
+    },
+    "data_ov075_0211c800": {
+      "target": "data_ov064_0211c800",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bowserpuzzle.cpp",
+          "line": 204,
+          "from": "_data_ov075_0211c800",
+          "to": "_data_ov064_0211c800"
+        }
+      ]
+    },
+    "data_ov075_0211d608": {
+      "target": "data_ov065_0211d608",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 208,
+          "from": "?data_ov075_0211d608@@3USharedFilePtr@@A",
+          "to": "_data_ov065_0211d608"
+        },
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 375,
+          "from": "_data_ov075_0211d608",
+          "to": "_data_ov065_0211d608"
+        }
+      ]
+    },
+    "data_ov075_0211d610": {
+      "target": "data_ov065_0211d610",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 209,
+          "from": "?data_ov075_0211d610@@3USharedFilePtr@@A",
+          "to": "_data_ov065_0211d610"
+        }
+      ]
+    },
+    "data_ov075_0211d650": {
+      "target": "data_ov065_0211d650",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 376,
+          "from": "_data_ov075_0211d650",
+          "to": "_data_ov065_0211d650"
+        }
+      ]
+    },
+    "data_ov091_021352bc": {
+      "target": "_ZTV11daObjPile_c",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bob_enemy.cpp",
+          "line": 701,
+          "from": "_data_ov091_021352bc",
+          "to": "__ZTV11daObjPile_c"
+        }
+      ]
+    },
+    "func_0200cc5c": {
+      "target": "sm64ds_cabi_ZN6Camera25SaveCameraStateBeforeTalkEv",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1360,
+          "from": "_func_0200cc5c",
+          "to": "__ZN6Camera25SaveCameraStateBeforeTalkEv"
+        }
+      ]
+    },
+    "func_02012664": {
+      "target": "sm64ds_cabi_ZN5Sound9PlayBank3EjRK7Vector3",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_wf.cpp",
+          "line": 883,
+          "from": "_func_02012664",
+          "to": "__ZN5Sound9PlayBank3EjRK7Vector3"
+        }
+      ]
+    },
+    "func_02012754": {
+      "target": "_ZN5Sound12PlayBank2_2DEj",
+      "upstream": [
+        {
+          "path": "port/hal/scene_mg_flower.cpp",
+          "line": 619,
+          "from": "_func_02012754",
+          "to": "__ZN5Sound12PlayBank2_2DEj"
+        }
+      ]
+    },
+    "func_02015bcc": {
+      "target": "sm64ds_cabi_ZN9Animation8FinishedEv",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov070.cpp",
+          "line": 313,
+          "from": "_func_02015bcc",
+          "to": "__ZN9Animation8FinishedEv"
+        }
+      ]
+    },
+    "func_02016748": {
+      "target": "_ZN9ModelAnim7SetAnimEP8BCA_Filei5Fix12IiEj",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 2030,
+          "from": "_func_02016748",
+          "to": "__ZN9ModelAnim7SetAnimEP8BCA_Filei5Fix12IiEj"
+        }
+      ]
+    },
+    "func_02018144": {
+      "target": "Deallocate",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2521,
+          "from": "_func_02018144",
+          "to": "_Deallocate"
+        }
+      ]
+    },
+    "func_0201816c": {
+      "target": "LoadFile",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2522,
+          "from": "_func_0201816c",
+          "to": "_LoadFile"
+        }
+      ]
+    },
+    "func_02037670": {
+      "target": "sm64ds_cabi_ZN11RaycastLine13SetObjAndLineERK7Vector3S2_P5Actor",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 927,
+          "from": "_func_02037670",
+          "to": "__ZN11RaycastLine13SetObjAndLineERK7Vector3S2_P5Actor"
+        }
+      ]
+    },
+    "func_02037764": {
+      "target": "sm64ds_cabi_ZN11RaycastLineD1Ev",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 928,
+          "from": "_func_02037764",
+          "to": "__ZN11RaycastLineD1Ev"
+        }
+      ]
+    },
+    "func_020377b0": {
+      "target": "sm64ds_cabi_ZN11RaycastLineC1Ev",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 929,
+          "from": "_func_020377b0",
+          "to": "__ZN11RaycastLineC1Ev"
+        }
+      ]
+    },
+    "func_02038638": {
+      "target": "sm64ds_cabi_ZN11RaycastLine10DetectClsnEv",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 930,
+          "from": "_func_02038638",
+          "to": "__ZN11RaycastLine10DetectClsnEv"
+        }
+      ]
+    },
+    "func_0203ae58": {
+      "target": "sm64ds_cabi_Z14ApproachLinearRiii",
+      "upstream": [
+        {
+          "path": "port/hal/fader_wipes.cpp",
+          "line": 121,
+          "from": "_func_0203ae58",
+          "to": "__Z14ApproachLinearRiii"
+        }
+      ]
+    },
+    "func_0203b0e8": {
+      "target": "AngleDiff",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 931,
+          "from": "_func_0203b0e8",
+          "to": "_AngleDiff"
+        }
+      ]
+    },
+    "func_0203b4dc": {
+      "target": "_ZN4cstd5atan2E5Fix12IiES1_",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 932,
+          "from": "_func_0203b4dc",
+          "to": "__ZN4cstd5atan2E5Fix12IiES1_"
+        }
+      ]
+    },
+    "func_0203c280": {
+      "target": "sm64ds_cabi_ZN4Heap11_DeallocateEPv",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2523,
+          "from": "_func_0203c280",
+          "to": "__ZN4Heap11_DeallocateEPv"
+        }
+      ]
+    },
+    "func_0203c28c": {
+      "target": "sm64ds_cabi_ZN4Heap8AllocateEj",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2524,
+          "from": "_func_0203c28c",
+          "to": "__ZN4Heap8AllocateEj"
+        }
+      ]
+    },
+    "func_0203cf78": {
+      "target": "Vec3_HorzLen",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 933,
+          "from": "_func_0203cf78",
+          "to": "_Vec3_HorzLen"
+        }
+      ]
+    },
+    "func_020527e9": {
+      "target": "func_020527e8",
+      "upstream": [
+        {
+          "path": "port/hal/method_faces.cpp",
+          "line": 832,
+          "from": "_func_020527e9",
+          "to": "_func_020527e8"
+        }
+      ]
+    },
+    "func_02054c80": {
+      "target": "Vram__Map",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2538,
+          "from": "_func_02054c80",
+          "to": "_Vram__Map"
+        }
+      ]
+    },
+    "func_02055574": {
+      "target": "_ZN3G3X13SetClearColorEtiiib",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2525,
+          "from": "_func_02055574",
+          "to": "__ZN3G3X13SetClearColorEtiiib"
+        }
+      ]
+    },
+    "func_02059d1c": {
+      "target": "_ZN3IRQ7DisableEv",
+      "upstream": [
+        {
+          "path": "port/hal/wm_arm7.cpp",
+          "line": 610,
+          "from": "_func_02059d1c",
+          "to": "__ZN3IRQ7DisableEv"
+        }
+      ]
+    },
+    "func_02059d30": {
+      "target": "_ZN3IRQ7RestoreEj",
+      "upstream": [
+        {
+          "path": "port/hal/wm_arm7.cpp",
+          "line": 611,
+          "from": "_func_02059d30",
+          "to": "__ZN3IRQ7RestoreEj"
+        }
+      ]
+    },
+    "func_0205a448": {
+      "target": "MultiStore16",
+      "upstream": [
+        {
+          "path": "port/unmatched/MgPachinko_Faces.cpp",
+          "line": 59,
+          "from": "_func_0205a448",
+          "to": "_MultiStore16"
+        }
+      ]
+    },
+    "func_020ab938": {
+      "target": "data_ov001_020ab938",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 198,
+          "from": "_func_020ab938",
+          "to": "_data_ov001_020ab938"
+        }
+      ]
+    },
+    "func_020ab940": {
+      "target": "data_ov001_020ab940",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 199,
+          "from": "_func_020ab940",
+          "to": "_data_ov001_020ab940"
+        }
+      ]
+    },
+    "func_020ab948": {
+      "target": "_ZN3OAM10LIFE_ICONSE",
+      "upstream": [
+        {
+          "path": "port/hal/sub_actors.cpp",
+          "line": 1005,
+          "from": "_func_020ab948",
+          "to": "__ZN3OAM10LIFE_ICONSE"
+        }
+      ]
+    },
+    "func_020ab9c8": {
+      "target": "_ZN3OAM5TIMESE",
+      "upstream": [
+        {
+          "path": "port/hal/sub_actors.cpp",
+          "line": 1006,
+          "from": "_func_020ab9c8",
+          "to": "__ZN3OAM5TIMESE"
+        }
+      ]
+    },
+    "func_020aba70": {
+      "target": "_ZN3OAM7NUMBERSE",
+      "upstream": [
+        {
+          "path": "port/hal/sub_actors.cpp",
+          "line": 1007,
+          "from": "_func_020aba70",
+          "to": "__ZN3OAM7NUMBERSE"
+        }
+      ]
+    },
+    "func_020abad0": {
+      "target": "_ZN3OAM10POWER_STARE",
+      "upstream": [
+        {
+          "path": "port/hal/sub_actors.cpp",
+          "line": 1008,
+          "from": "_func_020abad0",
+          "to": "__ZN3OAM10POWER_STARE"
+        }
+      ]
+    },
+    "func_020abad8": {
+      "target": "_ZN3OAM4COINE",
+      "upstream": [
+        {
+          "path": "port/hal/sub_actors.cpp",
+          "line": 1009,
+          "from": "_func_020abad8",
+          "to": "__ZN3OAM4COINE"
+        }
+      ]
+    },
+    "func_020abb18": {
+      "target": "data_ov001_020abb18",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 200,
+          "from": "_func_020abb18",
+          "to": "_data_ov001_020abb18"
+        }
+      ]
+    },
+    "func_020abb34": {
+      "target": "data_ov001_020abb34",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 201,
+          "from": "_func_020abb34",
+          "to": "_data_ov001_020abb34"
+        }
+      ]
+    },
+    "func_020abb54": {
+      "target": "data_ov001_020abb54",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 202,
+          "from": "_func_020abb54",
+          "to": "_data_ov001_020abb54"
+        }
+      ]
+    },
+    "func_020abb74": {
+      "target": "data_ov001_020abb74",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 203,
+          "from": "_func_020abb74",
+          "to": "_data_ov001_020abb74"
+        }
+      ]
+    },
+    "func_020abb94": {
+      "target": "data_ov001_020abb94",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 204,
+          "from": "_func_020abb94",
+          "to": "_data_ov001_020abb94"
+        }
+      ]
+    },
+    "func_020abbb4": {
+      "target": "data_ov001_020abbb4",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 205,
+          "from": "_func_020abbb4",
+          "to": "_data_ov001_020abbb4"
+        }
+      ]
+    },
+    "func_020abbf4": {
+      "target": "data_ov001_020abbf4",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 206,
+          "from": "_func_020abbf4",
+          "to": "_data_ov001_020abbf4"
+        }
+      ]
+    },
+    "func_020abcb4": {
+      "target": "data_ov001_020abcb4",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 207,
+          "from": "_func_020abcb4",
+          "to": "_data_ov001_020abcb4"
+        }
+      ]
+    },
+    "func_020abd78": {
+      "target": "data_ov001_020abd78",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 208,
+          "from": "_func_020abd78",
+          "to": "_data_ov001_020abd78"
+        }
+      ]
+    },
+    "func_020abd80": {
+      "target": "data_ov001_020abd80",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 209,
+          "from": "_func_020abd80",
+          "to": "_data_ov001_020abd80"
+        }
+      ]
+    },
+    "func_020abd88": {
+      "target": "_ZN3OAM14BOUNCING_ARROWE",
+      "upstream": [
+        {
+          "path": "port/hal/sub_actors.cpp",
+          "line": 1010,
+          "from": "_func_020abd88",
+          "to": "__ZN3OAM14BOUNCING_ARROWE"
+        }
+      ]
+    },
+    "func_020ad660": {
+      "target": "func_ov002_020ad660",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 490,
+          "from": "_func_020ad660",
+          "to": "_func_ov002_020ad660"
+        }
+      ]
+    },
+    "func_020ada40": {
+      "target": "func_ov002_020ada40",
+      "upstream": [
+        {
+          "path": "port/hal/bob_enemy_bridges.cpp",
+          "line": 57,
+          "from": "_func_020ada40",
+          "to": "_func_ov002_020ada40"
+        }
+      ]
+    },
+    "func_020adc74": {
+      "target": "func_ov004_020adc74",
+      "upstream": [
+        {
+          "path": "port/hal/scene_mg_faces.cpp",
+          "line": 248,
+          "from": "_func_020adc74",
+          "to": "_func_ov004_020adc74"
+        }
+      ]
+    },
+    "func_020aea30": {
+      "target": "func_ov002_020aea30",
+      "upstream": [
+        {
+          "path": "port/hal/bob_enemy_bridges.cpp",
+          "line": 241,
+          "from": "_func_020aea30",
+          "to": "_func_ov002_020aea30"
+        }
+      ]
+    },
+    "func_020b2160": {
+      "target": "func_ov007_020b2160",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2493,
+          "from": "_func_020b2160",
+          "to": "_func_ov007_020b2160"
+        }
+      ]
+    },
+    "func_020b2370": {
+      "target": "func_ov007_020b2370",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2494,
+          "from": "_func_020b2370",
+          "to": "_func_ov007_020b2370"
+        }
+      ]
+    },
+    "func_020b2728": {
+      "target": "func_ov007_020b2728",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2495,
+          "from": "_func_020b2728",
+          "to": "_func_ov007_020b2728"
+        }
+      ]
+    },
+    "func_020b2cf0": {
+      "target": "func_ov007_020b2cf0",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2496,
+          "from": "_func_020b2cf0",
+          "to": "_func_ov007_020b2cf0"
+        }
+      ]
+    },
+    "func_020b413c": {
+      "target": "func_ov007_020b413c",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2497,
+          "from": "_func_020b413c",
+          "to": "_func_ov007_020b413c"
+        }
+      ]
+    },
+    "func_020b4464": {
+      "target": "func_ov007_020b4464",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2498,
+          "from": "_func_020b4464",
+          "to": "_func_ov007_020b4464"
+        }
+      ]
+    },
+    "func_020b5e58": {
+      "target": "func_ov002_020b5e58",
+      "upstream": [
+        {
+          "path": "port/unmatched/Jrb_Aliases.cpp",
+          "line": 53,
+          "from": "_func_020b5e58",
+          "to": "_func_ov002_020b5e58"
+        }
+      ]
+    },
+    "func_020b60fc": {
+      "target": "func_ov002_020b60fc",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov045.cpp",
+          "line": 703,
+          "from": "_func_020b60fc",
+          "to": "_func_ov002_020b60fc"
+        }
+      ]
+    },
+    "func_020b6244": {
+      "target": "func_ov002_020b6244",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov045.cpp",
+          "line": 702,
+          "from": "_func_020b6244",
+          "to": "_func_ov002_020b6244"
+        }
+      ]
+    },
+    "func_020b6424": {
+      "target": "func_ov002_020b6424",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov045.cpp",
+          "line": 617,
+          "from": "_func_020b6424",
+          "to": "_func_ov002_020b6424"
+        }
+      ]
+    },
+    "func_020b6584": {
+      "target": "func_ov002_020b6584",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov045.cpp",
+          "line": 616,
+          "from": "_func_020b6584",
+          "to": "_func_ov002_020b6584"
+        }
+      ]
+    },
+    "func_020b66a8": {
+      "target": "func_ov002_020b66a8",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1984,
+          "from": "_func_020b66a8",
+          "to": "_func_ov002_020b66a8"
+        }
+      ]
+    },
+    "func_020b7658": {
+      "target": "func_ov007_020b7658",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2499,
+          "from": "_func_020b7658",
+          "to": "_func_ov007_020b7658"
+        }
+      ]
+    },
+    "func_020b7a00": {
+      "target": "func_ov007_020b7a00",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2500,
+          "from": "_func_020b7a00",
+          "to": "_func_ov007_020b7a00"
+        }
+      ]
+    },
+    "func_020b7a34": {
+      "target": "func_ov007_020b7a34",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2501,
+          "from": "_func_020b7a34",
+          "to": "_func_ov007_020b7a34"
+        }
+      ]
+    },
+    "func_020b8fd4": {
+      "target": "func_ov007_020b8fd4",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2502,
+          "from": "_func_020b8fd4",
+          "to": "_func_ov007_020b8fd4"
+        }
+      ]
+    },
+    "func_020b91b4": {
+      "target": "func_ov007_020b91b4",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2503,
+          "from": "_func_020b91b4",
+          "to": "_func_ov007_020b91b4"
+        }
+      ]
+    },
+    "func_020b9488": {
+      "target": "data_ov004_020b9488",
+      "upstream": [
+        {
+          "path": "port/hal/scene_mg_roulette.cpp",
+          "line": 911,
+          "from": "_func_020b9488",
+          "to": "_data_ov004_020b9488"
+        }
+      ]
+    },
+    "func_020bc7d4": {
+      "target": "data_ov004_020bc7d4",
+      "upstream": [
+        {
+          "path": "port/unmatched/MgMemory2_Faces.cpp",
+          "line": 236,
+          "from": "_func_020bc7d4",
+          "to": "_data_ov004_020bc7d4"
+        }
+      ]
+    },
+    "func_020bc864": {
+      "target": "data_ov004_020bc864",
+      "upstream": [
+        {
+          "path": "port/unmatched/MgLuigi_Faces.cpp",
+          "line": 58,
+          "from": "_func_020bc864",
+          "to": "_data_ov004_020bc864"
+        },
+        {
+          "path": "port/unmatched/MgSmartball_Faces.cpp",
+          "line": 104,
+          "from": "_func_020bc864",
+          "to": "_data_ov004_020bc864"
+        }
+      ]
+    },
+    "func_020bc86c": {
+      "target": "data_ov004_020bc86c",
+      "upstream": [
+        {
+          "path": "port/hal/scene_mg_flower.cpp",
+          "line": 620,
+          "from": "_func_020bc86c",
+          "to": "_data_ov004_020bc86c"
+        }
+      ]
+    },
+    "func_020bc888": {
+      "target": "data_ov004_020bc888",
+      "upstream": [
+        {
+          "path": "port/unmatched/MgLuigi_Faces.cpp",
+          "line": 59,
+          "from": "_func_020bc888",
+          "to": "_data_ov004_020bc888"
+        },
+        {
+          "path": "port/unmatched/MgSmartball_Faces.cpp",
+          "line": 105,
+          "from": "_func_020bc888",
+          "to": "_data_ov004_020bc888"
+        }
+      ]
+    },
+    "func_020bc898": {
+      "target": "data_ov004_020bc898",
+      "upstream": [
+        {
+          "path": "port/hal/scene_mg_flower.cpp",
+          "line": 621,
+          "from": "_func_020bc898",
+          "to": "_data_ov004_020bc898"
+        }
+      ]
+    },
+    "func_020bc8a4": {
+      "target": "data_ov004_020bc8a4",
+      "upstream": [
+        {
+          "path": "port/hal/scene_mg_flower.cpp",
+          "line": 622,
+          "from": "_func_020bc8a4",
+          "to": "_data_ov004_020bc8a4"
+        }
+      ]
+    },
+    "func_020bc8a8": {
+      "target": "data_ov004_020bc8a8",
+      "upstream": [
+        {
+          "path": "port/hal/scene_mg_flower.cpp",
+          "line": 623,
+          "from": "_func_020bc8a8",
+          "to": "_data_ov004_020bc8a8"
+        }
+      ]
+    },
+    "func_020beb68": {
+      "target": "data_ov004_020beb68",
+      "upstream": [
+        {
+          "path": "port/unmatched/MgCoin_Faces.cpp",
+          "line": 77,
+          "from": "_func_020beb68",
+          "to": "_data_ov004_020beb68"
+        },
+        {
+          "path": "port/unmatched/MgLuigi_Faces.cpp",
+          "line": 57,
+          "from": "_func_020beb68",
+          "to": "_data_ov004_020beb68"
+        }
+      ]
+    },
+    "func_020beb6c": {
+      "target": "data_ov004_020beb6c",
+      "upstream": [
+        {
+          "path": "port/hal/scene_mg_flower.cpp",
+          "line": 624,
+          "from": "_func_020beb6c",
+          "to": "_data_ov004_020beb6c"
+        }
+      ]
+    },
+    "func_020beb74": {
+      "target": "data_ov004_020beb74",
+      "upstream": [
+        {
+          "path": "port/unmatched/MgJump2_Faces.cpp",
+          "line": 90,
+          "from": "_func_020beb74",
+          "to": "_data_ov004_020beb74"
+        },
+        {
+          "path": "port/unmatched/MgTrampolineTerror_Faces.cpp",
+          "line": 142,
+          "from": "_func_020beb74",
+          "to": "_data_ov004_020beb74"
+        },
+        {
+          "path": "port/unmatched/MgTrampolineTime_Faces.cpp",
+          "line": 219,
+          "from": "_func_020beb74",
+          "to": "_data_ov004_020beb74"
+        },
+        {
+          "path": "port/hal/scene_mg_jump.cpp",
+          "line": 277,
+          "from": "_func_020beb74",
+          "to": "_data_ov004_020beb74"
+        }
+      ]
+    },
+    "func_020bee14": {
+      "target": "func_ov007_020bee14",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2504,
+          "from": "_func_020bee14",
+          "to": "_func_ov007_020bee14"
+        }
+      ]
+    },
+    "func_020bfaf0": {
+      "target": "func_ov007_020bfaf0",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2505,
+          "from": "_func_020bfaf0",
+          "to": "_func_ov007_020bfaf0"
+        }
+      ]
+    },
+    "func_020c232c": {
+      "target": "func_ov007_020c232c",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2506,
+          "from": "_func_020c232c",
+          "to": "_func_ov007_020c232c"
+        }
+      ]
+    },
+    "func_020c2390": {
+      "target": "func_ov007_020c2390",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2507,
+          "from": "_func_020c2390",
+          "to": "_func_ov007_020c2390"
+        }
+      ]
+    },
+    "func_020c3adc": {
+      "target": "func_ov006_020c3adc",
+      "upstream": [
+        {
+          "path": "port/hal/scene_mg_flower.cpp",
+          "line": 618,
+          "from": "_func_020c3adc",
+          "to": "_func_ov006_020c3adc"
+        }
+      ]
+    },
+    "func_020c3d1c": {
+      "target": "sm64ds_cabi_ZN6Player17St_EndingFly_MainEv",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2584,
+          "from": "_func_020c3d1c",
+          "to": "__ZN6Player17St_EndingFly_MainEv"
+        }
+      ]
+    },
+    "func_020c3df4": {
+      "target": "func_ov007_020c3df4",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2508,
+          "from": "_func_020c3df4",
+          "to": "_func_ov007_020c3df4"
+        }
+      ]
+    },
+    "func_020c78b0": {
+      "target": "func_ov007_020c78b0",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2509,
+          "from": "_func_020c78b0",
+          "to": "_func_ov007_020c78b0"
+        }
+      ]
+    },
+    "func_020c80a4": {
+      "target": "func_ov007_020c80a4",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2510,
+          "from": "_func_020c80a4",
+          "to": "_func_ov007_020c80a4"
+        }
+      ]
+    },
+    "func_020c844c": {
+      "target": "func_ov007_020c844c",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2511,
+          "from": "_func_020c844c",
+          "to": "_func_ov007_020c844c"
+        }
+      ]
+    },
+    "func_020c897c": {
+      "target": "func_ov007_020c897c",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2512,
+          "from": "_func_020c897c",
+          "to": "_func_ov007_020c897c"
+        }
+      ]
+    },
+    "func_020c93b4": {
+      "target": "func_ov007_020c93b4",
+      "upstream": [
+        {
+          "path": "port/hal/scene_boot.cpp",
+          "line": 2513,
+          "from": "_func_020c93b4",
+          "to": "_func_ov007_020c93b4"
+        }
+      ]
+    },
+    "func_020ca78c": {
+      "target": "func_ov002_020ca78c",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1801,
+          "from": "_func_020ca78c",
+          "to": "_func_ov002_020ca78c"
+        }
+      ]
+    },
+    "func_020caf98": {
+      "target": "func_ov002_020caf98",
+      "upstream": [
+        {
+          "path": "port/hal/actor_faces_bob.cpp",
+          "line": 193,
+          "from": "_func_020caf98",
+          "to": "_func_ov002_020caf98"
+        },
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1896,
+          "from": "_func_020caf98",
+          "to": "_func_ov002_020caf98"
+        }
+      ]
+    },
+    "func_020efaf0": {
+      "target": "func_ov002_020efaf0",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov100pl.cpp",
+          "line": 224,
+          "from": "_func_020efaf0",
+          "to": "_func_ov002_020efaf0"
+        }
+      ]
+    },
+    "func_020effb8": {
+      "target": "func_ov002_020effb8",
+      "upstream": [
+        {
+          "path": "port/hal/ptr_tables.cpp",
+          "line": 487,
+          "from": "_func_020effb8",
+          "to": "_func_ov002_020effb8"
+        }
+      ]
+    },
+    "func_020ff028": {
+      "target": "data_ov002_020ff028",
+      "upstream": [
+        {
+          "path": "port/hal/bob_enemy_bridges.cpp",
+          "line": 239,
+          "from": "_func_020ff028",
+          "to": "_data_ov002_020ff028"
+        }
+      ]
+    },
+    "func_021115bc": {
+      "target": "data_ov046_021115bc",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov060.cpp",
+          "line": 216,
+          "from": "_func_021115bc",
+          "to": "_data_ov046_021115bc"
+        }
+      ]
+    },
+    "func_021115e4": {
+      "target": "data_ov046_021115e4",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_runtime_spawns.cpp",
+          "line": 322,
+          "from": "_func_021115e4",
+          "to": "_data_ov046_021115e4"
+        }
+      ]
+    },
+    "func_021115f4": {
+      "target": "data_ov046_021115f4",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_runtime_spawns.cpp",
+          "line": 323,
+          "from": "_func_021115f4",
+          "to": "_data_ov046_021115f4"
+        }
+      ]
+    },
+    "func_02112118": {
+      "target": "data_ov035_02112118",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 1037,
+          "from": "?func_02112118@@3UCLPS_Block@@A",
+          "to": "_data_ov035_02112118"
+        }
+      ]
+    },
+    "func_02112198": {
+      "target": "data_ov035_02112198",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 1038,
+          "from": "_func_02112198",
+          "to": "_data_ov035_02112198"
+        }
+      ]
+    },
+    "func_021121b8": {
+      "target": "data_ov035_021121b8",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 1039,
+          "from": "_func_021121b8",
+          "to": "_data_ov035_021121b8"
+        }
+      ]
+    },
+    "func_02112258": {
+      "target": "data_ov035_02112258",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 1040,
+          "from": "_func_02112258",
+          "to": "_data_ov035_02112258"
+        }
+      ]
+    },
+    "func_021135d4": {
+      "target": "data_ov015_021135d4",
+      "upstream": [
+        {
+          "path": "port/hal/wf_enemy_bridges.cpp",
+          "line": 168,
+          "from": "_func_021135d4",
+          "to": "_data_ov015_021135d4"
+        }
+      ]
+    },
+    "func_02113c20": {
+      "target": "data_ov009_02113c20",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_intro.cpp",
+          "line": 734,
+          "from": "_func_02113c20",
+          "to": "_data_ov009_02113c20"
+        }
+      ]
+    },
+    "func_0211d610": {
+      "target": "data_ov065_0211d610",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_bullet.cpp",
+          "line": 58,
+          "from": "_func_0211d610",
+          "to": "_data_ov065_0211d610"
+        }
+      ]
+    },
+    "func_02123804": {
+      "target": "func_ov079_02123804",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_runtime_spawns.cpp",
+          "line": 462,
+          "from": "_func_02123804",
+          "to": "_func_ov079_02123804"
+        }
+      ]
+    },
+    "func_02132894": {
+      "target": "data_ov089_02132894",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1777,
+          "from": "_func_02132894",
+          "to": "_data_ov089_02132894"
+        }
+      ]
+    },
+    "func_0213a2cc": {
+      "target": "func_ov098_0213a2cc",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_wf.cpp",
+          "line": 970,
+          "from": "_func_0213a2cc",
+          "to": "_func_ov098_0213a2cc"
+        }
+      ]
+    },
+    "func_0213a794": {
+      "target": "func_ov098_0213a794",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_wf.cpp",
+          "line": 969,
+          "from": "_func_0213a794",
+          "to": "_func_ov098_0213a794"
+        }
+      ]
+    },
+    "func_ov006_020e6df0": {
+      "target": "Sound_PlayBank1Panned",
+      "upstream": [
+        {
+          "path": "port/unmatched/MgJump2_Faces.cpp",
+          "line": 102,
+          "from": "_func_ov006_020e6df0",
+          "to": "_Sound_PlayBank1Panned"
+        },
+        {
+          "path": "port/unmatched/MgTrampolineTerror_Faces.cpp",
+          "line": 162,
+          "from": "_func_ov006_020e6df0",
+          "to": "_Sound_PlayBank1Panned"
+        },
+        {
+          "path": "port/unmatched/MgTrampolineTime_Faces.cpp",
+          "line": 276,
+          "from": "_func_ov006_020e6df0",
+          "to": "_Sound_PlayBank1Panned"
+        },
+        {
+          "path": "port/hal/scene_mg_jump.cpp",
+          "line": 284,
+          "from": "_func_ov006_020e6df0",
+          "to": "_Sound_PlayBank1Panned"
+        }
+      ]
+    },
+    "func_ov006_020fefc0": {
+      "target": "sm64ds_cabi_ZN15dScMgPachinko_c13InitResourcesEv",
+      "upstream": [
+        {
+          "path": "port/unmatched/MgPachinko_Faces.cpp",
+          "line": 78,
+          "from": "_func_ov006_020fefc0",
+          "to": "__ZN15dScMgPachinko_c13InitResourcesEv"
+        }
+      ]
+    },
+    "func_ov006_0210f564": {
+      "target": "sm64ds_cabi_ZN20cMgSmartball_board_c12SaveSnapshotEv",
+      "upstream": [
+        {
+          "path": "port/unmatched/MgSmartball_Faces.cpp",
+          "line": 186,
+          "from": "_func_ov006_0210f564",
+          "to": "__ZN20cMgSmartball_board_c12SaveSnapshotEv"
+        }
+      ]
+    },
+    "func_ov006_021173c8": {
+      "target": "sm64ds_cabi_ZN16dScMgSmartball_c6RenderEv",
+      "upstream": [
+        {
+          "path": "port/unmatched/MgSmartball_Faces.cpp",
+          "line": 185,
+          "from": "_func_ov006_021173c8",
+          "to": "__ZN16dScMgSmartball_c6RenderEv"
+        }
+      ]
+    },
+    "func_ov006_02118b70": {
+      "target": "_ZN16dScMgSmartball_c13InitResourcesEv",
+      "upstream": [
+        {
+          "path": "port/unmatched/MgSmartball_Faces.cpp",
+          "line": 119,
+          "from": "_func_ov006_02118b70",
+          "to": "__ZN16dScMgSmartball_c13InitResourcesEv"
+        }
+      ]
+    },
+    "func_ov007_020c5dec": {
+      "target": "func_ov002_020c5dec",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1228,
+          "from": "_func_ov007_020c5dec",
+          "to": "_func_ov002_020c5dec"
+        }
+      ]
+    },
+    "func_ov064_0211616c": {
+      "target": "_Z19func_ov064_0211616cPc",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov064.cpp",
+          "line": 179,
+          "from": "_func_ov064_0211616c",
+          "to": "?func_ov064_0211616c@@YAHPAD@Z"
+        }
+      ]
+    },
+    "func_ov075_0211478c": {
+      "target": "_ZTV12WorkElevator",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 629,
+          "from": "_func_ov075_0211478c",
+          "to": "__ZTV12WorkElevator"
+        }
+      ]
+    },
+    "p__sinit_ov031_02111434": {
+      "target": "func_ov019_021114ec",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov019_w3e.cpp",
+          "line": 214,
+          "from": "_p__sinit_ov031_02111434",
+          "to": "_func_ov019_021114ec"
+        }
+      ]
+    },
+    "port_bookshotspawner_file0": {
+      "target": "data_ov020_02114aa0",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1591,
+          "from": "_port_bookshotspawner_file0",
+          "to": "_data_ov020_02114aa0"
+        },
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1587,
+          "from": "?port_bookshotspawner_file0@@3PAHA",
+          "to": "_data_ov020_02114aa0"
+        }
+      ]
+    },
+    "port_bookshotspawner_file1": {
+      "target": "data_ov020_02114ab8",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1592,
+          "from": "_port_bookshotspawner_file1",
+          "to": "_data_ov020_02114ab8"
+        }
+      ]
+    },
+    "port_bookshotspawner_vt": {
+      "target": "sm64ds_cabi_ZTV15BookShotSpawner",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1593,
+          "from": "_port_bookshotspawner_vt",
+          "to": "__ZTV15BookShotSpawner"
+        }
+      ]
+    },
+    "port_coffin_file0": {
+      "target": "data_ov071_021230d0",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1589,
+          "from": "_port_coffin_file0",
+          "to": "_data_ov071_021230d0"
+        }
+      ]
+    },
+    "port_coffin_file1": {
+      "target": "data_ov071_021230d8",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1590,
+          "from": "_port_coffin_file1",
+          "to": "_data_ov071_021230d8"
+        }
+      ]
+    },
+    "port_ov010_trap_clsnfile": {
+      "target": "data_ov010_02112d00",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov010.cpp",
+          "line": 210,
+          "from": "_port_ov010_trap_clsnfile",
+          "to": "_data_ov010_02112d00"
+        }
+      ]
+    },
+    "port_ov010_trap_modelfile": {
+      "target": "data_ov010_02112d08",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov010.cpp",
+          "line": 209,
+          "from": "_port_ov010_trap_modelfile",
+          "to": "_data_ov010_02112d08"
+        }
+      ]
+    },
+    "port_ov015_kdp_clsn_files": {
+      "target": "data_ov015_02114538",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov034.cpp",
+          "line": 217,
+          "from": "_port_ov015_kdp_clsn_files",
+          "to": "_data_ov015_02114538"
+        }
+      ]
+    },
+    "port_ov017_sw_file0": {
+      "target": "data_ov017_02111c88",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov017.cpp",
+          "line": 155,
+          "from": "?port_ov017_sw_file0@@3PAHA",
+          "to": "_data_ov017_02111c88"
+        }
+      ]
+    },
+    "port_ov017_sw_file1": {
+      "target": "data_ov017_02111c80",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov017.cpp",
+          "line": 156,
+          "from": "_port_ov017_sw_file1",
+          "to": "_data_ov017_02111c80"
+        }
+      ]
+    },
+    "port_ov023_clsn_file": {
+      "target": "data_ov023_02112080",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov023.cpp",
+          "line": 153,
+          "from": "_port_ov023_clsn_file",
+          "to": "_data_ov023_02112080"
+        }
+      ]
+    },
+    "port_ov023_sq_file0": {
+      "target": "data_ov023_02112088",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov023.cpp",
+          "line": 151,
+          "from": "?port_ov023_sq_file0@@3PAHA",
+          "to": "_data_ov023_02112088"
+        }
+      ]
+    },
+    "port_ov023_sq_file1": {
+      "target": "data_ov023_02112080",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov023.cpp",
+          "line": 152,
+          "from": "_port_ov023_sq_file1",
+          "to": "_data_ov023_02112080"
+        }
+      ]
+    },
+    "port_ov023_vt_base": {
+      "target": "_ZTV10dBgActor_c",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov023.cpp",
+          "line": 150,
+          "from": "_port_ov023_vt_base",
+          "to": "__ZTV10dBgActor_c"
+        }
+      ]
+    },
+    "port_ov023_vt_own": {
+      "target": "_ZTV8Squasher",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov023.cpp",
+          "line": 149,
+          "from": "_port_ov023_vt_own",
+          "to": "__ZTV8Squasher"
+        }
+      ]
+    },
+    "port_ov023_xform": {
+      "target": "func_ov023_02111308",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov023.cpp",
+          "line": 154,
+          "from": "_port_ov023_xform",
+          "to": "_func_ov023_02111308"
+        }
+      ]
+    },
+    "port_ov026_polelift_clsn": {
+      "target": "data_ov026_02113a9c",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov026.cpp",
+          "line": 161,
+          "from": "_port_ov026_polelift_clsn",
+          "to": "_data_ov026_02113a9c"
+        }
+      ]
+    },
+    "port_ov026_shutter_bmd": {
+      "target": "data_ov026_02113ebc",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov026.cpp",
+          "line": 153,
+          "from": "_port_ov026_shutter_bmd",
+          "to": "_data_ov026_02113ebc"
+        }
+      ]
+    },
+    "port_ov026_shutter_kcl": {
+      "target": "data_ov026_02113eb4",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov026.cpp",
+          "line": 154,
+          "from": "_port_ov026_shutter_kcl",
+          "to": "_data_ov026_02113eb4"
+        }
+      ]
+    },
+    "port_ov026_submarine_bmd": {
+      "target": "data_ov026_02113ee4",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov026.cpp",
+          "line": 155,
+          "from": "_port_ov026_submarine_bmd",
+          "to": "_data_ov026_02113ee4"
+        }
+      ]
+    },
+    "port_ov026_submarine_kcl": {
+      "target": "data_ov026_02113edc",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov026.cpp",
+          "line": 156,
+          "from": "_port_ov026_submarine_kcl",
+          "to": "_data_ov026_02113edc"
+        }
+      ]
+    },
+    "port_ov033_tw_vt_own": {
+      "target": "_ZTV9TinyCover",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov033.cpp",
+          "line": 155,
+          "from": "_port_ov033_tw_vt_own",
+          "to": "__ZTV9TinyCover"
+        }
+      ]
+    },
+    "port_ov033_vt_base": {
+      "target": "_ZTV10dBgActor_c",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov033.cpp",
+          "line": 156,
+          "from": "_port_ov033_vt_base",
+          "to": "__ZTV10dBgActor_c"
+        }
+      ]
+    },
+    "port_ov035_rcs_clsn": {
+      "target": "data_ov035_02112c68",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov035.cpp",
+          "line": 173,
+          "from": "_port_ov035_rcs_clsn",
+          "to": "_data_ov035_02112c68"
+        }
+      ]
+    },
+    "port_ov035_sp_file0": {
+      "target": "data_ov035_02112cb0",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov035.cpp",
+          "line": 163,
+          "from": "?port_ov035_sp_file0@@3PAHA",
+          "to": "_data_ov035_02112cb0"
+        }
+      ]
+    },
+    "port_ov035_sp_file1": {
+      "target": "data_ov035_02112cb8",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov035.cpp",
+          "line": 164,
+          "from": "_port_ov035_sp_file1",
+          "to": "_data_ov035_02112cb8"
+        }
+      ]
+    },
+    "port_ov043_ukishima_file0": {
+      "target": "data_ov043_021125e8",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov043.cpp",
+          "line": 132,
+          "from": "_port_ov043_ukishima_file0",
+          "to": "_data_ov043_021125e8"
+        }
+      ]
+    },
+    "port_ov043_ukishima_file1": {
+      "target": "data_ov043_021125e0",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov043.cpp",
+          "line": 133,
+          "from": "_port_ov043_ukishima_file1",
+          "to": "_data_ov043_021125e0"
+        }
+      ]
+    },
+    "port_ov065_m03_file0": {
+      "target": "data_ov065_0211d88c",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 972,
+          "from": "_port_ov065_m03_file0",
+          "to": "_data_ov065_0211d88c"
+        }
+      ]
+    },
+    "port_ov065_m03_file1": {
+      "target": "data_ov065_0211d894",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 973,
+          "from": "_port_ov065_m03_file1",
+          "to": "_data_ov065_0211d894"
+        }
+      ]
+    },
+    "port_ov065_m05_file0": {
+      "target": "data_ov065_0211d904",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 974,
+          "from": "_port_ov065_m05_file0",
+          "to": "_data_ov065_0211d904"
+        }
+      ]
+    },
+    "port_ov065_m05_file1": {
+      "target": "data_ov065_0211d90c",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 975,
+          "from": "_port_ov065_m05_file1",
+          "to": "_data_ov065_0211d90c"
+        }
+      ]
+    },
+    "port_ov065_m08_file0": {
+      "target": "data_ov065_0211d98c",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 976,
+          "from": "?port_ov065_m08_file0@@3PAHA",
+          "to": "_data_ov065_0211d98c"
+        }
+      ]
+    },
+    "port_ov065_m08_file1": {
+      "target": "data_ov065_0211d97c",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 977,
+          "from": "_port_ov065_m08_file1",
+          "to": "_data_ov065_0211d97c"
+        }
+      ]
+    },
+    "port_ov065_m09_file0": {
+      "target": "data_ov065_0211d9d4",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 978,
+          "from": "?port_ov065_m09_file0@@3PAHA",
+          "to": "_data_ov065_0211d9d4"
+        }
+      ]
+    },
+    "port_ov065_m09_file1": {
+      "target": "data_ov065_0211d9cc",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov065.cpp",
+          "line": 979,
+          "from": "_port_ov065_m09_file1",
+          "to": "_data_ov065_0211d9cc"
+        }
+      ]
+    },
+    "port_pathlift_file0": {
+      "target": "data_ov002_0210d9f0",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov100pl.cpp",
+          "line": 248,
+          "from": "_port_pathlift_file0",
+          "to": "_data_ov002_0210d9f0"
+        }
+      ]
+    },
+    "port_pathlift_file1": {
+      "target": "data_ov100_02148a54",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov100pl.cpp",
+          "line": 249,
+          "from": "_port_pathlift_file1",
+          "to": "_data_ov100_02148a54"
+        }
+      ]
+    },
+    "port_pathlift_file2": {
+      "target": "data_ov100_02148a5c",
+      "upstream": [
+        {
+          "path": "port/hal/actor_classes_ov100pl.cpp",
+          "line": 250,
+          "from": "_port_pathlift_file2",
+          "to": "_data_ov100_02148a5c"
+        }
+      ]
+    },
+    "vtbl_MovingCylinderClsn": {
+      "target": "_ZTV18MovingCylinderClsn",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1606,
+          "from": "_vtbl_MovingCylinderClsn",
+          "to": "__ZTV18MovingCylinderClsn"
+        }
+      ]
+    },
+    "vtbl_MovingCylinderClsnWithPos": {
+      "target": "_ZTV25MovingCylinderClsnWithPos",
+      "upstream": [
+        {
+          "path": "port/hal/cxx_aliases.cpp",
+          "line": 1612,
+          "from": "_vtbl_MovingCylinderClsnWithPos",
+          "to": "__ZTV25MovingCylinderClsnWithPos"
+        }
+      ]
+    }
+  }
+}

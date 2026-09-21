@@ -1,4 +1,4 @@
-name: Android full-engine compile (not playable)
+name: Android full-engine link (not playable)
 on:
   workflow_dispatch:
   push:
@@ -9,7 +9,7 @@ permissions:
 jobs:
   compile-inventory:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 60
     env:
       SM64DS_LINK_ONLY: '1'
     steps:
@@ -82,24 +82,92 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
+          rc=0
           python3 android/full-engine/compile_inventory.py \
             --build build/full-graph --ndk "$ANDROID_HOME/ndk/28.2.13676358" \
-            --target walk_window --output build/full-report --jobs 4 | tee full-engine.log
+            --target walk_window --output build/full-report --jobs 4 > full-engine.log 2>&1 || rc=$?
+          cat full-engine.log
+          test "$rc" -le 1
+          python3 - <<'PY'
+          import json
+          r=json.load(open('build/full-report/report.json'))
+          failures=[x for x in r['results'] if x['status']!='compiled']
+          assert len(failures)==1 and failures[0]['original_source'].endswith('/port/tests/walk_window.cpp'), failures
+          PY
       - name: Audit actual compiled objects and remaining engine link errors
         if: ${{ always() && !cancelled() }}
         shell: bash
         run: |
           test -f build/full-report/report.json
-          python3 android/full-engine/link_inventory.py --build build/full-graph --report build/full-report --ndk "$ANDROID_HOME/ndk/28.2.13676358"
+          rc=0
+          python3 android/full-engine/link_inventory.py --build build/full-graph --report build/full-report --ndk "$ANDROID_HOME/ndk/28.2.13676358" || rc=$?
+          test "$rc" -eq 1
+          test -f build/full-report/link-audit/report.json
       - name: Verify each retired face retains its unique original method symbol
         if: ${{ always() && !cancelled() }}
         run: python3 android/full-engine/check_native_face_symbols.py --report build/full-report
+      - name: Separate literal identifiers and native C++ signatures
+        shell: bash
+        run: |
+          rc=0
+          python3 android/full-engine/isolate_symbols.py --build build/full-graph \
+            --baseline build/full-report --output build/isolated \
+            --ndk "$ANDROID_HOME/ndk/28.2.13676358" --jobs 4 > isolated.log 2>&1 || rc=$?
+          cat isolated.log
+          test "$rc" -eq 1
+          python3 -c 'import json; assert json.load(open("build/isolated/provider-retention.json"))["passed"]'
+          rc=0
+          python3 android/full-engine/isolate_signatures.py --build build/full-graph \
+            --baseline build/isolated --output build/signatures \
+            --ndk "$ANDROID_HOME/ndk/28.2.13676358" --jobs 4 > signatures.log 2>&1 || rc=$?
+          cat signatures.log
+          test "$rc" -eq 1
+          python3 - <<'PY'
+          import json
+          r=json.load(open('build/signatures/SUMMARY.json'))
+          assert r['provider_retention'] and r['duplicates_after']==0, r
+          assert r['counts'].get('failed')==1 and not r['counts'].get('blocked'), r
+          PY
+      - name: Require every object and the complete native engine link
+        shell: bash
+        run: |
+          python3 android/full-engine/resolve_linkage.py --build build/full-graph \
+            --baseline build/signatures --output build/linkage \
+            --ndk "$ANDROID_HOME/ndk/28.2.13676358" --jobs 4
+          python3 - <<'PY'
+          import json
+          r=json.load(open('build/linkage/SUMMARY.json'))
+          assert r['compile_counts']=={'compiled':r['selected_units']}, r
+          assert r['provider_retention'] and r['link_returncode']==0, r
+          assert r['undefined_after']==0 and r['strong_duplicate_groups']==0, r
+          PY
+      - name: Compile linkage probes for Android ARMv7 API 23
+        shell: bash
+        run: |
+          LLVM="$ANDROID_HOME/ndk/28.2.13676358/toolchains/llvm/prebuilt/linux-x86_64/bin"
+          python3 android/full-engine/check_native_linkage.py --clang "$LLVM/clang++" \
+            --cxx "$LLVM/armv7a-linux-androideabi23-clang++" --cc "$LLVM/armv7a-linux-androideabi23-clang" \
+            --objcopy "$LLVM/llvm-objcopy" --flags='-static-libstdc++' --arm-layout \
+            --runner='' --output build/linkage-tests-android
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: android-full-engine-compilation-report
           path: |
             full-engine.log
+            isolated.log
+            signatures.log
+            build/isolated/SUMMARY.json
+            build/isolated/provider-retention.json
+            build/signatures/SUMMARY.json
+            build/signatures/signature-retention.json
+            build/linkage/*.json
+            build/linkage/errors
+            build/linkage/sources
+            build/linkage/link-audit/*.json
+            build/linkage/link-audit/*.log
+            build/linkage/link-audit/engine.map
+            build/linkage-tests-android/report.json
             build/full-report/*.json
             build/full-report/*.md
             build/full-report/*.log

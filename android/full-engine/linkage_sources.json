@@ -1,0 +1,7 @@
+{
+  "port/hal/fader_wipes.cpp": "dba4c57ab2b79e4a4c1e7c9b4b3bfa60f5c4d362e43cc0f0951ea8e342b5be9a",
+  "port/tests/walk_window.cpp": "f8c1a055c6e41a31631073f26feab7a22a614b474855c7f9e2dc0f108f1114d0",
+  "include/cMgSmartball_board_c.h": "ee83141e72528cc17f6f19757afeff4b9b56020c96b2e121d9e364d1bb511150",
+  "include/cMgSmartball_object_c.h": "7be0227ebf2417936ac1b9929530f6767b0645c051ee269052902525c12bab7a",
+  "port/hal/scene_mg.cpp": "c4c2e63f7197f25966a25d61bddf076ebe0a9b07be748d39ea643321efda3a4f"
+}
