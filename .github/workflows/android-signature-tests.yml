@@ -1,0 +1,38 @@
+name: Android C++ signature routing (not gameplay)
+on:
+  workflow_dispatch:
+  push:
+    branches: [android/native-bootstrap]
+    paths:
+      - 'android/full-engine/*signature*.py'
+      - 'android/full-engine/*prepare_rom.py'
+      - '.github/workflows/android-signature-tests.yml'
+permissions:
+  contents: read
+jobs:
+  routing:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install ARM test tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends clang g++-arm-linux-gnueabihf qemu-user
+      - name: Validate adapters and ROM preparation boundaries
+        run: python3 -m unittest discover -s android/full-engine -p 'test_*.py' -v
+      - name: Execute return, receiver, destructor and class/struct routing
+        run: |
+          python3 android/full-engine/check_native_signatures.py --clang clang++ --output build/signature-host
+          python3 android/full-engine/check_native_signatures.py --clang clang++ --flags='-fsanitize=address,undefined -fno-omit-frame-pointer' --output build/signature-sanitized
+          python3 android/full-engine/check_native_signatures.py --clang clang++ \
+            --cxx arm-linux-gnueabihf-g++ --cc arm-linux-gnueabihf-gcc --flags='-mthumb' \
+            --runner='qemu-arm -L /usr/arm-linux-gnueabihf' --output build/signature-arm
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: signature-routing-evidence-NOT-GAMEPLAY
+          path: build/signature-*
+          retention-days: 14
